@@ -43,6 +43,7 @@ export default function HomeLayout() {
         name="spurs"
         options={{
           tabBarLabel: "Spurs",
+          title: "Spur",
           tabBarIcon: ({ size, color }) => (
             <FontAwesome name="envelope" size={size} color={color} />
           ),
