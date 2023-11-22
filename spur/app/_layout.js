@@ -1,6 +1,9 @@
 import { Tabs } from "expo-router";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { FontAwesome } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
 export default function HomeLayout() {
   return (
@@ -14,7 +17,7 @@ export default function HomeLayout() {
         options={{
           tabBarLabel: "Explore",
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="explore" size={size} color={color} />
+            <MaterialIcons name="explore" size={size} color={color} />
           ),
         }}
       />
@@ -23,7 +26,7 @@ export default function HomeLayout() {
         options={{
           tabBarLabel: "Activities",
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="box" size={size} color={color} />
+            <Entypo name="box" size={size} color={color} />
           ),
         }}
       />
@@ -32,18 +35,19 @@ export default function HomeLayout() {
         options={{
           tabBarLabel: "Friends",
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="user-friends" size={size} color={color} />
+            <Ionicons name="people" size={size} color={color} />
           ),
         }}
       />
-        <Tabs.Screen
+      <Tabs.Screen
         name="spurs"
         options={{
           tabBarLabel: "Spurs",
           tabBarIcon: ({ size, color }) => (
-            <Ionicons name="envelope" size={size} color={color} />
+            <FontAwesome name="envelope" size={size} color={color} />
           ),
         }}
       />
     </Tabs>
   );
+}
