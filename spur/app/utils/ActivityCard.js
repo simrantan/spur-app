@@ -27,21 +27,43 @@ export default function Song({
   description,
   needsList,
 }) {
-  return <ScrollView></ScrollView>;
+  return (
+    <ScrollView style={styles.card_box}>
+      <View styles={styles.aboveFold}>
+        <Image style={styles.image} source={activityImage} />
+        <Text style={styles.name}>{activityTitle}</Text>
+        <View styles={styles.icons_box}></View>
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
   card_box: {
-    width: windowWidth,
-    backgroundColor: Themes.colors.background,
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.9,
+    backgroundColor: "green",
     padding: 2,
     marginVertical: 8,
     flex: 1,
-    flexDirection: "row",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: 10,
-    height: windowWidth * 0.2,
+  },
+  aboveFold: {
+    flexDirection: "column",
+    justifyContent: "center",
+    margin: 4,
+  },
+  belowFold: {
+    flexDirection: "column",
+    justifyContent: "flex-start",
+    margin: 4,
+  },
+  icons_box: {
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
   albumbox: {
     flexDirection: "column",
@@ -68,6 +90,6 @@ const styles = StyleSheet.create({
 
   name: {
     fontSize: 14,
-    color: Themes.colors.white,
+    color: "white",
   },
 });
