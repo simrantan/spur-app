@@ -14,7 +14,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function Song({
+export default function ActivityCard({
   number,
   activityImage,
   activityTitle,
@@ -35,7 +35,7 @@ export default function Song({
   return (
     //change names of all icons these r just placeholders
     //do checkboxes need to be pressable? why are the pressable also
-    <ScrollView style={styles.card_box}>
+    <ScrollView contentContainerStyle={styles.card_box}>
       <View styles={styles.aboveFold}>
         <Image style={styles.image} source={activityImage} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
@@ -57,36 +57,36 @@ export default function Song({
           <Text style={styles.smalltitle}>What you'll need</Text>
           <View style={styles.checkbox}>
             <Ionicons name="box" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList.get(0)}</Text>
+            <Text style={styles.bodytext}>{needsList[0]}</Text>
           </View>
           <View style={styles.checkbox}>
             <Ionicons name="box" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList.get(1)}</Text>
+            <Text style={styles.bodytext}>{needsList[1]}</Text>
           </View>
           <View style={styles.checkbox}>
             <Ionicons name="box" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList.get(2)}</Text>
+            <Text style={styles.bodytext}>{needsList[3]}</Text>
           </View>
           <Text style={styles.smalltitle}>Interested Friends</Text>
-          <ScrollView style={styles.checkbox} horizontal={true}>
+          <ScrollView contentContainerStyle={styles.checkbox} horizontal={true}>
             <View style={styles.friendbox}>
-              <Image
+              {/* <Image
                 style={styles.friendimage}
-                source={interestedFriendsProfiles.get(0)}
-              />
+                source={interestedFriendsProfiles[0]}
+              /> */}
               <Text
                 style={styles.friendName}
-                source={interestedFriendsNames.get(0)}
+                source={interestedFriendsNames[0]}
               />
             </View>
             <View style={styles.friendbox}>
-              <Image
+              {/* <Image
                 style={styles.friendimage}
-                source={interestedFriendsProfiles.get(1)}
-              />
+                source={interestedFriendsProfiles[1]}
+              /> */}
               <Text
                 style={styles.friendName}
-                source={interestedFriendsNames.get(1)}
+                source={interestedFriendsNames[1]}
               />
             </View>
           </ScrollView>

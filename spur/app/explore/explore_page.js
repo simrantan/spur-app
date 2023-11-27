@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-
+import ActivityCard from "../../components/ActivityCard";
 import { Link } from "expo-router";
 
 export default function Page() {
@@ -7,6 +7,10 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Explore</Text>
+        <ActivityCard
+          needsList={["a", "b", "c"]}
+          interestedFriendsNames={["a", "b", "c"]}
+        />
       </View>
     </View>
   );
