@@ -41,13 +41,13 @@ export default function ActivityCard({
         <Text style={styles.bigtitle}>{activityTitle}</Text>
         <View styles={styles.icons_box}>
           <Ionicons name={participantsIcon} size={20} color="black" />
-          <Ionicons name="money" size={20} color="black" />
+          <Ionicons name="cash" size={20} color="black" />
           <Ionicons name={activityType} size={20} color="black" />
           <View style={styles.distbox}>
             <Text>{dist}</Text>
           </View>
           <View style={styles.timebox}>
-            <Ionicons name="clock" size={20} color="black" />
+            <Ionicons name="time" size={20} color="black" />
             <Text>{time}</Text>
           </View>
         </View>
@@ -56,15 +56,15 @@ export default function ActivityCard({
           <Text style={styles.bodytext}>{description}</Text>
           <Text style={styles.smalltitle}>What you'll need</Text>
           <View style={styles.checkbox}>
-            <Ionicons name="box" size={20} color="black" />
+            <Ionicons name="square-outline" size={20} color="black" />
             <Text style={styles.bodytext}>{needsList[0]}</Text>
           </View>
           <View style={styles.checkbox}>
-            <Ionicons name="box" size={20} color="black" />
+            <Ionicons name="square-outline" size={20} color="black" />
             <Text style={styles.bodytext}>{needsList[1]}</Text>
           </View>
           <View style={styles.checkbox}>
-            <Ionicons name="box" size={20} color="black" />
+            <Ionicons name="square-outline" size={20} color="black" />
             <Text style={styles.bodytext}>{needsList[3]}</Text>
           </View>
           <Text style={styles.smalltitle}>Interested Friends</Text>
