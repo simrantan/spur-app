@@ -15,7 +15,7 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
 
-const Users = [
+const Activities = [
   { id: "1", uri: require("../assets/Images/pickleball.jpg") },
   { id: "2", uri: require("../assets/Images/pickleball.jpg") },
   { id: "3", uri: require("../assets/Images/pickleball.jpg") },
@@ -83,6 +83,7 @@ export default class SwipeStack extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
               this.position.setValue({ x: 0, y: 0 });
             });
+            // This is where we update the particular card to liked
           });
         } else if (gestureState.dx < -120) {
           Animated.spring(this.position, {
@@ -91,6 +92,7 @@ export default class SwipeStack extends React.Component {
             this.setState({ currentIndex: this.state.currentIndex + 1 }, () => {
               this.position.setValue({ x: 0, y: 0 });
             });
+            // This is where we update the particular card to disliked
           });
         } else {
           Animated.spring(this.position, {
