@@ -101,7 +101,7 @@ export default function ActivityCard({
 
 const styles = StyleSheet.create({
   card_box: {
-    width: windowWidth * 0.9,
+    width: windowWidth * 0.8,
     height: windowHeight * 0.9,
     backgroundColor: "green",
     padding: 2,
@@ -199,3 +199,22 @@ const styles = StyleSheet.create({
     color: "black",
   },
 });
+
+ActivityCard.defaultProps = {
+  number: 1,
+  activityImage: require("../assets/Images/pickleball.jpg"),
+  activityTitle: "Pickelball",
+  dist: "0.5 mi",
+  time: "1 hr",
+  participants: 4,
+  interestedFriendsProfiles: [
+    // require("../assets/profiles/1.png"),
+    // require("../assets/profiles/2.png"),
+  ],
+  interestedFriendsNames: ["John", "Jane"],
+  activityType: "walk",
+  cost: "free",
+  description:
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis viverra tortor. Suspendisse potenti. Duis sit amet odio vitae nisi finibus ultricies. Praesent nec semper nisi. Donec sed ultrices velit. Duis quis ligula at nisl aliquam ullamcorper. Sed euismod, leo vitae lacinia ultricies, justo nunc condimentum purus, vitae ultricies sapien nisl id dolor. Sed nec nulla sit amet enim scelerisque varius. Aenean euismod, nisl eget ultricies dapibus, erat velit aliquet leo, sed venenatis tellus nisi nec augue. Sed eget justo quis metus lacinia aliquet. Sed sed justo quis nunc ultricies porta. Donec nec nisi sit amet ante ultrices tincidunt. Nulla facilisi. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi.",
+  needsList: ["water", "snacks", "sunscreen", "hat"],
+};

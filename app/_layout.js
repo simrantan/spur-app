@@ -49,6 +49,16 @@ export default function HomeLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="dummy"
+        options={{
+          tabBarLabel: "Dummy",
+          title: "Dummy",
+          // tabBarIcon: ({ size, color }) => (
+          //   <FontAwesome name="dummy" size={size} color={color} />
+          // ),
+        }}
+      />
     </Tabs>
   );
 }

@@ -7,7 +7,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Activities</Text>
+        <ActivityCard> </ActivityCard>
       </View>
     </View>
   );
