@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard.js";
+import Checklist from "../../components/Checklist.js";
 
 import { Link } from "expo-router";
 
@@ -7,7 +8,15 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCard> </ActivityCard>
+        {/* <ActivityCard> </ActivityCard> */}
+        <Checklist
+          needsList={[
+            "this test is a lot longer lallalawo aidjoa apdijf pasd apsodj apojsdpo apdoj ap",
+            "test2",
+            "test3",
+          ]}
+        />
+        <Text style={styles.title}>Dummy</Text>
       </View>
     </View>
   );

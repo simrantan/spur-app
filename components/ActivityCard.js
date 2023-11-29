@@ -6,9 +6,12 @@ import {
   Dimensions,
   Pressable,
   ScrollView,
+  CheckBox,
+  FlatList,
 } from "react-native";
 import { Themes } from "../assets/Themes";
 import { Link, Stack } from "expo-router";
+import { Checklist } from "./Checklist";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -39,6 +42,8 @@ export default function ActivityCard({
       <View styles={styles.aboveFold}>
         <Image style={styles.image} source={activityImage} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
+        <Checklist needsList={needsList} />
+
         <View styles={styles.icons_box}>
           <Ionicons name={participantsIcon} size={20} color="black" />
           <Ionicons name="cash" size={20} color="black" />
@@ -101,9 +106,10 @@ export default function ActivityCard({
 
 const styles = StyleSheet.create({
   card_box: {
-    width: windowWidth * 0.8,
-    height: windowHeight * 0.9,
-    backgroundColor: "green",
+    // width: windowWidth * 0.8,
+    // height: windowHeight * 0.9,
+
+    backgroundColor: "pink",
     padding: 2,
     marginVertical: 8,
     flex: 1,
@@ -115,7 +121,8 @@ const styles = StyleSheet.create({
   aboveFold: {
     flexDirection: "column",
     justifyContent: "center",
-    margin: 4,
+    // margin: 10,
+    backgroundColor: "green",
   },
   belowFold: {
     flexDirection: "column",
@@ -169,9 +176,11 @@ const styles = StyleSheet.create({
   image: {
     flexDirection: "column",
     justifyContent: "center",
+    alignContent: "flex-start",
     resizeMode: "contain",
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.5,
+    width: windowWidth,
+    height: 400,
+    // height: "100%",
   },
   friendimage: {
     flexDirection: "column",
@@ -202,7 +211,7 @@ const styles = StyleSheet.create({
 
 ActivityCard.defaultProps = {
   number: 1,
-  activityImage: require("../assets/Images/pickleball.jpg"),
+  activityImage: require("../assets/Images/pickleball2.webp"),
   activityTitle: "Pickelball",
   dist: "0.5 mi",
   time: "1 hr",
