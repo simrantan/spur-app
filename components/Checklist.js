@@ -22,7 +22,7 @@ function Checkbox({ title }) {
   return (
     <View style={styles.checkbox}>
       <Pressable onPress={() => setChecked(!checked)}>{boxToUse}</Pressable>
-      <Text>{title}</Text>
+      <Text style={styles.bodytext}>{title}</Text>
     </View>
   );
 }
@@ -44,5 +44,10 @@ const styles = StyleSheet.create({
   checkbox: {
     flexDirection: "row",
     alignItems: "center",
+  },
+  bodytext: {
+    fontSize: 16,
+    color: "black",
+    paddingLeft: 5,
   },
 });

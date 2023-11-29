@@ -2,6 +2,7 @@ import { palette } from "./palette";
 
 const Themes = {
   bg: palette.beige,
+  bgSecondary: palette.white,
   textPrimary: palette.lightBlack,
 
   buttonPrimaryFill: palette.accent,
