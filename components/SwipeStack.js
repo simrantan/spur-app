@@ -15,7 +15,7 @@ const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
 import Icon from "react-native-vector-icons/Ionicons";
 
-const Activities = [
+const Users = [
   { id: "1", uri: require("../assets/Images/pickleball.jpg") },
   { id: "2", uri: require("../assets/Images/pickleball.jpg") },
   { id: "3", uri: require("../assets/Images/pickleball.jpg") },
