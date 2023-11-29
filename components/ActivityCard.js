@@ -15,18 +15,19 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function ActivityCard({
-  number,
   activityImage,
   activityTitle,
   dist,
   time,
   participants,
-  interestedFriendsProfiles,
-  interestedFriendsNames,
+  friendName1,
+  friendName2,
   activityType,
   cost,
   description,
-  needsList,
+  need1,
+  need2,
+  need3,
 }) {
   const participantsIcon = "";
   if (participants == 1) {
@@ -41,7 +42,7 @@ export default function ActivityCard({
         <Text style={styles.bigtitle}>{activityTitle}</Text>
         <View styles={styles.icons_box}>
           <Ionicons name={participantsIcon} size={20} color="black" />
-          <Ionicons name="cash" size={20} color="black" />
+          <Ionicons name={cost} size={20} color="black" />
           <Ionicons name={activityType} size={20} color="black" />
           <View style={styles.distbox}>
             <Text>{dist}</Text>
@@ -57,15 +58,15 @@ export default function ActivityCard({
           <Text style={styles.smalltitle}>What you'll need</Text>
           <View style={styles.checkbox}>
             <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[0]}</Text>
+            <Text style={styles.bodytext}>{need1}</Text>
           </View>
           <View style={styles.checkbox}>
             <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[1]}</Text>
+            <Text style={styles.bodytext}>{need2}</Text>
           </View>
           <View style={styles.checkbox}>
             <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[3]}</Text>
+            <Text style={styles.bodytext}>{need3}</Text>
           </View>
           <Text style={styles.smalltitle}>Interested Friends</Text>
           <ScrollView contentContainerStyle={styles.checkbox} horizontal={true}>
@@ -74,20 +75,14 @@ export default function ActivityCard({
                 style={styles.friendimage}
                 source={interestedFriendsProfiles[0]}
               /> */}
-              <Text
-                style={styles.friendName}
-                source={interestedFriendsNames[0]}
-              />
+              <Text style={styles.friendName}>{friendName1}</Text>
             </View>
             <View style={styles.friendbox}>
               {/* <Image
                 style={styles.friendimage}
                 source={interestedFriendsProfiles[1]}
               /> */}
-              <Text
-                style={styles.friendName}
-                source={interestedFriendsNames[1]}
-              />
+              <Text style={styles.friendName}>{friendName2}</Text>
             </View>
           </ScrollView>
         </View>
