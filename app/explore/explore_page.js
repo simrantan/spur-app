@@ -2,17 +2,14 @@ import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard";
 import SwipeStack from "../../components/SwipeStack";
 import { Link } from "expo-router";
+import MyTinderCard from "../../components/MyTinderCard";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Explore</Text>
-        {/* <ActivityCard
-          activityTitle={"Pickleball"}
-          needsList={["a", "b", "c"]}
-          interestedFriendsNames={["a", "b", "c"]}
-        /> */}
+        <MyTinderCard />
         <SwipeStack />
       </View>
     </View>
