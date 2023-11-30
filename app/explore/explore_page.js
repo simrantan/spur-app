@@ -1,16 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
-import ActivityCard from "../../components/ActivityCard";
-import SwipeStack from "../../components/SwipeStack";
 import { Link } from "expo-router";
-import MyTinderCard from "../../components/MyTinderCard";
+import ActivityStack from "../../components/ActivityStack";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Explore</Text>
-        <MyTinderCard />
-        <SwipeStack />
+        <ActivityStack />
       </View>
     </View>
   );

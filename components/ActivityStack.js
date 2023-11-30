@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { ImageBackground, Text, View, Button } from "react-native";
+import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
 
 const styles = {
@@ -58,27 +59,52 @@ const styles = {
 const db = [
   {
     name: "Richard Hendricks",
+    img: require("../assets/Images/pickleball.jpg"),
   },
   {
     name: "Erlich Bachman",
+    img: require("../assets/Images/pickleball.jpg"),
   },
   {
     name: "Monica Hall",
+    img: require("../assets/Images/pickleball.jpg"),
   },
   {
     name: "Jared Dunn",
+    img: require("../assets/Images/pickleball.jpg"),
   },
   {
     name: "Dinesh Chugtai",
+    img: require("../assets/Images/pickleball.jpg"),
   },
 ];
 
 const alreadyRemoved = [];
-let charactersState = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
+//  = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
-export default MyTinderCard = () => {
-  const [characters, setCharacters] = useState(db);
+const ActivityStack = () => {
+  const [lastRemovedActivity, setLastRemovedActivity] = useState();
   const [lastDirection, setLastDirection] = useState();
+  const [activities, setActivities] = useState([]);
+
+  const fetchActivities = async () => {
+    const { data, error } = await supabase.from("test_table").select("*");
+    if (error) console.log("error", error);
+    else {
+      console.log(data);
+      setActivities(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchActivities();
+  }, []);
+
+  useEffect(() => {
+    if (lastDirection && lastRemovedActivity) {
+      updateDB(lastRemovedActivity, lastDirection);
+    }
+  }, [activities]);
 
   const childRefs = useMemo(
     () =>
@@ -88,19 +114,35 @@ export default MyTinderCard = () => {
     []
   );
 
-  const swiped = (direction, nameToDelete) => {
-    console.log("removing: " + nameToDelete + " to the " + direction);
+  const swiped = (direction, id) => {
+    console.log("removing: " + id + " to the " + direction);
     setLastDirection(direction);
-    alreadyRemoved.push(nameToDelete);
+    setLastRemovedActivity(id);
+    // alreadyRemoved.push(id);
+    console.log(id + " left the screen!");
+    newActivities = activities.filter((item) => item.id !== id);
+    setActivities(newActivities);
   };
 
-  const outOfFrame = (name) => {
-    console.log(name + " left the screen!");
-    charactersState = charactersState.filter(
-      (character) => character.name !== name
-    );
-    setCharacters(charactersState);
+  const updateDB = async (id, direction) => {
+    let liked = false;
+    if (direction === "right") {
+      liked = true;
+    }
+    const { data, error } = await supabase
+      .from("test_table")
+      .update({ isLiked: liked })
+      .eq("id", id)
+      .select();
+
+    if (error) {
+      console.log("error here", error);
+    } else {
+      console.log("successful update, marked:", data);
+    }
   };
+
+  const outOfFrame = (id) => {};
 
   const swipe = (dir) => {
     const cardsLeft = characters.filter(
@@ -118,16 +160,16 @@ export default MyTinderCard = () => {
     <View style={styles.container}>
       <Text style={styles.header}>React Native Tinder Card</Text>
       <View style={styles.cardContainer}>
-        {characters.map((character, index) => (
+        {activities.map((activity, index) => (
           <TinderCard
             ref={childRefs[index]}
-            key={character.name}
-            onSwipe={(dir) => swiped(dir, character.name)}
-            onCardLeftScreen={() => outOfFrame(character.name)}
+            key={activity.name}
+            onSwipe={(dir) => swiped(dir, activity.id)}
+            onCardLeftScreen={() => outOfFrame(activity.name)}
           >
             <View style={styles.card}>
               {/* <ImageBackground style={styles.cardImage} source={character.img}> */}
-              <Text style={styles.cardTitle}>{character.name}</Text>
+              <Text style={styles.cardTitle}>{activity.name}</Text>
               {/* </ImageBackground> */}
             </View>
           </TinderCard>
@@ -149,3 +191,5 @@ export default MyTinderCard = () => {
     </View>
   );
 };
+
+export default ActivityStack;
