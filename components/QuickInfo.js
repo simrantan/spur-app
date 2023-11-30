@@ -1,20 +1,6 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  Pressable,
-  ScrollView,
-  CheckBox,
-  FlatList,
-} from "react-native";
-import { Themes } from "../assets/Themes";
-import { Link, Stack } from "expo-router";
-import Checklist from "./Checklist";
+import { StyleSheet, Text, View } from "react-native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 function PriceSymbol({ cost }) {
   if (cost === "free") {

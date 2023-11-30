@@ -88,7 +88,6 @@ const styles = StyleSheet.create({
     margin: 4,
     width: windowWidth * 0.9,
   },
-
   timebox: {
     flexDirection: "row",
     justifyContent: "center",

@@ -7,8 +7,6 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { Themes } from "../assets/Themes";
 
-// import Ionicons from "@expo/vector-icons/Ionicons";
-
 function Checkbox({ title }) {
   const [checked, setChecked] = useState(false);
   var boxToUse = (

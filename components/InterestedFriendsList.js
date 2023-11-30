@@ -6,6 +6,7 @@ import {
   Pressable,
   FlatList,
 } from "react-native";
+
 import { Themes } from "../assets/Themes";
 
 function FriendProfleAndName({ friend }) {
