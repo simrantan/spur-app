@@ -6,11 +6,18 @@ import {
   Dimensions,
   Pressable,
   ScrollView,
+  CheckBox,
+  FlatList,
+  ImageBackground,
 } from "react-native";
 import { Themes } from "../assets/Themes";
 import { Link, Stack } from "expo-router";
+import Checklist from "./Checklist";
+import QuickInfo from "./QuickInfo";
+import InterestedFriendsList from "./InterestedFriendsList";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -18,113 +25,61 @@ export default function ActivityCard({
   number,
   activityImage,
   activityTitle,
-  dist,
-  time,
+  quickInfo, // dist, time, participants, activityType, cost
   participants,
-  interestedFriendsProfiles,
-  interestedFriendsNames,
-  activityType,
-  cost,
+  interestedFriends, // array of friend objects, each of which has a name and profile image
   description,
   needsList,
 }) {
-  const participantsIcon = "";
+  var participantsIcon = "people-outline";
   if (participants == 1) {
     participantsIcon = "people";
   }
   return (
-    //change names of all icons these r just placeholders
-    //do checkboxes need to be pressable? why are the pressable also
-    <ScrollView contentContainerStyle={styles.card_box}>
-      <View styles={styles.aboveFold}>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.card_box}>
         <Image style={styles.image} source={activityImage} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
-        <View styles={styles.icons_box}>
-          <Ionicons name={participantsIcon} size={20} color="black" />
-          <Ionicons name="cash" size={20} color="black" />
-          <Ionicons name={activityType} size={20} color="black" />
-          <View style={styles.distbox}>
-            <Text>{dist}</Text>
-          </View>
-          <View style={styles.timebox}>
-            <Ionicons name="time" size={20} color="black" />
-            <Text>{time}</Text>
-          </View>
-        </View>
-        <View styles={styles.belowFold}>
+        <QuickInfo quickInfo={quickInfo} />
+        <View style={styles.belowFold}>
           <Text style={styles.smalltitle}>What is it?</Text>
           <Text style={styles.bodytext}>{description}</Text>
           <Text style={styles.smalltitle}>What you'll need</Text>
-          <View style={styles.checkbox}>
-            <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[0]}</Text>
-          </View>
-          <View style={styles.checkbox}>
-            <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[1]}</Text>
-          </View>
-          <View style={styles.checkbox}>
-            <Ionicons name="square-outline" size={20} color="black" />
-            <Text style={styles.bodytext}>{needsList[3]}</Text>
-          </View>
+          <Checklist needsList={needsList} />
           <Text style={styles.smalltitle}>Interested Friends</Text>
-          <ScrollView contentContainerStyle={styles.checkbox} horizontal={true}>
-            <View style={styles.friendbox}>
-              {/* <Image
-                style={styles.friendimage}
-                source={interestedFriendsProfiles[0]}
-              /> */}
-              <Text
-                style={styles.friendName}
-                source={interestedFriendsNames[0]}
-              />
-            </View>
-            <View style={styles.friendbox}>
-              {/* <Image
-                style={styles.friendimage}
-                source={interestedFriendsProfiles[1]}
-              /> */}
-              <Text
-                style={styles.friendName}
-                source={interestedFriendsNames[1]}
-              />
-            </View>
-          </ScrollView>
+          <InterestedFriendsList interestedFriends={interestedFriends} />
         </View>
-      </View>
-      <View style={styles.button}>
-        <Text style={styles.smalltitle}>Spur Friends</Text>
-      </View>
-    </ScrollView>
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Spur Friends</Text>
+        </View>
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   card_box: {
-    width: windowWidth * 0.9,
-    height: windowHeight * 0.9,
-    backgroundColor: "green",
-    padding: 2,
+    backgroundColor: Themes.bgSecondary,
+    // padding: 2,
     marginVertical: 8,
-    flex: 1,
+    // flex: 1,
     flexDirection: "column",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: 10,
+    // marginLeft: 10,
+    paddingBottom: 30,
   },
   aboveFold: {
     flexDirection: "column",
     justifyContent: "center",
-    margin: 4,
+    // margin: 10,
+    backgroundColor: "green",
   },
   belowFold: {
     flexDirection: "column",
     justifyContent: "flex-start",
-    margin: 4,
-  },
-  icons_box: {
-    flexDirection: "row",
-    justifyContent: "space-around",
+    margin: 10,
   },
   checkbox: {
     flexDirection: "row",
@@ -133,12 +88,7 @@ const styles = StyleSheet.create({
     margin: 4,
     width: windowWidth * 0.9,
   },
-  friendbox: {
-    flexDirection: "column",
-    justifyContent: "center",
-    width: 40,
-    height: 50,
-  },
+
   timebox: {
     flexDirection: "row",
     justifyContent: "center",
@@ -146,6 +96,7 @@ const styles = StyleSheet.create({
     margin: 4,
     width: 40,
     height: 20,
+    alignItems: "center",
   },
   distbox: {
     flexDirection: "row",
@@ -157,45 +108,88 @@ const styles = StyleSheet.create({
   },
   button: {
     width: windowWidth * 0.6,
-    height: windowWidth * 0.2,
+    height: windowHeight * 0.07,
     borderRadius: 10,
-    backgroundColor: "pink",
+    backgroundColor: Themes.buttonPrimaryFill,
+    color: Themes.buttonPrimaryText,
     justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
   },
-  icon: {
-    flexDirection: "column",
-    justifyContent: "center",
+  buttonText: {
+    color: Themes.buttonPrimaryText,
+    fontSize: 24,
   },
   image: {
     flexDirection: "column",
     justifyContent: "center",
-    resizeMode: "contain",
-    width: windowWidth * 0.8,
-    height: windowWidth * 0.5,
-  },
-  friendimage: {
-    flexDirection: "column",
-    justifyContent: "center",
-    borderRadius: 12,
-    resizeMode: "contain",
-    width: windowWidth * 40,
-    height: 40,
-  },
-  friendName: {
-    fontSize: 10,
-    color: "black",
+    alignContent: "flex-start",
+    resizeMode: "cover",
+    flex: 1,
+    height: windowHeight * 0.65,
+    width: "94%",
+    alignSelf: "center",
+    margin: 10,
+    borderRadius: 10,
   },
 
   bigtitle: {
-    fontSize: 36,
-    color: "black",
+    fontSize: 40,
+    color: Themes.textPrimary,
+    paddingLeft: 10,
   },
   smalltitle: {
     fontSize: 28,
-    color: "black",
+    color: Themes.textPrimary,
+    paddingTop: 15,
   },
   bodytext: {
-    fontSize: 14,
-    color: "black",
+    fontSize: 16,
+    color: Themes.textPrimary,
+  },
+  container: {
+    flex: 1,
   },
 });
+
+ActivityCard.defaultProps = {
+  number: 1,
+  activityImage: require("../assets/Images/pickleball2.webp"),
+  activityTitle: "Pickelball",
+  interestedFriends: [
+    {
+      name: "John Doe",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+    {
+      name: "Nils Forstall",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+    {
+      name: "Jeremy Bentham Nickels",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+    {
+      name: "John Doe",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+    {
+      name: "John Doe",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+    {
+      name: "John Doe",
+      profileImage: require("../assets/Images/john_doe.png"),
+    },
+  ],
+  description:
+    "Lorem ipsum dolor sit amet, ulla sit amet enim scelerisque varius. Aenean euismod, nisl eget ultricies dapibus, erat velit aliquet leo, sed venenatis tellus nisi nec augue. Sed eget justo quis metus lacinia aliquet. Sed sed justo quis nunc ultricies porta. Donec nec nisi sit amet ante ultrices tincidunt. Nulla facilisi. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi.",
+  needsList: ["water", "snacks", "sunscreen", "hat"],
+  quickInfo: {
+    dist: "0.5 mi",
+    time: "1 hr",
+    participants: 1,
+    activityType: "walk",
+    cost: "cheap",
+  },
+};
