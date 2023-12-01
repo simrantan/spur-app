@@ -10,13 +10,6 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.main}>
         <ActivityCard> </ActivityCard>
-        {/* <Checklist
-          needsList={[
-            "this test is a lot longer lallalawo aidjoa apdijf pasd apsodj apojsdpo apdoj ap",
-            "test2",
-            "test3",
-          ]}
-        /> */}
       </View>
     </View>
   );

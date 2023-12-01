@@ -1,52 +1,69 @@
 import { StyleSheet, Text, View } from "react-native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Themes } from "../assets/Themes";
+
+const symbolSize = 25;
+const symbolFontSize = symbolSize * 0.8;
 
 function PriceSymbol({ cost }) {
   if (cost === "free") {
-    return <Text style={{ color: "black" }}>Free</Text>;
+    return (
+      <Text style={{ color: "black", fontSize: symbolFontSize }}>Free</Text>
+    );
   }
   if (cost === "cheap") {
     return (
       <View style={{ flexDirection: "row" }}>
-        <Text style={{ color: "black" }}>$</Text>
-        <Text style={{ color: "lightgray" }}>$$</Text>
+        <Text style={{ color: "black", fontSize: symbolFontSize }}>$</Text>
+        <Text style={{ color: "lightgray", fontSize: symbolFontSize }}>$$</Text>
       </View>
     );
   }
   if (cost === "moderate") {
     return (
       <View style={{ flexDirection: "row" }}>
-        <Text style={{ color: "black" }}>$$</Text>
-        <Text style={{ color: "lightgray" }}>$</Text>
+        <Text style={{ color: "black", fontSize: symbolFontSize }}>$$</Text>
+        <Text style={{ color: "lightgray", fontSize: symbolFontSize }}>$</Text>
       </View>
     );
   }
   if (cost === "expensive") {
-    return <Text style={{ color: "black" }}>$$$</Text>;
+    return (
+      <Text style={{ color: "black", fontSize: symbolFontSize }}>$$$</Text>
+    );
   }
   return <Text style={{ color: "black" }}>Price Unknown</Text>;
 }
 
 function ParticipantsSymbol({ participants }) {
   var participantsIcon = "people-outline";
-  return <Ionicons name={participantsIcon} size={20} color="black" />;
-  return <Text style={{ color: "black" }}>Particiopants Unknown</Text>;
+  return (
+    <View style={{ flexDirection: "row", alignItems: "center" }}>
+      <Ionicons name={participantsIcon} size={symbolSize} color="black" />
+      <Text style={{ color: "black", fontSize: symbolFontSize }}>
+        {" "}
+        {participants}
+      </Text>
+    </View>
+  );
 }
 
 function ActivitySymbol({ activityType }) {
-  return <Ionicons name={activityType} size={20} color="black" />;
+  return <Ionicons name={activityType} size={symbolSize} color="black" />;
 }
 
 function DistanceSymbol({ dist }) {
-  return <Text style={{ color: "black" }}>{dist}</Text>;
+  return (
+    <Text style={{ color: "black", fontSize: symbolFontSize }}>{dist}</Text>
+  );
 }
 
 function TimeSymbol({ time }) {
   return (
     <View style={styles.timebox}>
-      <Ionicons name="time" size={20} color="black" />
-      <Text>{time}</Text>
+      <Ionicons name="time" size={symbolSize} color="black" />
+      <Text style={{ color: "black", fontSize: symbolFontSize }}>{time}</Text>
     </View>
   );
 }
@@ -73,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginVertical: 5,
     paddingVertical: 5,
-    backgroundColor: "gray",
+    backgroundColor: Themes.bg,
     marginHorizontal: 10,
     borderRadius: 10,
   },
