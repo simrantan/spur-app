@@ -36,7 +36,7 @@ export default function ActivityCard({
     participantsIcon = "people";
   }
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.card_box}>
         <Image style={styles.image} source={{ uri: activityImage }} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
@@ -53,7 +53,7 @@ export default function ActivityCard({
           <Text style={styles.buttonText}>Spur Friends</Text>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bgSecondary,
     // padding: 2,
     marginVertical: 8,
-
     flexDirection: "column",
     // alignItems: "center",
     justifyContent: "flex-start",
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     resizeMode: "cover",
     flex: 1,
-    height: windowHeight * 0.65,
+    height: windowHeight * 0.6,
     width: "94%",
     alignSelf: "center",
     margin: 10,
