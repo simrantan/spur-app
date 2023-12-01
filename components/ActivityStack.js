@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { ImageBackground, Text, View, Button } from "react-native";
 import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
+import ActivityCard from "./ActivityCard";
 
 const styles = {
   container: {
@@ -56,29 +57,7 @@ const styles = {
   },
 };
 
-const db = [
-  {
-    name: "Richard Hendricks",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Erlich Bachman",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Monica Hall",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Jared Dunn",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Dinesh Chugtai",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-];
-
+const table = "Activities";
 const alreadyRemoved = [];
 //  = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
@@ -88,7 +67,7 @@ const ActivityStack = () => {
   const [activities, setActivities] = useState([]);
 
   const fetchActivities = async () => {
-    const { data, error } = await supabase.from("test_table").select("*");
+    const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
     else {
       console.log(data);
@@ -108,7 +87,7 @@ const ActivityStack = () => {
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(activities.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
@@ -143,7 +122,7 @@ const ActivityStack = () => {
       liked = true;
     }
     const { data, error } = await supabase
-      .from("test_table")
+      .from(table)
       .update({ isLiked: liked })
       .eq("id", id)
       .select();
@@ -157,21 +136,8 @@ const ActivityStack = () => {
 
   const outOfFrame = (id) => {};
 
-  const swipe = (dir) => {
-    const cardsLeft = characters.filter(
-      (person) => !alreadyRemoved.includes(person.name)
-    );
-    if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1].name; // Find the card object to be removed
-      const index = db.map((person) => person.name).indexOf(toBeRemoved); // Find the index of which to make the reference to
-      alreadyRemoved.push(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
-      childRefs[index].current.swipe(dir); // Swipe the card!
-    }
-  };
-
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>React Native Tinder Card</Text>
       <View style={styles.cardContainer}>
         {activities.map(
           (activity, index) => (
@@ -183,29 +149,12 @@ const ActivityStack = () => {
                 onSwipe={(dir) => swiped(dir, activity.id)}
                 onCardLeftScreen={() => outOfFrame(activity.name)}
               >
-                <View style={styles.card}>
-                  {/* <ImageBackground style={styles.cardImage} source={character.img}> */}
-                  <Text style={styles.cardTitle}>{activity.name}</Text>
-                  {/* </ImageBackground> */}
-                </View>
+                <ActivityCard needsList={activity.needsList} />
               </TinderCard>
             )
           )
         )}
       </View>
-      <View style={styles.buttons}>
-        <Button onPress={() => swiped("left")} title="Swipe left!" />
-        <Button onPress={() => swiped("right")} title="Swipe right!" />
-      </View>
-      {lastDirection ? (
-        <Text style={styles.infoText} key={lastDirection}>
-          You swiped {lastDirection}
-        </Text>
-      ) : (
-        <Text style={styles.infoText}>
-          Swipe a card or press a button to get started!
-        </Text>
-      )}
     </View>
   );
 };
