@@ -9,6 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "1.18.2",
     "@react-native-community/checkbox": "^0.5.16",
     "@react-spring/native": "^9.5.5",
     "@rneui/base": "^4.0.0-rc.7",
@@ -29,7 +30,8 @@
     "react-tinder-card": "^1.6.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "react-native-dotenv": "^3.4.9"
   },
   "private": true
 }

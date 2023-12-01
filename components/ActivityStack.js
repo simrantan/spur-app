@@ -1,7 +1,16 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { ImageBackground, Text, View, Button } from "react-native";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import {
+  ImageBackground,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
 import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
+import ActivityCard from "./ActivityCard";
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 const styles = {
   container: {
@@ -9,6 +18,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    flex: 1,
   },
   header: {
     color: "#000",
@@ -16,13 +26,12 @@ const styles = {
     marginBottom: 30,
   },
   cardContainer: {
-    width: "90%",
-    maxWidth: 260,
-    height: 300,
+    width: "95%",
+    height: "95%",
   },
   card: {
     position: "absolute",
-    backgroundColor: "#fff",
+    backgroundColor: "green",
     width: "100%",
     maxWidth: 260,
     height: 300,
@@ -42,7 +51,7 @@ const styles = {
     position: "absolute",
     bottom: 0,
     margin: 10,
-    color: "#fff",
+    color: "blue",
   },
   buttons: {
     margin: 20,
@@ -56,31 +65,9 @@ const styles = {
   },
 };
 
-const db = [
-  {
-    name: "Richard Hendricks",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Erlich Bachman",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Monica Hall",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Jared Dunn",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-  {
-    name: "Dinesh Chugtai",
-    img: require("../assets/Images/pickleball.jpg"),
-  },
-];
-
+const table = "Activities";
 const alreadyRemoved = [];
-//  = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
+//let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
 const ActivityStack = () => {
   const [lastRemovedActivity, setLastRemovedActivity] = useState();
@@ -88,7 +75,7 @@ const ActivityStack = () => {
   const [activities, setActivities] = useState([]);
 
   const fetchActivities = async () => {
-    const { data, error } = await supabase.from("test_table").select("*");
+    const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
     else {
       console.log(data);
@@ -108,21 +95,24 @@ const ActivityStack = () => {
 
   const childRefs = useMemo(
     () =>
-      Array(db.length)
+      Array(activities.length)
         .fill(0)
         .map((i) => React.createRef()),
     []
   );
 
-  const swiped = (direction, id) => {
-    console.log("removing: " + id + " to the " + direction);
-    setLastDirection(direction);
-    setLastRemovedActivity(id);
-    // alreadyRemoved.push(id);
-    console.log(id + " left the screen!");
-    newActivities = activities.filter((item) => item.id !== id);
-    setActivities(newActivities);
-  };
+  const swiped = useCallback(
+    (direction, id) => {
+      console.log("removing: " + id + " to the " + direction);
+      setLastDirection(direction);
+      setLastRemovedActivity(id);
+      alreadyRemoved.push(id);
+      console.log(id + " left the screen!");
+      let newActivities = activities.filter((item) => item.id !== id);
+      setActivities(newActivities);
+    },
+    [activities]
+  );
 
   const updateDB = async (id, direction) => {
     let liked = false;
@@ -130,7 +120,7 @@ const ActivityStack = () => {
       liked = true;
     }
     const { data, error } = await supabase
-      .from("test_table")
+      .from(table)
       .update({ isLiked: liked })
       .eq("id", id)
       .select();
@@ -142,53 +132,38 @@ const ActivityStack = () => {
     }
   };
 
-  const outOfFrame = (id) => {};
-
-  const swipe = (dir) => {
-    const cardsLeft = characters.filter(
-      (person) => !alreadyRemoved.includes(person.name)
-    );
-    if (cardsLeft.length) {
-      const toBeRemoved = cardsLeft[cardsLeft.length - 1].name; // Find the card object to be removed
-      const index = db.map((person) => person.name).indexOf(toBeRemoved); // Find the index of which to make the reference to
-      alreadyRemoved.push(toBeRemoved); // Make sure the next card gets removed next time if this card do not have time to exit the screen
-      childRefs[index].current.swipe(dir); // Swipe the card!
-    }
-  };
+  const outOfFrame = (activityTitle) => {};
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>React Native Tinder Card</Text>
+    <SafeAreaView style={styles.container}>
       <View style={styles.cardContainer}>
-        {activities.map((activity, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            key={activity.name}
-            onSwipe={(dir) => swiped(dir, activity.id)}
-            onCardLeftScreen={() => outOfFrame(activity.name)}
-          >
-            <View style={styles.card}>
-              {/* <ImageBackground style={styles.cardImage} source={character.img}> */}
-              <Text style={styles.cardTitle}>{activity.name}</Text>
-              {/* </ImageBackground> */}
-            </View>
-          </TinderCard>
-        ))}
+        {activities.map(
+          (activity, index) => (
+            console.log("activity", activity),
+            console.log("id", activity.id),
+            (
+              <TinderCard
+                //preventSwipe={["up", "down"]}
+                flickOnSwipe={true}
+                ref={childRefs[index]}
+                key={activity.id}
+                onSwipe={(dir) => swiped(dir, activity.id)}
+                //onCardLeftScreen={() => outOfFrame(activity.id)}
+              >
+                <ActivityCard
+                  activityTitle={activity.activityTitle}
+                  activityImage={activity.activityImage}
+                  quickInfo={activity.quickinfo}
+                  interestedFriends={activity.interestedFriends}
+                  description={activity.description}
+                  needsList={activity.needsList}
+                />
+              </TinderCard>
+            )
+          )
+        )}
       </View>
-      <View style={styles.buttons}>
-        <Button onPress={() => swipe("left")} title="Swipe left!" />
-        <Button onPress={() => swipe("right")} title="Swipe right!" />
-      </View>
-      {lastDirection ? (
-        <Text style={styles.infoText} key={lastDirection}>
-          You swiped {lastDirection}
-        </Text>
-      ) : (
-        <Text style={styles.infoText}>
-          Swipe a card or press a button to get started!
-        </Text>
-      )}
-    </View>
+    </SafeAreaView>
   );
 };
 
