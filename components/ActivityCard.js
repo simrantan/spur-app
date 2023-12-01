@@ -27,14 +27,8 @@ export default function ActivityCard({
   quickInfo, // dist, time, participants, activityType, cost
   interestedFriends, // array of friend objects, each of which has a name and profile image
   description,
-  need1,
-  need2,
-  need3,
+  needsList,
 }) {
-  var participantsIcon = "people-outline";
-  if (participants == 1) {
-    participantsIcon = "people";
-  }
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.card_box}>

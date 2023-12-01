@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard.js";
 import Checklist from "../../components/Checklist.js";
-import { Themes } from "../../assets/Themes";
+import { Themes } from "../../assets/Themes/index.js";
 
 import { Link } from "expo-router";
 
