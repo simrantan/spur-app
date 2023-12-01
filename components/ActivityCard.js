@@ -25,7 +25,6 @@ export default function ActivityCard({
   activityImage,
   activityTitle,
   quickInfo, // dist, time, participants, activityType, cost
-  participants,
   interestedFriends, // array of friend objects, each of which has a name and profile image
   description,
   need1,
