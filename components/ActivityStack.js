@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { ImageBackground, Text, View, Button } from "react-native";
 import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
@@ -114,15 +114,28 @@ const ActivityStack = () => {
     []
   );
 
-  const swiped = (direction, id) => {
-    console.log("removing: " + id + " to the " + direction);
-    setLastDirection(direction);
-    setLastRemovedActivity(id);
-    alreadyRemoved.push(id);
-    console.log(id + " left the screen!");
-    newActivities = activities.filter((item) => item.id !== id);
-    setActivities(newActivities);
-  };
+  // const swiped = (direction, id) => {
+  //   console.log("removing: " + id + " to the " + direction);
+  //   setLastDirection(direction);
+  //   setLastRemovedActivity(id);
+  //   alreadyRemoved.push(id);
+  //   console.log(id + " left the screen!");
+  //   newActivities = activities.filter((item) => item.id !== id);
+  //   setActivities(newActivities);
+  // };
+
+  const swiped = useCallback(
+    (direction, id) => {
+      console.log("removing: " + id + " to the " + direction);
+      setLastDirection(direction);
+      setLastRemovedActivity(id);
+      //alreadyRemoved.push(id);
+      console.log(id + " left the screen!");
+      newActivities = activities.filter((item) => item.id !== id);
+      setActivities(newActivities);
+    },
+    [activities]
+  );
 
   const updateDB = async (id, direction) => {
     let liked = false;
