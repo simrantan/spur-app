@@ -1,8 +1,16 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { ImageBackground, Text, View, Button } from "react-native";
+import {
+  ImageBackground,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+  Dimensions,
+} from "react-native";
 import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "./ActivityCard";
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 const styles = {
   container: {
@@ -10,6 +18,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
+    flex: 1,
   },
   header: {
     color: "#000",
@@ -17,9 +26,8 @@ const styles = {
     marginBottom: 30,
   },
   cardContainer: {
-    width: "90%",
-    maxWidth: 260,
-    height: 300,
+    width: "95%",
+    height: "95%",
   },
   card: {
     position: "absolute",
@@ -59,7 +67,7 @@ const styles = {
 
 const table = "Activities";
 const alreadyRemoved = [];
-//  = db; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
+//let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
 const ActivityStack = () => {
   const [lastRemovedActivity, setLastRemovedActivity] = useState();
@@ -93,24 +101,14 @@ const ActivityStack = () => {
     []
   );
 
-  // const swiped = (direction, id) => {
-  //   console.log("removing: " + id + " to the " + direction);
-  //   setLastDirection(direction);
-  //   setLastRemovedActivity(id);
-  //   alreadyRemoved.push(id);
-  //   console.log(id + " left the screen!");
-  //   newActivities = activities.filter((item) => item.id !== id);
-  //   setActivities(newActivities);
-  // };
-
   const swiped = useCallback(
     (direction, id) => {
       console.log("removing: " + id + " to the " + direction);
       setLastDirection(direction);
       setLastRemovedActivity(id);
-      //alreadyRemoved.push(id);
+      alreadyRemoved.push(id);
       console.log(id + " left the screen!");
-      newActivities = activities.filter((item) => item.id !== id);
+      let newActivities = activities.filter((item) => item.id !== id);
       setActivities(newActivities);
     },
     [activities]
@@ -134,28 +132,38 @@ const ActivityStack = () => {
     }
   };
 
-  const outOfFrame = (id) => {};
+  const outOfFrame = (activityTitle) => {};
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View style={styles.cardContainer}>
         {activities.map(
           (activity, index) => (
+            console.log("activity", activity),
             console.log("id", activity.id),
             (
               <TinderCard
+                //preventSwipe={["up", "down"]}
+                flickOnSwipe={true}
                 ref={childRefs[index]}
-                key={activity.name}
+                key={activity.id}
                 onSwipe={(dir) => swiped(dir, activity.id)}
-                onCardLeftScreen={() => outOfFrame(activity.name)}
+                //onCardLeftScreen={() => outOfFrame(activity.id)}
               >
-                <ActivityCard needsList={activity.needsList} />
+                <ActivityCard
+                  activityTitle={activity.activityTitle}
+                  activityImage={activity.activityImage}
+                  quickInfo={activity.quickinfo}
+                  interestedFriends={activity.interestedFriends}
+                  description={activity.description}
+                  needsList={activity.needsList}
+                />
               </TinderCard>
             )
           )
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

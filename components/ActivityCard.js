@@ -37,8 +37,8 @@ export default function ActivityCard({
   }
   return (
     <View style={styles.container}>
-      <ScrollView contentContainerStyle={styles.card_box}>
-        <Image style={styles.image} source={activityImage} />
+      <View style={styles.card_box}>
+        <Image style={styles.image} source={{ uri: activityImage }} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
         <QuickInfo quickInfo={quickInfo} />
         <View style={styles.belowFold}>
@@ -52,7 +52,7 @@ export default function ActivityCard({
         <View style={styles.button}>
           <Text style={styles.buttonText}>Spur Friends</Text>
         </View>
-      </ScrollView>
+      </View>
     </View>
   );
 }
@@ -62,13 +62,13 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bgSecondary,
     // padding: 2,
     marginVertical: 8,
-    // flex: 1,
+
     flexDirection: "column",
     // alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: 10,
     // marginLeft: 10,
-    paddingBottom: 30,
+    paddingBottom: 10,
   },
   aboveFold: {
     flexDirection: "column",

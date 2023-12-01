@@ -6,7 +6,6 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Explore</Text>
         <ActivityStack />
       </View>
     </View>
