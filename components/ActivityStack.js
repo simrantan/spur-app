@@ -22,7 +22,7 @@ const styles = {
   },
   card: {
     position: "absolute",
-    backgroundColor: "#fff",
+    backgroundColor: "green",
     width: "100%",
     maxWidth: 260,
     height: 300,
@@ -42,7 +42,7 @@ const styles = {
     position: "absolute",
     bottom: 0,
     margin: 10,
-    color: "#fff",
+    color: "blue",
   },
   buttons: {
     margin: 20,
@@ -118,7 +118,7 @@ const ActivityStack = () => {
     console.log("removing: " + id + " to the " + direction);
     setLastDirection(direction);
     setLastRemovedActivity(id);
-    // alreadyRemoved.push(id);
+    alreadyRemoved.push(id);
     console.log(id + " left the screen!");
     newActivities = activities.filter((item) => item.id !== id);
     setActivities(newActivities);
@@ -160,24 +160,29 @@ const ActivityStack = () => {
     <View style={styles.container}>
       <Text style={styles.header}>React Native Tinder Card</Text>
       <View style={styles.cardContainer}>
-        {activities.map((activity, index) => (
-          <TinderCard
-            ref={childRefs[index]}
-            key={activity.name}
-            onSwipe={(dir) => swiped(dir, activity.id)}
-            onCardLeftScreen={() => outOfFrame(activity.name)}
-          >
-            <View style={styles.card}>
-              {/* <ImageBackground style={styles.cardImage} source={character.img}> */}
-              <Text style={styles.cardTitle}>{activity.name}</Text>
-              {/* </ImageBackground> */}
-            </View>
-          </TinderCard>
-        ))}
+        {activities.map(
+          (activity, index) => (
+            console.log("id", activity.id),
+            (
+              <TinderCard
+                ref={childRefs[index]}
+                key={activity.name}
+                onSwipe={(dir) => swiped(dir, activity.id)}
+                onCardLeftScreen={() => outOfFrame(activity.name)}
+              >
+                <View style={styles.card}>
+                  {/* <ImageBackground style={styles.cardImage} source={character.img}> */}
+                  <Text style={styles.cardTitle}>{activity.name}</Text>
+                  {/* </ImageBackground> */}
+                </View>
+              </TinderCard>
+            )
+          )
+        )}
       </View>
       <View style={styles.buttons}>
-        <Button onPress={() => swipe("left")} title="Swipe left!" />
-        <Button onPress={() => swipe("right")} title="Swipe right!" />
+        <Button onPress={() => swiped("left")} title="Swipe left!" />
+        <Button onPress={() => swiped("right")} title="Swipe right!" />
       </View>
       {lastDirection ? (
         <Text style={styles.infoText} key={lastDirection}>
