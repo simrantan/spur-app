@@ -1,5 +1,24 @@
 import { palette } from "./palette";
 
+const theme = {
+  lightColors: {
+    primary: palette.accent,
+    secondary: palette.accent2,
+    background: palette.beige,
+  },
+  // mode: "light",
+  components: {
+    Button: {
+      buttonStyle: {
+        paddingHorizontal: 30,
+        paddingVertical: 10,
+        borderRadius: 10,
+      },
+      titleStyle: { fontSize: 24, fontWeight: "bold" },
+    },
+  },
+};
+
 const Themes = {
   bg: palette.beige,
   bgSecondary: palette.white,
@@ -21,4 +40,4 @@ const Themes = {
   notSelected: palette.lightBlack,
 };
 
-export default Themes;
+export { theme, Themes };

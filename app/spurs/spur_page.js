@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import { useState, useEffect } from "react";
 import { supabase } from "../../utils/supabase";
-import Button from "../../components/Button";
+import { Button } from "@rneui/themed";
 
 import { Link } from "expo-router";
 
@@ -10,7 +10,7 @@ export default function Page() {
     <View style={styles.container}>
       <View style={styles.main}>
         <Text style={styles.title}>Spurs</Text>
-        <Button label="button" onPress={() => console.log("hello")} />
+        <Button title="button" onPress={() => console.log("hello")} />
       </View>
     </View>
   );
