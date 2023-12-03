@@ -2,6 +2,9 @@ import { StyleSheet, Pressable, Text } from "react-native";
 import { Themes } from "../assets/Themes";
 
 export default function Button({ alternative, label, onPress }) {
+  {
+    /*making a comement */
+  }
   return (
     <Pressable
       style={[
