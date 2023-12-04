@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Themes } from "../assets/Themes";
 
-const symbolSize = 25;
-const symbolFontSize = symbolSize * 0.8;
+var symbolSize = 25;
+var symbolFontSize = symbolSize * 0.8;
 
 function PriceSymbol({ cost }) {
   if (cost === "free") {
@@ -50,7 +50,9 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
-  return <Ionicons name={activityType} size={symbolSize} color="black" />;
+  // if (activityType === "sport")
+  return <Ionicons name="walk" size={symbolSize} color="black" />;
+  // return <Ionicons name={activityType} size={symbolSize} color="black" />;
 }
 
 function DistanceSymbol({ dist }) {
@@ -68,7 +70,9 @@ function TimeSymbol({ time }) {
   );
 }
 
-export default function QuickInfo({ quickInfo }) {
+export default function QuickInfo({ quickInfo, size }) {
+  symbolSize = size;
+  symbolFontSize = size * 0.8;
   return (
     <View style={styles.iconsbox}>
       <ParticipantsSymbol participants={quickInfo.participants} />
@@ -88,10 +92,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginVertical: 5,
+    // marginVertical: 5,
     paddingVertical: 5,
     backgroundColor: Themes.bg,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     borderRadius: 10,
   },
   timebox: {

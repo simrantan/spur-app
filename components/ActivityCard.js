@@ -28,13 +28,12 @@ export default function ActivityCard({
   needsList,
 }) {
   return (
-
     <ScrollView style={styles.container}>
       <View style={styles.card_box}>
         <Image style={styles.image} source={{ uri: activityImageUri }} />
-        <Text style={styles.bigtitle}>{activityTitle}</Text>
-        <QuickInfo quickInfo={quickInfo} />
         <View style={styles.belowFold}>
+          <Text style={styles.bigtitle}>{activityTitle}</Text>
+          <QuickInfo quickInfo={quickInfo} size={25} />
           <Text style={styles.smalltitle}>What is it?</Text>
           <Text style={styles.bodytext}>{description}</Text>
           <Text style={styles.smalltitle}>What you'll need</Text>
@@ -129,7 +128,6 @@ const styles = StyleSheet.create({
   bigtitle: {
     fontSize: 40,
     color: Themes.textPrimary,
-    paddingLeft: 10,
   },
   smalltitle: {
     fontSize: 28,
