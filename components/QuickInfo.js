@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { Themes } from "../assets/Themes";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
-const symbolSize = 25;
-const symbolFontSize = symbolSize * 0.8;
+var symbolSize = 25;
+var symbolFontSize = symbolSize * 0.8;
 
 function PriceSymbol({ cost }) {
   if (cost === "free") {
@@ -50,38 +50,7 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
-  const typeToIcon = new Map([
-    [
-      "leisure",
-      <MaterialIcons
-        name="airline-seat-recline-extra"
-        size={symbolSize}
-        color="black"
-      />,
-    ],
-    [
-      "sport",
-      <MaterialIcons
-        name={"sports-handball"}
-        size={symbolSize}
-        color="black"
-      />,
-    ],
-    ["cultural", <MaterialIcons name="agriculture" size={24} color="black" />],
-    [
-      "entertain",
-      <FontAwesome5 name="theater-masks" size={symbolSize} color="black" />,
-    ],
-    [
-      "outdoor",
-      <MaterialIcons name="nature-people" size={symbolSize} color="black" />,
-    ],
-    [
-      "social-relaxed",
-      <MaterialIcons name="local-drink" size={symbolSize} color="black" />,
-    ],
-  ]);
-  return typeToIcon.get(activityType);
+  return <Ionicons name={activityType} size={symbolSize} color="black" />;
 }
 
 function DistanceSymbol({ dist }) {
@@ -99,7 +68,9 @@ function TimeSymbol({ time }) {
   );
 }
 
-export default function QuickInfo({ quickInfo }) {
+export default function QuickInfo({ quickInfo, size }) {
+  symbolSize = size;
+  symbolFontSize = size * 0.8;
   return (
     <View style={styles.iconsbox}>
       <ParticipantsSymbol participants={quickInfo.participants} />
@@ -119,10 +90,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginVertical: 5,
+    // marginVertical: 5,
     paddingVertical: 5,
     backgroundColor: Themes.bg,
-    marginHorizontal: 10,
+    // marginHorizontal: 10,
     borderRadius: 10,
   },
   timebox: {
