@@ -1,8 +1,6 @@
 import {
-  Button,
   StyleSheet,
   SafeAreaView,
-  Text,
   Pressable,
   Image,
   Dimensions,
@@ -10,9 +8,11 @@ import {
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Themes } from "../../../assets/Themes";
-import { Link, Stack } from "expo-router";
+import { Link, Stack, router } from "expo-router";
 import { supabase } from "../../../utils/supabase";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { Button, Text } from "@rneui/themed";
+
 import SpurInvite from "./SpurInvite";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
