@@ -15,7 +15,7 @@ export default function Page() {
         <Button
           title="button"
           onPress={() => {
-            router.push("spurs/NewSpurPage");
+            router.push({ pathname: "spurs/NewSpurPage", params: { id: 4 } });
           }}
         />
       </View>

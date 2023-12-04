@@ -20,11 +20,11 @@ const dateFormat = {
 };
 
 export default function NewSpurPage() {
-  // const { initialId } = useLocalSearchParams();
-  const initialId = 7;
+  const { id } = useLocalSearchParams();
   const { theme } = useTheme();
 
-  const [activityId, setactivityId] = useState(7);
+  const [isReady, setIsReady] = useState(false);
+  const [activityId, setactivityId] = useState(1);
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
@@ -35,20 +35,25 @@ export default function NewSpurPage() {
   const [visiblePeopleDialog, setVisiblePeopleDialog] = useState(false);
 
   const fetchActivity = async () => {
+    console.log("searching for id: ", activityId);
     const { data, error } = await supabase
       .from(table)
       .select("*")
       .eq("id", activityId);
     if (error) console.log("error", error);
     else {
+      console.log("got data!", data[0]);
       setActivity(data[0]);
-      setFriends(JSON.parse(data[0].interestedFriends));
+      if (data[0].interestedFriends) {
+        setFriends(JSON.parse(data[0].interestedFriends));
+      }
       setLikedFriends(Array(friends.length).fill(true));
+      setIsReady(true);
     }
   };
 
   useEffect(() => {
-    setactivityId(initialId);
+    setactivityId(Number(id));
   }, []);
 
   useEffect(() => {
@@ -57,6 +62,7 @@ export default function NewSpurPage() {
 
   const changeActivity = () => {
     setactivityId(activityId + 1);
+    setIsReady(false);
   };
 
   const changePeople = (i) => {
@@ -77,69 +83,84 @@ export default function NewSpurPage() {
     setVisibleDateDialog(true);
   };
 
-  return (
-    <View style={styles.container}>
-      <MiniActivityCard
-        activityImageUri={activity.activityImage}
-        activityTitle={activity.activityTitle}
-        quickInfo={activity.quickInfo}
-      />
-      <Button title="Change Activity" type="outline" onPress={changeActivity} />
-      <InterestedFriendsList
-        interestedFriends={friends.filter((item, i) => likedFriends[i])}
-      />
-      <Button title="change people" type="outline" onPress={showPeoplePicker} />
-      <Text>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
-      <Button onPress={showDatePicker} title="Change date" type="outline" />
-
-      <Dialog isVisible={visibleDateDialog} onBackdropPress={showPeoplePicker}>
-        <Text h3>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
-        <Text>
-          Most of your friends are available at this time:{" "}
-          {suggestedDateTime.toLocaleString(undefined, dateFormat)}
-        </Text>
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="date"
-          is24Hour={true}
-          onChange={onDateChange}
+  if (!isReady) {
+    return <Button title="Solid" type="solid" loading />;
+  } else {
+    return (
+      <View style={styles.container}>
+        <MiniActivityCard
+          activityImageUri={activity.activityImage}
+          activityTitle={activity.activityTitle}
+          quickInfo={activity.quickInfo}
         />
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode="time"
-          is24Hour={true}
-          onChange={onDateChange}
+        <Button
+          title="Change Activity"
+          type="outline"
+          onPress={changeActivity}
         />
-      </Dialog>
+        <InterestedFriendsList
+          interestedFriends={friends.filter((item, i) => likedFriends[i])}
+        />
+        <Button
+          title="change people"
+          type="outline"
+          onPress={showPeoplePicker}
+        />
+        <Text>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
+        <Button onPress={showDatePicker} title="Change date" type="outline" />
 
-      <Dialog
-        isVisible={visiblePeopleDialog}
-        onBackdropPress={() => setVisiblePeopleDialog(false)}
-      >
-        {friends.map((l, i) => (
-          <PeopleChecklistItem
-            person={l}
-            key={i}
-            toggleChecked={() => changePeople(i)}
-            isChecked={likedFriends[i]}
+        <Dialog
+          isVisible={visibleDateDialog}
+          onBackdropPress={showPeoplePicker}
+        >
+          <Text h3>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
+          <Text>
+            Most of your friends are available at this time:{" "}
+            {suggestedDateTime.toLocaleString(undefined, dateFormat)}
+          </Text>
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode="date"
+            is24Hour={true}
+            onChange={onDateChange}
           />
-        ))}
-      </Dialog>
-      <Button
-        title="Send Spur!"
-        icon={
-          <FontAwesome
-            name="send"
-            size={20}
-            marginRight={10}
-            color={theme.colors.white}
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode="time"
+            is24Hour={true}
+            onChange={onDateChange}
           />
-        }
-      />
-    </View>
-  );
+        </Dialog>
+
+        <Dialog
+          isVisible={visiblePeopleDialog}
+          onBackdropPress={() => setVisiblePeopleDialog(false)}
+        >
+          {friends.map((l, i) => (
+            <PeopleChecklistItem
+              person={l}
+              key={i}
+              toggleChecked={() => changePeople(i)}
+              isChecked={likedFriends[i]}
+            />
+          ))}
+        </Dialog>
+        <Button
+          title="Send Spur!"
+          icon={
+            <FontAwesome
+              name="send"
+              size={20}
+              marginRight={10}
+              color={theme.colors.white}
+            />
+          }
+        />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
