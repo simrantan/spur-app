@@ -7,11 +7,14 @@ import {
   Image,
   Dimensions,
   FlatList,
+  Linking,
 } from "react-native";
 
 import { Button, Text } from "@rneui/themed";
 import { router, Stack } from "expo-router";
 import QuickInfo from "../../../components/QuickInfo";
+import InterestedFriendsList from "./InterestedFriendsList";
+import { palette } from "../../../assets/Themes/palette";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -24,13 +27,42 @@ export default function Accepted(
   interestedFriends,
   needsList
 ) {
+    const [invites, setInvites] = useState([]);
+
+    const fetchInvites = async () => {
+      const { data, error } = await supabase.from(table).select("*");
+      if (error) console.log("error", error);
+      else {
+        console.log(data);
+        setInvites(data);
+      }
+    };
+  
+    useEffect(() => {
+      fetchInvites();
+    }, []);
+  
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Text>{activityTitle}</Text>
-        <QuickInfo quickInfo={quickInfo} size={30} />
+        <Text>{invites.activityTitle}</Text>
+        <QuickInfo quickInfo={invites.quickInfo} size={30} />
+        <Text style={styles.promptbox}>When</Text>
+        <Text style={styles.textbox}>{time}</Text>
+        <Text style={styles.promptbox}>Where</Text>
+        <Text
+                style={styles.textbox}
+                numberOfLines={1}
+                onPress={() =>
+                  Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
+                }
+              >
+                {address}
+              </Text>
         <Text>Attendees</Text>
-        <InterestedFriendsList interestedFriends={interestedFriends} />
+        <InterestedFriendsList interestedFriends={invites.interestedFriends} />
+        <Checklist needsList={invites.needsList} />
+        
       </View>
     </SafeAreaView>
   );
@@ -38,37 +70,21 @@ export default function Accepted(
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Themes.colors.background,
+    backgroundColor: palette.beige,
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
   },
-  button_text: {
-    color: Themes.colors.white,
-    fontSize: 20,
-    textAlign: "center",
-    fontWeight: "bold",
-    margin: 15,
+  promptbox: {
+    width: windowWidth*0.3,
+    height: windowWidth*0.1,
+    marginVertical: 3,
   },
-  button_style: {
-    width: windowWidth * 0.7,
-    height: windowWidth * 0.17,
-    backgroundColor: Themes.colors.spotify,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-
-    borderRadius: 30,
-  },
-  header_style: {
-    backgroundColor: Themes.colors.background,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
-  },
-  icon: {
-    width: windowWidth * 0.1,
-    height: windowWidth * 0.1,
-    margin: 15,
+  textbox: {
+    width: windowWidth*0.5,
+    height: windowWidth*0,1,
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginVertical: 3,
   },
 });
