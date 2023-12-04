@@ -69,6 +69,18 @@ export default function HomeLayout() {
       <Tabs
         screenOptions={{
           headerShown: false,
+          tabBarStyle: {
+            backgroundColor: theme.lightColors.background,
+            height: 100,
+            borderTopColor: theme.lightColors.primary,
+            borderTopWidth: 5,
+          },
+          tabBarItemStyle: {
+            // backgroundColor: "#00ff00",
+            margin: 5,
+            borderRadius: 10,
+          },
+          tabBarActiveTintColor: theme.lightColors.primary,
         }}
       >
         <Tabs.Screen
