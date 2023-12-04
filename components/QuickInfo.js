@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Themes } from "../assets/Themes";
+import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 var symbolSize = 25;
 var symbolFontSize = symbolSize * 0.8;
@@ -50,9 +50,7 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
-  // if (activityType === "sport")
-  return <Ionicons name="walk" size={symbolSize} color="black" />;
-  // return <Ionicons name={activityType} size={symbolSize} color="black" />;
+  return <Ionicons name={activityType} size={symbolSize} color="black" />;
 }
 
 function DistanceSymbol({ dist }) {

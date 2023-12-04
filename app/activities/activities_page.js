@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
-import ActivityCard from "../../components/ActivityCard.js";
+import { StyleSheet, View } from "react-native";
+import { Text } from "@rneui/themed";
 
 import { Link } from "expo-router";
 
@@ -7,7 +7,9 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Activities</Text>
+        <Text h1 style={styles.title}>
+          Activities
+        </Text>
       </View>
     </View>
   );
