@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Themes } from "../assets/Themes";
 
 function FriendProfleAndName({ friend }) {
+  console.log("frind type: ", typeof friend);
   return (
     <View style={styles.friendbox}>
       <Pressable>

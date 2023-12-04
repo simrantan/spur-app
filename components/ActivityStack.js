@@ -58,7 +58,7 @@ const styles = {
   },
 };
 
-const table = "Activities v3";
+const table = "Activities v4";
 const alreadyRemoved = [];
 //let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
@@ -144,8 +144,8 @@ const ActivityStack = () => {
               >
                 <ActivityCard
                   activityTitle={activity.activityTitle}
-                  activityImage={activity.activityImage}
-                  quickInfo={activity.quickinfo}
+                  activityImageUri={activity.activityImage}
+                  quickInfo={activity.quickInfo}
                   interestedFriends={activity.interestedFriends}
                   description={activity.description}
                   needsList={activity.needsList}

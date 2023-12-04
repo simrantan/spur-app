@@ -25,18 +25,14 @@ export default function MiniActivityCard({
 
 const styles = StyleSheet.create({
   mini_card_box: {
-    // width: windowWidth * 0.9,
-    // backgroundColor: Themes.bgSecondary,
-    // padding: 2,
-    // marginVertical: 8,
     flexDirection: "row",
-    // alignItems: "center",
     alignContent: "flex-start",
     alignItems: "flex-start",
-    // borderRadius: 5,
-    // marginLeft: 10,
     padding: 10,
-    // margin: 5,
+    // flexGrow: 1,
+    width: "100%",
+    // maxWidth: windowWidth,
+    height: 100,
   },
   image: {
     height: 80,
@@ -47,16 +43,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: Themes.textPrimary,
-    paddingBottom: 10,
+    paddingBottom: 0,
   },
   container: {
     flex: 1,
   },
   info: {
     flexDirection: "column",
-    justifyContent: "flex-start",
     flexGrow: 1,
-    alignContent: "space-around",
+    justifyContent: "space-between",
   },
 });
 

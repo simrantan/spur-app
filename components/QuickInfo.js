@@ -4,7 +4,6 @@ import { Themes } from "../assets/Themes";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import Icons from "../assets/Icons";
 import { Image } from "react-native";
-import { a } from "@react-spring/native";
 
 var symbolSize = 25;
 var symbolFontSize = symbolSize * 0.8;
@@ -96,6 +95,14 @@ function TimeSymbol({ time }) {
 export default function QuickInfo({ quickInfo, size }) {
   symbolSize = size;
   symbolFontSize = size * 0.8;
+  if (typeof quickInfo === "string") {
+    try {
+      quickInfo = JSON.parse(quickInfo);
+    } catch (e) {
+      console.log("error parsing quick info: ", e);
+    }
+    // quickInfo = JSON.parse(quickInfo);
+  }
   return (
     <View style={styles.iconsbox}>
       <View style={styles.icon}>
@@ -121,6 +128,7 @@ const styles = StyleSheet.create({
   iconsbox: {
     borderColor: "black",
     borderStyle: "solid",
+
     flex: 1,
     flexDirection: "row",
     justifyContent: "space-around",
@@ -131,6 +139,7 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bg,
     // marginHorizontal: 10,
     borderRadius: 10,
+    // flexShrink: 1,
   },
   timebox: {
     flexDirection: "row",

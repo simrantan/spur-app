@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
-    marginHorizontal: "auto",
+    // marginHorizontal: 10,
     backgroundColor: Themes.bgSecondary,
     flexGrow: 1,
     width: "100%",

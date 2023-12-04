@@ -30,7 +30,7 @@ export default function ActivityCard({
         <View style={styles.aboveChecklist}>
           <Image style={styles.image} source={{ uri: activityImageUri }} />
           <Text style={styles.bigtitle}>{activityTitle}</Text>
-          <QuickInfo quickInfo={quickInfo} size={25} />
+          <QuickInfo quickInfo={quickInfo} size={20} />
           <Text style={styles.smalltitle}>What is it?</Text>
           <Text style={styles.bodytext}>{description}</Text>
           <Text style={styles.smalltitle}>What you'll need</Text>
@@ -113,27 +113,33 @@ ActivityCard.defaultProps = {
   interestedFriends: [
     {
       name: "John Doe",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     {
       name: "Nils Forstall",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     {
       name: "Jeremy Bentham Nickels",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     {
       name: "John Doe",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     {
       name: "John Doe",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
     {
       name: "John Doe",
-      profileImage: require("../assets/Images/john_doe.png"),
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
     },
   ],
   description:
@@ -143,7 +149,7 @@ ActivityCard.defaultProps = {
     dist: "0.5 mi",
     time: "1 hr",
     participants: 1,
-    activityType: "nature",
+    activityType: "sport",
     cost: "cheap",
   },
 };

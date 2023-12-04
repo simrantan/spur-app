@@ -9,7 +9,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
 
-const table = "Activities v3";
+const table = "Activities v4";
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const dateFormat = {
   year: "numeric",
@@ -167,12 +167,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
+    // padding: 24,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
+  },
+  miniActivityCardContainer: {
+    flexDirection: "row",
+    flexGrow: 1,
   },
 });
