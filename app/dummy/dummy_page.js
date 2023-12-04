@@ -10,7 +10,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <MiniActivityCard />
+        <ActivityCard />
       </View>
     </View>
   );

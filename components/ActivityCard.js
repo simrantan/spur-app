@@ -14,7 +14,6 @@ import { Link, Stack } from "expo-router";
 import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
 import InterestedFriendsList from "./InterestedFriendsList";
-
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -28,10 +27,10 @@ export default function ActivityCard({
   needsList,
 }) {
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView>
       <View style={styles.card_box}>
-        <Image style={styles.image} source={{ uri: activityImageUri }} />
-        <View style={styles.belowFold}>
+        <View style={styles.aboveChecklist}>
+          <Image style={styles.image} source={{ uri: activityImageUri }} />
           <Text style={styles.bigtitle}>{activityTitle}</Text>
           <QuickInfo quickInfo={quickInfo} size={25} />
           <Text style={styles.smalltitle}>What is it?</Text>
@@ -50,52 +49,15 @@ export default function ActivityCard({
 }
 
 const styles = StyleSheet.create({
+  aboveChecklist: {
+    marginHorizontal: 10,
+  },
   card_box: {
     backgroundColor: Themes.bgSecondary,
-    // padding: 2,
     marginVertical: 8,
     flexDirection: "column",
-    // alignItems: "center",
     justifyContent: "flex-start",
     borderRadius: 10,
-    // marginLeft: 10,
-    paddingBottom: 10,
-  },
-  aboveFold: {
-    flexDirection: "column",
-    justifyContent: "center",
-    // margin: 10,
-    backgroundColor: "green",
-  },
-  belowFold: {
-    flexDirection: "column",
-    justifyContent: "flex-start",
-    marginLeft: 10,
-    marginRight: 10,
-  },
-  checkbox: {
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    direction: "ltr",
-    margin: 4,
-    width: windowWidth * 0.9,
-  },
-  timebox: {
-    flexDirection: "row",
-    justifyContent: "center",
-    direction: "ltr",
-    margin: 4,
-    width: 40,
-    height: 20,
-    alignItems: "center",
-  },
-  distbox: {
-    flexDirection: "row",
-    justifyContent: "center",
-    direction: "ltr",
-    margin: 4,
-    width: 20,
-    height: 20,
   },
   button: {
     width: windowWidth * 0.6,
@@ -106,7 +68,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
-    margin: 10,
+    margin: 20,
+    marginBottom: 30,
   },
   buttonText: {
     color: Themes.buttonPrimaryText,
@@ -119,15 +82,16 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     flex: 1,
     height: windowHeight * 0.6,
-    width: "94%",
     alignSelf: "center",
-    margin: 10,
+    width: "100%",
     borderRadius: 10,
+    marginTop: 10,
   },
 
   bigtitle: {
     fontSize: 40,
     color: Themes.textPrimary,
+    marginVertical: 10,
   },
   smalltitle: {
     fontSize: 28,
