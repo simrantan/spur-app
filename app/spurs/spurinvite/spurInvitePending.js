@@ -51,6 +51,13 @@ export default function spurInvitePending() {
         renderItem={(item) => renderInvite(item)}
         keyExtractor={(item) => item.id}
       />
+      <Button
+        title="Create a New Spur"
+        size="lg"
+        onPress={() => {
+          router.push("spurs/NewSpurPage");
+        }}
+      />
     </SafeAreaView>
   );
 }
@@ -58,6 +65,7 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     width: windowWidth,
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
+    flexDirection: "column",
   },
 });

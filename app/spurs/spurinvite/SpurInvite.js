@@ -58,8 +58,7 @@ export default function SpurInvite({
       <View style={styles.acceptAndReject}>
         <Button
           title="Accept"
-          loading={false}
-          loadingProps={{ size: "small", color: "white" }}
+          size="sm"
           onPress={() => {
             router.push("spurs/spurinvite/spurInviteAccepted");
           }}
@@ -67,6 +66,7 @@ export default function SpurInvite({
 
         <Button
           title="Reject"
+          size="sm"
           onPress={() => {
             router.push("spurs/spurinvite/blankSpurPage");
           }}
@@ -110,9 +110,9 @@ const styles = StyleSheet.create({
   },
   textbox: {
     width: 90,
-    height: 20,
+    height: 25,
     backgroundColor: "white",
-    borderRadius: 10,
+    borderRadius: 5,
     marginVertical: 3,
   },
 
