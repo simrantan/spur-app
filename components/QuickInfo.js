@@ -2,38 +2,45 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { Themes } from "../assets/Themes";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import Icons from "../assets/Icons";
+import { Image } from "react-native";
+import { a } from "@react-spring/native";
 
 var symbolSize = 25;
 var symbolFontSize = symbolSize * 0.8;
 
 function PriceSymbol({ cost }) {
+  var inner = <View />;
   if (cost === "free") {
-    return (
+    inner = (
       <Text style={{ color: "black", fontSize: symbolFontSize }}>Free</Text>
     );
-  }
-  if (cost === "cheap") {
-    return (
+  } else if (cost === "cheap") {
+    inner = (
       <View style={{ flexDirection: "row" }}>
         <Text style={{ color: "black", fontSize: symbolFontSize }}>$</Text>
         <Text style={{ color: "lightgray", fontSize: symbolFontSize }}>$$</Text>
       </View>
     );
-  }
-  if (cost === "moderate") {
-    return (
+  } else if (cost === "moderate") {
+    inner = (
       <View style={{ flexDirection: "row" }}>
         <Text style={{ color: "black", fontSize: symbolFontSize }}>$$</Text>
         <Text style={{ color: "lightgray", fontSize: symbolFontSize }}>$</Text>
       </View>
     );
-  }
-  if (cost === "expensive") {
-    return (
+  } else if (cost === "expensive") {
+    inner = (
       <Text style={{ color: "black", fontSize: symbolFontSize }}>$$$</Text>
     );
+  } else {
+    inner = (
+      <Text style={{ color: "black", fontSize: symbolFontSize }}>
+        Price Unknown
+      </Text>
+    );
   }
-  return <Text style={{ color: "black" }}>Price Unknown</Text>;
+  return inner;
 }
 
 function ParticipantsSymbol({ participants }) {
@@ -50,10 +57,25 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
-  if (activityType === "intellectual" || activityType === "sport") {
-    return <Ionicons name="help" size={symbolSize} color="black" />;
+  if (
+    activityType !== "sport" &&
+    activityType !== "entertainment" &&
+    activityType !== "leisure" &&
+    activityType !== "intellectual" &&
+    activityType !== "outdoors" &&
+    activityType !== "explore"
+  ) {
+    return <Ionicons name="radio-button-off" size={symbolSize} color="black" />;
   }
-  return <Ionicons name={activityType} size={symbolSize} color="black" />;
+  return (
+    <Image
+      source={Icons[activityType]}
+      style={{
+        width: symbolSize,
+        height: symbolSize,
+      }}
+    />
+  );
 }
 
 function DistanceSymbol({ dist }) {
@@ -76,11 +98,21 @@ export default function QuickInfo({ quickInfo, size }) {
   symbolFontSize = size * 0.8;
   return (
     <View style={styles.iconsbox}>
-      <ParticipantsSymbol participants={quickInfo.participants} />
-      <PriceSymbol cost={quickInfo.cost} />
-      <ActivitySymbol activityType={quickInfo.activityType} />
-      <DistanceSymbol dist={quickInfo.dist} />
-      <TimeSymbol time={quickInfo.time} />
+      <View style={styles.icon}>
+        <ParticipantsSymbol participants={quickInfo.participants} />
+      </View>
+      <View style={styles.icon}>
+        <PriceSymbol cost={quickInfo.cost} />
+      </View>
+      <View style={styles.icon}>
+        <ActivitySymbol activityType={quickInfo.activityType} />
+      </View>
+      <View style={styles.icon}>
+        <DistanceSymbol dist={quickInfo.dist} />
+      </View>
+      <View style={styles.icon}>
+        <TimeSymbol time={quickInfo.time} />
+      </View>
     </View>
   );
 }
@@ -93,6 +125,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    // flexGrow: 1,
     // marginVertical: 5,
     paddingVertical: 5,
     backgroundColor: Themes.bg,
@@ -100,6 +133,14 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   timebox: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  icon: {
+    // flex: 1,
+    // alignItems: "center",
+  },
+  text: {
     flexDirection: "row",
     alignItems: "center",
   },
