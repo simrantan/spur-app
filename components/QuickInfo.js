@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Themes } from "../assets/Themes";
+import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
 
 const symbolSize = 25;
 const symbolFontSize = symbolSize * 0.8;
@@ -50,7 +50,38 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
-  return <Ionicons name={activityType} size={symbolSize} color="black" />;
+  const typeToIcon = new Map([
+    [
+      "leisure",
+      <MaterialIcons
+        name="airline-seat-recline-extra"
+        size={symbolSize}
+        color="black"
+      />,
+    ],
+    [
+      "sport",
+      <MaterialIcons
+        name={"sports-handball"}
+        size={symbolSize}
+        color="black"
+      />,
+    ],
+    ["cultural", <MaterialIcons name="agriculture" size={24} color="black" />],
+    [
+      "entertain",
+      <FontAwesome5 name="theater-masks" size={symbolSize} color="black" />,
+    ],
+    [
+      "outdoor",
+      <MaterialIcons name="nature-people" size={symbolSize} color="black" />,
+    ],
+    [
+      "social-relaxed",
+      <MaterialIcons name="local-drink" size={symbolSize} color="black" />,
+    ],
+  ]);
+  return typeToIcon.get(activityType);
 }
 
 function DistanceSymbol({ dist }) {
