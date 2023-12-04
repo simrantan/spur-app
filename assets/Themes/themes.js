@@ -9,6 +9,9 @@ const theme = {
   // mode: "light",
   components: {
     Text: {
+      style: {
+        fontFamily: "Montserrat_400Regular",
+      },
       h1Style: {
         fontFamily: "SpicyRice_400Regular",
       },
@@ -19,10 +22,6 @@ const theme = {
       h3Style: {
         fontFamily: "Montserrat_500Medium",
         fontWeight: "500",
-      },
-      h4Style: {
-        fontFamily: "Montserrat_400Regular",
-        fontWeight: "400",
       },
     },
     Button: {
