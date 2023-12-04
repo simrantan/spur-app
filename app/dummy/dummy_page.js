@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard.js";
 import Checklist from "../../components/Checklist.js";
 import { Themes } from "../../assets/Themes/index.js";
+import MiniActivityCard from "../../components/MiniActivityCard.js";
 
 import { Link } from "expo-router";
 
@@ -9,7 +10,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCard> </ActivityCard>
+        <MiniActivityCard />
       </View>
     </View>
   );
