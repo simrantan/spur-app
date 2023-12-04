@@ -18,6 +18,10 @@ export default function Page() {
             router.push("spurs/NewSpurPage");
           }}
         />
+        <Button
+          title="invites"
+          onPress={() => router.push("spurs/spurinvite/spurInvitePending")}
+        />
       </View>
     </View>
   );
