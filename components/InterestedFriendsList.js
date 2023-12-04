@@ -1,12 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  FlatList,
-} from "react-native";
-
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
 import { Themes } from "../assets/Themes";
 
 function FriendProfleAndName({ friend }) {
@@ -23,18 +15,21 @@ function FriendProfleAndName({ friend }) {
 }
 
 export default function InterestedFriendsList({ interestedFriends }) {
-  return (
-    <FlatList
-      data={interestedFriends}
-      renderItem={({ item, index }) => <FriendProfleAndName friend={item} />}
-      horizontal={true}
-      ListEmptyComponent={
-        <Text style={styles.noFriends}>
-          None of your friends share this interest.
-        </Text>
-      }
-    />
-  );
+  if (interestedFriends.length > 0) {
+    return (
+      <View style={styles.container}>
+        {interestedFriends.map((item) => {
+          return <FriendProfleAndName friend={item} />;
+        })}
+      </View>
+    );
+  } else {
+    return (
+      <Text style={styles.noFriends}>
+        None of your friends share this interest.
+      </Text>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -51,6 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Themes.textPrimary,
     textAlign: "center",
+    margin: 5,
   },
   noFriends: {
     fontSize: 16,
@@ -61,8 +57,12 @@ const styles = StyleSheet.create({
   friendbox: {
     flexDirection: "column",
     justifyContent: "center",
-    width: 70,
+    width: "25%",
     height: 100,
-    marginHorizontal: 5,
+  },
+  container: {
+    flexDirection: "row",
+    width: "100%",
+    flexWrap: "wrap",
   },
 });
