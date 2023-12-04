@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import {
-  ImageBackground,
-  Text,
-  View,
-  Button,
-  SafeAreaView,
-  Dimensions,
-} from "react-native";
+import { View, SafeAreaView, Dimensions } from "react-native";
 import { supabase } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "./ActivityCard";
@@ -65,7 +58,7 @@ const styles = {
   },
 };
 
-const table = "Activities";
+const table = "Activities v3";
 const alreadyRemoved = [];
 //let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
@@ -78,7 +71,6 @@ const ActivityStack = () => {
     const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
     else {
-      console.log(data);
       setActivities(data);
     }
   };

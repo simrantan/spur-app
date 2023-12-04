@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../../utils/supabase";
 import { Button, Text } from "@rneui/themed";
 
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 
 export default function Page() {
   return (
@@ -12,7 +12,12 @@ export default function Page() {
         <Text h1 style={styles.title}>
           Spurs
         </Text>
-        <Button title="button" onPress={() => console.log("hello")} />
+        <Button
+          title="button"
+          onPress={() => {
+            router.push({ pathname: "spurs/NewSpurPage", params: { id: 4 } });
+          }}
+        />
       </View>
     </View>
   );
@@ -29,9 +34,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
-  },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
   },
 });

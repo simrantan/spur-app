@@ -1,6 +1,5 @@
 import {
   StyleSheet,
-  Text,
   View,
   Image,
   Dimensions,
@@ -9,6 +8,7 @@ import {
   FlatList,
   ImageBackground,
 } from "react-native";
+import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import { Link, Stack } from "expo-router";
 import Checklist from "./Checklist";
@@ -111,7 +111,7 @@ ActivityCard.defaultProps = {
   number: 1,
   activityImageUri:
     "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
-  activityTitle: "Pickelball",
+  activityTitle: "Pickleball",
   interestedFriends: [
     {
       name: "John Doe",

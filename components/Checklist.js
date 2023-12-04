@@ -1,4 +1,5 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Pressable } from "react-native";
+import { Text } from "@rneui/themed";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import React from "react";

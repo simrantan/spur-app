@@ -50,6 +50,9 @@ function ParticipantsSymbol({ participants }) {
 }
 
 function ActivitySymbol({ activityType }) {
+  if (activityType === "intellectual" || activityType === "sport") {
+    return <Ionicons name="help" size={symbolSize} color="black" />;
+  }
   return <Ionicons name={activityType} size={symbolSize} color="black" />;
 }
 

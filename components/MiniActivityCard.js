@@ -1,21 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  Pressable,
-  ScrollView,
-  FlatList,
-  ImageBackground,
-} from "react-native";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
-import { Link, Stack } from "expo-router";
-import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
-import InterestedFriendsList from "./InterestedFriendsList";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -75,7 +61,7 @@ const styles = StyleSheet.create({
 MiniActivityCard.defaultProps = {
   activityImageUri:
     "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
-  activityTitle: "Pickelball",
+  activityTitle: "Pickleball",
   quickInfo: {
     dist: "0.5 mi",
     time: "1 hr",
