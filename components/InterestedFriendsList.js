@@ -1,11 +1,5 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Pressable,
-  FlatList,
-} from "react-native";
+import { StyleSheet, View, Image, Pressable, FlatList } from "react-native";
+import { Text } from "@rneui/themed";
 
 import { Themes } from "../assets/Themes";
 
