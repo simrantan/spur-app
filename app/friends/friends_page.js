@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "@rneui/themed";
 
 import { Link } from "expo-router";
 
@@ -6,7 +7,9 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Friends</Text>
+        <Text h1 style={styles.title}>
+          Friends
+        </Text>
       </View>
     </View>
   );

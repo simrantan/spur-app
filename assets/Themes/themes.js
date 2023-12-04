@@ -11,7 +11,18 @@ const theme = {
     Text: {
       h1Style: {
         fontFamily: "SpicyRice_400Regular",
-        color: "red",
+      },
+      h2Style: {
+        fontFamily: "Montserrat_600SemiBold",
+        fontWeight: "600",
+      },
+      h3Style: {
+        fontFamily: "Montserrat_500Medium",
+        fontWeight: "500",
+      },
+      h4Style: {
+        fontFamily: "Montserrat_400Regular",
+        fontWeight: "400",
       },
     },
     Button: {
