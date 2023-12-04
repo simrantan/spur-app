@@ -145,7 +145,7 @@ ActivityCard.defaultProps = {
     dist: "0.5 mi",
     time: "1 hr",
     participants: 1,
-    activityType: "walk",
+    activityType: "nature",
     cost: "cheap",
   },
 };
