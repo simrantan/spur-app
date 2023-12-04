@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bg,
     // marginHorizontal: 10,
     borderRadius: 10,
-    // flexShrink: 1,
   },
   timebox: {
     flexDirection: "row",

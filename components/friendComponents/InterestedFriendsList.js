@@ -28,36 +28,17 @@ export default function InterestedFriendsList({ interestedFriends }) {
 }
 
 const styles = StyleSheet.create({
-  friendimage: {
-    flexDirection: "column",
-    justifyContent: "center",
-    borderRadius: 50,
-    resizeMode: "cover",
-    width: 60,
-    height: 60,
-    alignSelf: "center",
-  },
-  friendName: {
-    fontSize: 14,
-    color: Themes.textPrimary,
-    textAlign: "center",
-    margin: 5,
-  },
   noFriends: {
     fontSize: 16,
     color: "gray",
     textAlign: "center",
     marginVertical: 8,
   },
-  friendbox: {
-    flexDirection: "column",
-    justifyContent: "center",
-    width: "25%",
-    height: 100,
-  },
   container: {
     flexDirection: "row",
     width: "100%",
     flexWrap: "wrap",
+    // flexGrow: 1,
+    // justifyContent: "space-around",
   },
 });

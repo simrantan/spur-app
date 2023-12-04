@@ -133,6 +133,7 @@ const ActivityStack = () => {
           (activity, index) => (
             console.log("activity", activity),
             console.log("id", activity.id),
+            console.log("needslist", activity.needsList),
             (
               <TinderCard
                 //preventSwipe={["up", "down"]}
@@ -148,7 +149,7 @@ const ActivityStack = () => {
                   quickInfo={activity.quickInfo}
                   interestedFriends={activity.interestedFriends}
                   description={activity.description}
-                  needsList={activity.needsList}
+                  needsList={activity.needs}
                 />
               </TinderCard>
             )

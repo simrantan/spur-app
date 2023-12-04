@@ -29,9 +29,7 @@ const styles = StyleSheet.create({
     alignContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
-    // flexGrow: 1,
     width: "100%",
-    // maxWidth: windowWidth,
     height: 100,
   },
   image: {

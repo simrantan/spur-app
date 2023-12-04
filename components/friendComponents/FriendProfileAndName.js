@@ -1,6 +1,9 @@
 import { StyleSheet, View, Image, Pressable } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../../assets/Themes";
+import { Dimensions } from "react-native";
+
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function FriendProfileAndName({ friend }) {
   return (
@@ -24,8 +27,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 50,
     resizeMode: "cover",
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     alignSelf: "center",
   },
   friendName: {
@@ -36,8 +39,8 @@ const styles = StyleSheet.create({
   friendbox: {
     flexDirection: "column",
     justifyContent: "center",
-    width: 70,
+    width: "25%",
     height: 100,
-    marginHorizontal: 5,
+    paddingHorizontal: 5,
   },
 });

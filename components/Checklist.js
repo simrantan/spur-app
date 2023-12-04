@@ -25,6 +25,13 @@ function Checkbox({ title }) {
 }
 
 export default function Checklist({ needsList }) {
+  if (typeof needsList === "string") {
+    try {
+      needsList = JSON.parse(needsList);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
     <View style={styles.app}>
       {needsList.map((item) => {
