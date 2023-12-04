@@ -1,21 +1,7 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Dimensions,
-  Pressable,
-  ScrollView,
-  FlatList,
-  ImageBackground,
-} from "react-native";
+import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
-import { Link, Stack } from "expo-router";
-import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
-import InterestedFriendsList from "./InterestedFriendsList";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 

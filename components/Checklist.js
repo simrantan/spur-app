@@ -1,6 +1,5 @@
-// import React, { useState } from "react";
-import { FlatList, View, Text, Pressable } from "react-native";
-import { CheckBox } from "@react-native-community/checkbox";
+import { View, Pressable } from "react-native";
+import { Text } from "@rneui/themed";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import React from "react";
@@ -27,14 +26,16 @@ function Checkbox({ title }) {
 
 export default function Checklist({ needsList }) {
   return (
-    <FlatList
-      data={needsList}
-      renderItem={({ item, index }) => (
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+    <View>
+      {needsList.map((item, index) => (
+        <View
+          key={index}
+          style={{ flexDirection: "row", alignItems: "center" }}
+        >
           <Checkbox title={item} />
         </View>
-      )}
-    />
+      ))}
+    </View>
   );
 }
 
