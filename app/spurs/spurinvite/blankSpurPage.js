@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   FlatList,
+  View,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Themes } from "../../../assets/Themes";
@@ -33,13 +34,20 @@ export default function spurInvitePending() {
   useEffect(() => {
     fetchInvites();
   }, []);
+  console.log("invite", invites);
 
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen options={{ title: "" }}></Stack.Screen>
-      <Link asChild href="/spurs/spurinvite/spurInviteAccepted">
-        {invites.map((invite) => (
-          <Pressable style={styles.activityInfo}>
+      {invites.map((invite, index) => (
+        <Pressable
+          key={index}
+          style={styles.col}
+          onPress={() => {
+            router.push("spurs/spurinvite/spurInviteAccepted");
+          }}
+        >
+          <View style={styles.activityInfo}>
             <Image
               style={styles.image}
               source={{ uri: invite.activityPhoto }}
@@ -68,10 +76,10 @@ export default function spurInvitePending() {
                 </Text>
               </View>
             </View>
-            <Text h3>You're Going!</Text>
-          </Pressable>
-        ))}
-      </Link>
+          </View>
+          <Text h3>You're Going!</Text>
+        </Pressable>
+      ))}
       <Button
         title="Create a New Spur"
         size="lg"
@@ -88,5 +96,34 @@ const styles = StyleSheet.create({
     width: windowWidth,
     justifyContent: "space-between",
     flexDirection: "column",
+  },
+  promptbox: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    marginVertical: 3,
+  },
+  textbox: {
+    width: windowWidth * 0.5,
+    height: windowWidth * 0.1,
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginVertical: 3,
+  },
+  from: {
+    flexDirection: "row",
+  },
+  activityInfo: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  activityDetails: {
+    flexDirection: "column",
+    alignContent: "flex-start",
+    justifyContent: "flex-start",
+    direction: "ltr",
+  },
+  col: {
+    flexDirection: "row",
   },
 });
