@@ -7,4 +7,6 @@ export default navOptions = {
     fontFamily: theme.components.Text.h1Style.fontFamily,
     fontSize: 30,
   },
+  headerBackTitleVisible: false,
+  headerTintColor: theme.lightColors.primary,
 };
