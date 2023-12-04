@@ -13,9 +13,7 @@ import { Themes } from "../assets/Themes";
 import { Link, Stack } from "expo-router";
 import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
-import InterestedFriendsList from "./InterestedFriendsList";
-
-import Ionicons from "@expo/vector-icons/Ionicons";
+import InterestedFriendsList from "./friendComponents/InterestedFriendsList";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 

@@ -1,6 +1,6 @@
-import { useState, useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Tabs } from "expo-router";
-import { ThemeProvider, Button, createTheme, useTheme } from "@rneui/themed";
+import { ThemeProvider, createTheme } from "@rneui/themed";
 import { theme } from "../assets/Themes";
 
 import * as SplashScreen from "expo-splash-screen";
@@ -26,10 +26,12 @@ import {
   Montserrat_900Black_Italic,
 } from "@expo-google-fonts/montserrat";
 
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { FontAwesome } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import {
+  FontAwesome,
+  MaterialIcons,
+  Entypo,
+  Ionicons,
+} from "@expo/vector-icons";
 
 SplashScreen.preventAutoHideAsync();
 
