@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard.js";
+import SpurInvite from "../../components/SpurInvite.js";
 
 import { Link } from "expo-router";
 

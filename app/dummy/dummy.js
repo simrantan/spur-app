@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import ActivityCard from "../../components/ActivityCard.js";
 import Checklist from "../../components/Checklist.js";
 import { Themes } from "../../assets/Themes";
+import SpurInvite from "../../components/SpurInvite.js";
 
 import { Link } from "expo-router";
 
@@ -9,14 +10,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCard> </ActivityCard>
-        {/* <Checklist
-          needsList={[
-            "this test is a lot longer lallalawo aidjoa apdijf pasd apsodj apojsdpo apdoj ap",
-            "test2",
-            "test3",
-          ]}
-        /> */}
+        <SpurInvite />
       </View>
     </View>
   );
