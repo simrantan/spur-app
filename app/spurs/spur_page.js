@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState, useEffect } from "react";
 import { supabase } from "../../utils/supabase";
-import { Button } from "@rneui/themed";
+import { Button, Text } from "@rneui/themed";
 
 import { Link } from "expo-router";
 
@@ -9,7 +9,9 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text style={styles.title}>Spurs</Text>
+        <Text h1 style={styles.title}>
+          Spurs
+        </Text>
         <Button title="button" onPress={() => console.log("hello")} />
       </View>
     </View>
@@ -27,10 +29,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
-  },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
   },
   subtitle: {
     fontSize: 36,

@@ -8,6 +8,12 @@ const theme = {
   },
   // mode: "light",
   components: {
+    Text: {
+      h1Style: {
+        fontFamily: "SpicyRice_400Regular",
+        color: "red",
+      },
+    },
     Button: {
       buttonStyle: {
         paddingHorizontal: 30,
