@@ -6,7 +6,6 @@ import {
   Dimensions,
   Pressable,
   ScrollView,
-  CheckBox,
   FlatList,
   ImageBackground,
 } from "react-native";
@@ -17,28 +16,22 @@ import QuickInfo from "./QuickInfo";
 import InterestedFriendsList from "./InterestedFriendsList";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function ActivityCard({
-  number,
-  activityImage,
+  activityImageUri,
   activityTitle,
   quickInfo, // dist, time, participants, activityType, cost
-  participants,
   interestedFriends, // array of friend objects, each of which has a name and profile image
   description,
   needsList,
 }) {
-  var participantsIcon = "people-outline";
-  if (participants == 1) {
-    participantsIcon = "people";
-  }
   return (
+
     <ScrollView style={styles.container}>
       <View style={styles.card_box}>
-        <Image style={styles.image} source={{ uri: activityImage }} />
+        <Image style={styles.image} source={{ uri: activityImageUri }} />
         <Text style={styles.bigtitle}>{activityTitle}</Text>
         <QuickInfo quickInfo={quickInfo} />
         <View style={styles.belowFold}>
@@ -47,8 +40,8 @@ export default function ActivityCard({
           <Text style={styles.smalltitle}>What you'll need</Text>
           <Checklist needsList={needsList} />
           <Text style={styles.smalltitle}>Interested Friends</Text>
-          <InterestedFriendsList interestedFriends={interestedFriends} />
         </View>
+        <InterestedFriendsList interestedFriends={interestedFriends} />
         <View style={styles.button}>
           <Text style={styles.buttonText}>Spur Friends</Text>
         </View>
@@ -78,7 +71,8 @@ const styles = StyleSheet.create({
   belowFold: {
     flexDirection: "column",
     justifyContent: "flex-start",
-    margin: 10,
+    marginLeft: 10,
+    marginRight: 10,
   },
   checkbox: {
     flexDirection: "row",
@@ -113,6 +107,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     alignSelf: "center",
+    margin: 10,
   },
   buttonText: {
     color: Themes.buttonPrimaryText,
@@ -152,7 +147,8 @@ const styles = StyleSheet.create({
 
 ActivityCard.defaultProps = {
   number: 1,
-  activityImage: require("../assets/Images/pickleball2.webp"),
+  activityImageUri:
+    "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
   activityTitle: "Pickelball",
   interestedFriends: [
     {
