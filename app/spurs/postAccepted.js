@@ -10,14 +10,13 @@ import {
   Linking,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Themes } from "../../../assets/Themes";
+
 import { Link, Stack, router, useNavigation } from "expo-router";
-import { supabase } from "../../../utils/supabase";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { supabase } from "../../utils/supabase";
+
 import { Button, Text } from "@rneui/themed";
 
-import SpurInvite from "./SpurInvite";
-import { palette } from "../../../assets/Themes/palette";
+import { palette } from "../../assets/Themes/palette";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const table = "spurInvite";
@@ -40,7 +39,7 @@ export default function spurInvitePending() {
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
-            router.push("spurs/spurinvite/postAccepted");
+            router.push("spurs/postAccepted");
           }}
         >
           <Text></Text>
@@ -56,7 +55,7 @@ export default function spurInvitePending() {
         <Pressable
           key={index}
           onPress={() => {
-            router.push("spurs/spurinvite/spurInviteAccepted");
+            router.push("spurs/spurInviteAccepted");
           }}
         >
           <View style={styles.col}>

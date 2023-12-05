@@ -12,7 +12,6 @@ import { Button, Text } from "@rneui/themed";
 import React from "react";
 
 import { Link, Stack, router } from "expo-router";
-import { palette } from "../../../assets/Themes/palette";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 //set table
@@ -73,7 +72,7 @@ export default function SpurInvite({
           title="Accept"
           size="sm"
           onPress={() => {
-            router.push("spurs/spurinvite/spurInviteAccepted");
+            router.push("spurs/spurInviteAccepted");
           }}
         />
 
@@ -81,7 +80,7 @@ export default function SpurInvite({
           title="Reject"
           size="sm"
           onPress={() => {
-            router.push("spurs/spurinvite/postRejected");
+            router.push("spurs/postRejected");
           }}
         />
       </View>

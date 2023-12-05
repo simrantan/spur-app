@@ -1,13 +1,18 @@
 import { StyleSheet, View } from "react-native";
-import { useState, useEffect } from "react";
-import { supabase } from "../../utils/supabase";
+
 import { Button, Text } from "@rneui/themed";
 
-import { Link, router } from "expo-router";
+import { Stack, Link, router } from "expo-router";
 
 export default function Page() {
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "",
+          headerShown: false, // Hide the default navigation header
+        }}
+      ></Stack.Screen>
       <View style={styles.main}>
         <Text h1 style={styles.title}>
           Spurs
@@ -20,7 +25,7 @@ export default function Page() {
         />
         <Button
           title="invites"
-          onPress={() => router.push("spurs/spurinvite/spurInvitePending")}
+          onPress={() => router.push("spurs/spurInvitePending")}
         />
       </View>
     </View>

@@ -7,7 +7,7 @@ import {
   FlatList,
   View,
 } from "react-native";
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React from "react";
 
 import { Link, Stack, router } from "expo-router";
 
