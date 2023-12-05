@@ -30,7 +30,6 @@ export default function Accepted() {
     const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
     else {
-      console.log(data);
       setInvites(data);
     }
   };
