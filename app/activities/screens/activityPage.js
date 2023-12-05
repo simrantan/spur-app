@@ -10,5 +10,23 @@ import { Themes } from "../../../assets/Themes/index.js";
 import { Stack } from "expo-router";
 
 export default function Page() {
-  return <ActivityCard />;
+  return (
+    <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          title: "My Activities",
+        }}
+      />
+      <ActivityCard />
+    </View>
+  );
 }
+
+styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    paddingHorizontal: 10,
+    backgroundColor: Themes.bg,
+  },
+});

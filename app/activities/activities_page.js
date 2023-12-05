@@ -3,11 +3,15 @@ import ActivityCard from "../../components/ActivityCard.js";
 
 import { Text } from "@rneui/themed";
 
-import { Link } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import { Themes } from "../../assets/Themes";
-import { Stack } from "expo-router";
+import { Link, router, Stack } from "expo-router";
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry.js";
+
+function getLikedActivities() {
+  return [1, 2, 3, 4, 5, 6, 7, 8, 9];
+}
 
 export default function Page() {
   return (
@@ -19,19 +23,8 @@ export default function Page() {
       />
       <View style={styles.main}>
         <FlatList
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderItem={(item, index) => (
-            // <Pressable
-            //   onPress={() =>
-            //     router.push({
-            //       pathname: "activities/activityPage",
-            //       params: { activityInfo: item },
-            //     })
-            //   }
-            // >
-            <MiniActivityCard />
-            // </Pressable>
-          )}
+          data={getLikedActivities()}
+          renderItem={(item, index) => <MiniActivityCard />}
           ItemSeparatorComponent={
             <View style={{ height: 1, backgroundColor: "lightgray" }} />
           }

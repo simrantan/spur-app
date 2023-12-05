@@ -1,7 +1,9 @@
-import { StyleSheet, View, Image, Dimensions } from "react-native";
+import { StyleSheet, View, Image, Dimensions, Pressable } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import QuickInfo from "./QuickInfo";
+import { Link, router } from "expo-router";
+// import ActivityPage from "../app/activities/screens/activityPage";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -10,6 +12,14 @@ export default function MiniActivityCard({ activityInfo }) {
   const activityTitle = activityInfo.activityTitle;
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
   return (
+    // <Pressable
+    //   onPress={() =>
+    //     router.push({
+    //       pathname: "components/../app/activities/screens/activityPage.js",
+    //       params: { activityInfo: activityInfo },
+    //     })
+    //   }
+    // >
     <View style={styles.mini_card_box}>
       <Image style={styles.image} source={{ uri: activityImageUri }} />
       <View style={styles.info}>
@@ -19,6 +29,7 @@ export default function MiniActivityCard({ activityInfo }) {
         <QuickInfo quickInfo={quickInfo} size={20} />
       </View>
     </View>
+    // </Pressable>
   );
 }
 
