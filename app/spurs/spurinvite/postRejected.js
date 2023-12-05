@@ -18,7 +18,12 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 export default function Rejected() {
   return (
     <SafeAreaView style={styles.item}>
-      <Stack.Screen options={{ title: "" }}></Stack.Screen>
+      <Stack.Screen
+        options={{
+          title: "",
+          headerShown: false, // Hide the default navigation header
+        }}
+      ></Stack.Screen>
       <Button
         title="Create a New Spur"
         size="lg"
@@ -34,7 +39,8 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     justifyContent: "center",
-    flexDirection: "column",
+    alignItems: "center", // Align items to the center
+    paddingTop: 0, // Set paddingTop to remove the top padding
   },
   promptbox: {
     width: windowWidth * 0.3,

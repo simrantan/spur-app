@@ -78,7 +78,7 @@ export default function SpurInvite({
         />
 
         <Button
-          title="Accept"
+          title="Reject"
           size="sm"
           onPress={() => {
             router.push("spurs/spurinvite/postRejected");
