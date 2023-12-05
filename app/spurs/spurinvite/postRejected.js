@@ -8,17 +8,14 @@ import {
   View,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Themes } from "../../../assets/Themes";
-import { Link, Stack, router } from "expo-router";
-import { supabase } from "../../../utils/supabase";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { Button, Text } from "@rneui/themed";
 
-import SpurInvite from "./SpurInvite";
+import { Link, Stack, router } from "expo-router";
+
+import { Button, Text } from "@rneui/themed";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function spurInvitePending() {
+export default function Rejected() {
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen options={{ title: "" }}></Stack.Screen>
