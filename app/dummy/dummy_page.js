@@ -7,12 +7,13 @@ import Icons from "../../assets/Icons";
 import { Image } from "react-native";
 
 import { Link } from "expo-router";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList.js";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCard />
+        <InterestedFriendsList />
       </View>
     </View>
   );

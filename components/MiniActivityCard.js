@@ -5,11 +5,10 @@ import QuickInfo from "./QuickInfo";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function MiniActivityCard({
-  activityImageUri,
-  activityTitle,
-  quickInfo, // dist, time, participants, activityType, cost
-}) {
+export default function MiniActivityCard({ activityInfo }) {
+  const activityImageUri = activityInfo.activityImageUri;
+  const activityTitle = activityInfo.activityTitle;
+  const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
   return (
     <View style={styles.mini_card_box}>
       <Image style={styles.image} source={{ uri: activityImageUri }} />
@@ -60,14 +59,16 @@ const styles = StyleSheet.create({
 });
 
 MiniActivityCard.defaultProps = {
-  activityImageUri:
-    "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
-  activityTitle: "Pickleball",
-  quickInfo: {
-    dist: "0.5 mi",
-    time: "1 hr",
-    participants: 1,
-    activityType: "sport",
-    cost: "cheap",
+  activityInfo: {
+    activityImageUri:
+      "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
+    activityTitle: "Pickleball",
+    quickInfo: {
+      dist: "0.5 mi",
+      time: "1 hr",
+      participants: 1,
+      activityType: "sport",
+      cost: "cheap",
+    },
   },
 };

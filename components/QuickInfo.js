@@ -101,7 +101,6 @@ export default function QuickInfo({ quickInfo, size }) {
     } catch (e) {
       console.log("error parsing quick info: ", e);
     }
-    // quickInfo = JSON.parse(quickInfo);
   }
   return (
     <View style={styles.iconsbox}>

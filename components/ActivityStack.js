@@ -145,7 +145,7 @@ const ActivityStack = () => {
               >
                 <ActivityCard
                   activityTitle={activity.activityTitle}
-                  activityImageUri={activity.activityImage}
+                  activityImageUri={activity.activityImageUri}
                   quickInfo={activity.quickInfo}
                   interestedFriends={activity.interestedFriends}
                   description={activity.description}

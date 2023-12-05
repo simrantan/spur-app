@@ -3,7 +3,10 @@ import { Text } from "@rneui/themed";
 import FriendProfileAndName from "./FriendProfileAndName";
 import { Themes } from "../../assets/Themes";
 
-export default function InterestedFriendsList({ interestedFriends }) {
+export default function InterestedFriendsList({
+  interestedFriends,
+  emptyMessage,
+}) {
   if (!Array.isArray(interestedFriends)) {
     if (typeof interestedFriends === "string") {
       interestedFriends = JSON.parse(interestedFriends);
@@ -18,11 +21,7 @@ export default function InterestedFriendsList({ interestedFriends }) {
       </View>
     );
   } else {
-    return (
-      <Text style={styles.noFriends}>
-        None of your friends share this interest.
-      </Text>
-    );
+    return <Text style={styles.noFriends}>{emptyMessage}</Text>;
   }
   // return <View />;
 }
@@ -31,8 +30,9 @@ const styles = StyleSheet.create({
   noFriends: {
     fontSize: 16,
     color: "gray",
-    textAlign: "center",
+    textAlign: "left",
     marginVertical: 8,
+    marginLeft: 8,
   },
   container: {
     flexDirection: "row",
@@ -42,3 +42,39 @@ const styles = StyleSheet.create({
     // justifyContent: "space-around",
   },
 });
+
+InterestedFriendsList.defaultProps = {
+  interestedFriends: [
+    {
+      name: "John Doe",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    {
+      name: "Nils Forstall",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    {
+      name: "Jeremy Bentham Nickels",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    {
+      name: "John Doe",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    {
+      name: "John Doe",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+    {
+      name: "John Doe",
+      profileImage:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+    },
+  ],
+  emptyMessage: "None of your friends share this interest.",
+};

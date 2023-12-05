@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, View, Modal } from "react-native";
-import { Text, Button, Dialog, useTheme } from "@rneui/themed";
-import { useLocalSearchParams } from "expo-router";
+import { Text, Button, Dialog, useTheme, ButtonSmall } from "@rneui/themed";
+import { useLocalSearchParams, Stack } from "expo-router";
 import { supabase } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
@@ -89,32 +89,71 @@ export default function NewSpurPage() {
   } else {
     return (
       <View style={styles.container}>
-        <View style={styles.miniActivityCardContainer}>
-          <MiniActivityCard
-            activityImageUri={activity.activityImage}
-            activityTitle={activity.activityTitle}
-            quickInfo={activity.quickInfo}
-          />
+        <Stack.Screen
+          options={{
+            title: "Create New Spur",
+          }}
+        />
+        <View style={styles.createSpurSection}>
+          <View style={styles.headerContainer}>
+            <Text h3 style={styles.title}>
+              Activity
+            </Text>
+            <Button
+              title="Change Activity"
+              type="outline"
+              onPress={changeActivity}
+              style={styles.smallButton}
+              titleStyle={styles.smallButtonTitle}
+            />
+          </View>
+          <View style={styles.sectionBodyContainer}>
+            <MiniActivityCard activityInfo={activity} />
+          </View>
         </View>
-        <Button
-          title="Change Activity"
-          type="outline"
-          onPress={changeActivity}
-        />
-        <InterestedFriendsList
-          interestedFriends={friends.filter((item, i) => likedFriends[i])}
-        />
-        <Button
-          title="change people"
-          type="outline"
-          onPress={showPeoplePicker}
-        />
-        <Text>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
-        <Button onPress={showDatePicker} title="Change date" type="outline" />
+        <View style={styles.createSpurSection}>
+          <View style={styles.headerContainer}>
+            <Text h3 style={styles.title}>
+              People
+            </Text>
+            <Button
+              title="Change People"
+              type="outline"
+              onPress={showPeoplePicker}
+              style={styles.smallButton}
+              titleStyle={styles.smallButtonTitle}
+            />
+          </View>
+          <View style={styles.sectionBodyContainer}>
+            <InterestedFriendsList
+              interestedFriends={friends.filter((item, i) => likedFriends[i])}
+              emptyMessage={"Press 'Change People' to select friends to spur."}
+            />
+          </View>
+        </View>
+        <View style={styles.createSpurSection}>
+          <View style={styles.headerContainer}>
+            <Text h3 style={styles.title}>
+              Time
+            </Text>
+            <Button
+              title="Change Time"
+              type="outline"
+              onPress={showDatePicker}
+              style={styles.smallButton}
+              titleStyle={styles.smallButtonTitle}
+            />
+          </View>
+          <View style={styles.sectionBodyContainer}>
+            <Text h4 style={{ padding: 10 }}>
+              {date.toLocaleString(undefined, dateFormat)}
+            </Text>
+          </View>
+        </View>
 
         <Dialog
           isVisible={visibleDateDialog}
-          onBackdropPress={showPeoplePicker}
+          onBackdropPress={() => setVisibleDateDialog(false)}
         >
           <Text h3>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
           <Text>
@@ -173,6 +212,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: Themes.bg,
+    padding: 10,
     // padding: 24,
   },
   main: {
@@ -181,11 +221,13 @@ const styles = StyleSheet.create({
     maxWidth: 960,
     marginHorizontal: "auto",
   },
-  miniActivityCardContainer: {
+  sectionBodyContainer: {
     flexDirection: "row",
     backgroundColor: Themes.bgSecondary,
-    margin: 10,
     borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
   },
   peopleChecklist: {
     flexDirection: "column",
@@ -194,5 +236,23 @@ const styles = StyleSheet.create({
     // flexWrap: "wrap",
     // flexGrow: 1,
     // justifyContent: "space-around",
+  },
+  headerContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    width: "100%",
+    marginBottom: 10,
+  },
+  smallButtonTitle: {
+    fontSize: 16,
+    margin: 0,
+  },
+  smallButton: {
+    minWidth: 200,
+  },
+  createSpurSection: {
+    width: "100%",
+    marginBottom: 20,
   },
 });
