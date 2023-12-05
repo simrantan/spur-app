@@ -2,17 +2,20 @@ import { StyleSheet, View } from "react-native";
 
 import { Button, Text } from "@rneui/themed";
 
-import { Stack, Link, router } from "expo-router";
+
+import { Link, router, Stack } from "expo-router";
+
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-          title: "",
-          headerShown: false, // Hide the default navigation header
+
+          title: "Spurs",
         }}
-      ></Stack.Screen>
+      />
+
       <View style={styles.main}>
         <Text h1 style={styles.title}>
           Spurs
@@ -20,7 +23,7 @@ export default function Page() {
         <Button
           title="button"
           onPress={() => {
-            router.push("spurs/NewSpurPage");
+            router.push({ pathname: "spurs/NewSpurPage", params: { id: 4 } });
           }}
         />
         <Button

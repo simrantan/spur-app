@@ -5,16 +5,17 @@ import QuickInfo from "./QuickInfo";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function MiniActivityCard({
-  activityImageUri,
-  activityTitle,
-  quickInfo, // dist, time, participants, activityType, cost
-}) {
+export default function MiniActivityCard({ activityInfo }) {
+  const activityImageUri = activityInfo.activityImageUri;
+  const activityTitle = activityInfo.activityTitle;
+  const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
   return (
     <View style={styles.mini_card_box}>
       <Image style={styles.image} source={{ uri: activityImageUri }} />
       <View style={styles.info}>
-        <Text style={styles.title}>{activityTitle}</Text>
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+          {activityTitle}
+        </Text>
         <QuickInfo quickInfo={quickInfo} size={20} />
       </View>
     </View>
@@ -23,50 +24,51 @@ export default function MiniActivityCard({
 
 const styles = StyleSheet.create({
   mini_card_box: {
-    width: windowWidth * 0.9,
-    // backgroundColor: Themes.bgSecondary,
-    // padding: 2,
-    marginVertical: 8,
     flexDirection: "row",
-    // alignItems: "center",
     alignContent: "flex-start",
     alignItems: "flex-start",
-    // borderRadius: 5,
-    // marginLeft: 10,
     padding: 10,
-    margin: 5,
+    width: "100%",
+    height: 100,
+    maxWidth: windowWidth,
+    overflow: "hidden",
   },
   image: {
-    height: 80,
-    width: 80,
+    height: "100%",
+    aspectRatio: 1,
     borderRadius: 5,
     marginRight: 10,
   },
   title: {
-    fontSize: 30,
+    fontSize: 32,
     color: Themes.textPrimary,
-    paddingBottom: 10,
+    paddingBottom: 5,
+    flexWrap: "wrap",
+    flexShrink: 1,
+    overflow: "hidden",
   },
   container: {
     flex: 1,
   },
   info: {
     flexDirection: "column",
-    justifyContent: "flex-start",
     flexGrow: 1,
-    alignContent: "space-around",
+    flexShrink: 1,
+    justifyContent: "space-between",
   },
 });
 
 MiniActivityCard.defaultProps = {
-  activityImageUri:
-    "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
-  activityTitle: "Pickleball",
-  quickInfo: {
-    dist: "0.5 mi",
-    time: "1 hr",
-    participants: 1,
-    activityType: "walk",
-    cost: "cheap",
+  activityInfo: {
+    activityImageUri:
+      "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
+    activityTitle: "Pickleball",
+    quickInfo: {
+      dist: "0.5 mi",
+      time: "1 hr",
+      participants: 1,
+      activityType: "sport",
+      cost: "cheap",
+    },
   },
 };

@@ -58,6 +58,8 @@ const Themes = {
 
   activeSelection: palette.accent,
   notSelected: palette.lightBlack,
+
+  shadowColor: palette.black,
 };
 
 export { theme, Themes };

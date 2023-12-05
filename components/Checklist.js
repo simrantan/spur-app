@@ -25,16 +25,18 @@ function Checkbox({ title }) {
 }
 
 export default function Checklist({ needsList }) {
+  if (typeof needsList === "string") {
+    try {
+      needsList = JSON.parse(needsList);
+    } catch (e) {
+      console.log(e);
+    }
+  }
   return (
-    <View>
-      {needsList.map((item, index) => (
-        <View
-          key={index}
-          style={{ flexDirection: "row", alignItems: "center" }}
-        >
-          <Checkbox title={item} />
-        </View>
-      ))}
+    <View style={styles.app}>
+      {needsList.map((item) => {
+        return <Checkbox title={item} />;
+      })}
     </View>
   );
 }

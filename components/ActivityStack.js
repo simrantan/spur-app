@@ -58,7 +58,7 @@ const styles = {
   },
 };
 
-const table = "Activities";
+const table = "Activities v4";
 const alreadyRemoved = [];
 //let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
 
@@ -71,7 +71,6 @@ const ActivityStack = () => {
     const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
     else {
-      console.log(data);
       setActivities(data);
     }
   };
@@ -134,6 +133,7 @@ const ActivityStack = () => {
           (activity, index) => (
             console.log("activity", activity),
             console.log("id", activity.id),
+            console.log("needslist", activity.needsList),
             (
               <TinderCard
                 //preventSwipe={["up", "down"]}
@@ -145,11 +145,11 @@ const ActivityStack = () => {
               >
                 <ActivityCard
                   activityTitle={activity.activityTitle}
-                  activityImage={activity.activityImage}
-                  quickInfo={activity.quickinfo}
+                  activityImageUri={activity.activityImageUri}
+                  quickInfo={activity.quickInfo}
                   interestedFriends={activity.interestedFriends}
                   description={activity.description}
-                  needsList={activity.needsList}
+                  needsList={activity.needs}
                 />
               </TinderCard>
             )

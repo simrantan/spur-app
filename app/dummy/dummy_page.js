@@ -3,14 +3,17 @@ import ActivityCard from "../../components/ActivityCard.js";
 import Checklist from "../../components/Checklist.js";
 import { Themes } from "../../assets/Themes/index.js";
 import MiniActivityCard from "../../components/MiniActivityCard.js";
+import Icons from "../../assets/Icons";
+import { Image } from "react-native";
 
 import { Link } from "expo-router";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList.js";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <MiniActivityCard />
+        <InterestedFriendsList />
       </View>
     </View>
   );
@@ -20,8 +23,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingLeft: 12,
-    paddingRight: 12,
+    paddingLeft: 10,
+    paddingRight: 10,
     backgroundColor: Themes.bg,
   },
   main: {
