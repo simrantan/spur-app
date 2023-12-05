@@ -12,10 +12,11 @@ import { Button, Text } from "@rneui/themed";
 import React from "react";
 
 import { Link, Stack, router } from "expo-router";
+import { palette } from "../../../assets/Themes/palette";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 //set table
-table = "spurInvite";
+
 export default function SpurInvite({
   id,
   activityPhoto,
@@ -32,25 +33,37 @@ export default function SpurInvite({
           <View style={styles.activityDetails}>
             <Text h2>{activityTitle}</Text>
             <View style={styles.from}>
-              <Text style={styles.promptbox}> From </Text>
-              <Text style={styles.textbox}>{friend.name}</Text>
+              <View style={styles.promptbox}>
+                <Text style={styles.textalign}> From </Text>
+              </View>
+              <View style={styles.textbox}>
+                <Text style={styles.textalign}>{friend.name}</Text>
+              </View>
             </View>
 
             <View style={styles.from}>
-              <Text style={styles.promptbox}> When </Text>
-              <Text style={styles.textbox}>{time}</Text>
+              <View style={styles.promptbox}>
+                <Text style={styles.textalign}> When </Text>
+              </View>
+              <View style={styles.textbox}>
+                <Text style={styles.textalign}>{time}</Text>
+              </View>
             </View>
             <View style={styles.from}>
-              <Text style={styles.promptbox}> Where </Text>
-              <Text
-                style={styles.textbox}
-                numberOfLines={1}
-                onPress={() =>
-                  Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
-                }
-              >
-                {address}
-              </Text>
+              <View style={styles.promptbox}>
+                <Text style={styles.textalign}> Where </Text>
+              </View>
+              <View style={styles.textbox}>
+                <Text
+                  style={styles.textalign}
+                  numberOfLines={1}
+                  onPress={() =>
+                    Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
+                  }
+                >
+                  {address}
+                </Text>
+              </View>
             </View>
           </View>
         </View>
@@ -65,10 +78,10 @@ export default function SpurInvite({
         />
 
         <Button
-          title="Reject"
+          title="Accept"
           size="sm"
           onPress={() => {
-            router.push("spurs/spurinvite/blankSpurPage");
+            router.push("spurs/spurinvite/postRejected");
           }}
         />
       </View>
@@ -78,11 +91,17 @@ export default function SpurInvite({
 
 const styles = StyleSheet.create({
   item: {
-    width: windowWidth,
+    width: windowWidth * 0.95,
     flex: 2,
     backgroundColor: "pink",
     borderRadius: 5,
     flexDirection: "center",
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { width: -1, height: 5 },
+    alignSelf: "center",
+    borderRadius: 10,
   },
   activityInfo: {
     flexDirection: "row",
@@ -99,21 +118,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
+    margin: 10,
   },
   from: {
     flexDirection: "row",
+    justifyContent: "center",
   },
   promptbox: {
-    width: 55,
-    height: 22,
+    width: windowWidth * 0.2,
+    height: windowWidth * 0.07,
     marginVertical: 3,
+    justifyContent: "center",
   },
   textbox: {
-    width: 90,
-    height: 25,
+    width: windowWidth * 0.4,
+    height: windowWidth * 0.07,
     backgroundColor: "white",
-    borderRadius: 5,
+    borderRadius: 20,
     marginVertical: 3,
+  },
+  textalign: {
+    margin: 5,
   },
 
   image: {

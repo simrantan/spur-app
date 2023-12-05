@@ -37,17 +37,24 @@ export default function Accepted() {
 
   useEffect(() => {
     fetchInvites();
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push("spurs/spurinvite/postAccepted");
+          }}
+        >
+          <Text>Back</Text>
+        </TouchableOpacity>
+      ),
+    });
   }, []);
-
-  const navigateToAnotherScreen = () => {
-    navigation.navigate("spurs/spurinvite/blankSpurPage");
-  };
 
   navigation.setOptions({
     headerLeft: () => (
       <TouchableOpacity
         onPress={() => {
-          router.push("spurs/spurinvite/blankSpurPage");
+          router.push("spurs/spurinvite/postAccepted");
         }}
       >
         <Text>Back</Text>

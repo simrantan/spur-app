@@ -5,6 +5,7 @@ import {
   Image,
   Dimensions,
   FlatList,
+  View,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Themes } from "../../../assets/Themes";
@@ -18,40 +19,9 @@ import SpurInvite from "./SpurInvite";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function spurInvitePending() {
-  const [invites, setInvites] = useState([]);
-  const table = "spurInvite";
-
-  const fetchInvites = async () => {
-    const { data, error } = await supabase.from(table).select("*");
-    if (error) console.log("error", error);
-    else {
-      console.log(data);
-      setInvites(data);
-    }
-  };
-
-  useEffect(() => {
-    fetchInvites();
-  }, []);
-
-  const renderInvite = ({ item }) => (
-    <SpurInvite
-      activityPhoto={item.activityPhoto}
-      activityTitle={item.activityTitle}
-      friend={item.friend}
-      time={item.time}
-      address={item.address}
-    />
-  );
-
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen options={{ title: "" }}></Stack.Screen>
-      <FlatList
-        data={invites}
-        renderItem={(item) => renderInvite(item)}
-        keyExtractor={(item) => item.id}
-      />
       <Button
         title="Create a New Spur"
         size="lg"
@@ -66,7 +36,36 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     width: windowWidth,
-    justifyContent: "space-between",
+    justifyContent: "center",
     flexDirection: "column",
+  },
+  promptbox: {
+    width: windowWidth * 0.3,
+    height: windowWidth * 0.1,
+    marginVertical: 3,
+  },
+  textbox: {
+    width: windowWidth * 0.5,
+    height: windowWidth * 0.1,
+    backgroundColor: "white",
+    borderRadius: 5,
+    marginVertical: 3,
+  },
+  from: {
+    flexDirection: "row",
+  },
+  activityInfo: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
+  },
+  activityDetails: {
+    flexDirection: "column",
+    alignContent: "flex-start",
+    justifyContent: "flex-start",
+    direction: "ltr",
+  },
+  col: {
+    flexDirection: "row",
   },
 });
