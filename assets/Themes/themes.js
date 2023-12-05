@@ -23,6 +23,10 @@ const theme = {
         fontFamily: "Montserrat_500Medium",
         fontWeight: "500",
       },
+      h4Style: {
+        fontFamily: "Montserrat_400Regular",
+        fontWeight: "500",
+      },
     },
     Button: {
       buttonStyle: {
