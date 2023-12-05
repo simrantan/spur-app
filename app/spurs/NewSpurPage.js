@@ -8,6 +8,7 @@ import InterestedFriendsList from "../../components/friendComponents/InterestedF
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
+import { Themes } from "../../assets/Themes";
 
 const table = "Activities v4";
 const suggestedDateTime = new Date(Date.now() + 9000000);
@@ -88,11 +89,13 @@ export default function NewSpurPage() {
   } else {
     return (
       <View style={styles.container}>
-        <MiniActivityCard
-          activityImageUri={activity.activityImage}
-          activityTitle={activity.activityTitle}
-          quickInfo={activity.quickInfo}
-        />
+        <View style={styles.miniActivityCardContainer}>
+          <MiniActivityCard
+            activityImageUri={activity.activityImage}
+            activityTitle={activity.activityTitle}
+            quickInfo={activity.quickInfo}
+          />
+        </View>
         <Button
           title="Change Activity"
           type="outline"
@@ -138,17 +141,19 @@ export default function NewSpurPage() {
           isVisible={visiblePeopleDialog}
           onBackdropPress={() => setVisiblePeopleDialog(false)}
         >
-          {friends.map((l, i) => (
-            <PeopleChecklistItem
-              person={l}
-              key={i}
-              toggleChecked={() => changePeople(i)}
-              isChecked={likedFriends[i]}
-            />
-          ))}
+          <View style={styles.peopleChecklist}>
+            {friends.map((l, i) => (
+              <PeopleChecklistItem
+                person={l}
+                key={i}
+                toggleChecked={() => changePeople(i)}
+                isChecked={likedFriends[i]}
+              />
+            ))}
+          </View>
         </Dialog>
         <Button
-          title="Send Spur!"
+          title="Send Spur"
           icon={
             <FontAwesome
               name="send"
@@ -167,6 +172,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+    backgroundColor: Themes.bg,
     // padding: 24,
   },
   main: {
@@ -177,6 +183,16 @@ const styles = StyleSheet.create({
   },
   miniActivityCardContainer: {
     flexDirection: "row",
-    flexGrow: 1,
+    backgroundColor: Themes.bgSecondary,
+    margin: 10,
+    borderRadius: 10,
+  },
+  peopleChecklist: {
+    flexDirection: "column",
+    // flexDirection: "row",
+    // width: "100%",
+    // flexWrap: "wrap",
+    // flexGrow: 1,
+    // justifyContent: "space-around",
   },
 });

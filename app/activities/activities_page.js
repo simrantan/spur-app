@@ -15,6 +15,9 @@ export default function Page() {
         <FlatList
           data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
           renderItem={() => <MiniActivityCard />}
+          ItemSeparatorComponent={
+            <View style={{ height: 1, backgroundColor: "lightgray" }} />
+          }
         />
       </View>
     </View>

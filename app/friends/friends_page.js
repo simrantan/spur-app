@@ -1,15 +1,22 @@
 import { StyleSheet, View } from "react-native";
 import { Text } from "@rneui/themed";
+import { Themes } from "../../assets/Themes";
 
 import { Link } from "expo-router";
+import { FlatList } from "react-native-gesture-handler";
+import FriendProfileAndNameHorizontal from "../../components/friendComponents/FriendProfileAndNameHorizontal";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <Text h1 style={styles.title}>
-          Friends
-        </Text>
+        <FlatList
+          data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
+          renderItem={() => <FriendProfileAndNameHorizontal />}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: 1, backgroundColor: "lightgray" }} />
+          )}
+        />
       </View>
     </View>
   );
@@ -19,13 +26,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
+    paddingHorizontal: 10,
+    backgroundColor: Themes.bg,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
+    backgroundColor: Themes.bgSecondary,
   },
   title: {
     fontSize: 64,

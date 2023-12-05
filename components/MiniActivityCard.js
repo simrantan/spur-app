@@ -14,7 +14,7 @@ export default function MiniActivityCard({
     <View style={styles.mini_card_box}>
       <Image style={styles.image} source={{ uri: activityImageUri }} />
       <View style={styles.info}>
-        <Text style={styles.title} numberOfLines={1}>
+        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
           {activityTitle}
         </Text>
         <QuickInfo quickInfo={quickInfo} size={20} />
@@ -31,17 +31,22 @@ const styles = StyleSheet.create({
     padding: 10,
     width: "100%",
     height: 100,
+    maxWidth: windowWidth,
+    overflow: "hidden",
   },
   image: {
-    height: 80,
-    width: 80,
+    height: "100%",
+    aspectRatio: 1,
     borderRadius: 5,
     marginRight: 10,
   },
   title: {
     fontSize: 32,
     color: Themes.textPrimary,
-    paddingBottom: 0,
+    paddingBottom: 5,
+    flexWrap: "wrap",
+    flexShrink: 1,
+    overflow: "hidden",
   },
   container: {
     flex: 1,
@@ -49,6 +54,7 @@ const styles = StyleSheet.create({
   info: {
     flexDirection: "column",
     flexGrow: 1,
+    flexShrink: 1,
     justifyContent: "space-between",
   },
 });

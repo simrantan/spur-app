@@ -12,8 +12,8 @@ export default function InterestedFriendsList({ interestedFriends }) {
   if (interestedFriends.length > 0) {
     return (
       <View style={styles.container}>
-        {interestedFriends.map((item) => {
-          return <FriendProfileAndName friend={item} />;
+        {interestedFriends.map((item, index) => {
+          return <FriendProfileAndName friend={item} key={index} />;
         })}
       </View>
     );
