@@ -5,7 +5,7 @@ import { Text } from "@rneui/themed";
 
 export default function FriendsProvider({ children }) {
   const [friends, setFriends] = useState([]);
-  //   const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchFriends = async () => {
