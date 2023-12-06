@@ -129,32 +129,28 @@ const ActivityStack = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.cardContainer}>
-        {activities.map(
-          (activity, index) => (
-            console.log("activity", activity),
-            console.log("id", activity.id),
-            console.log("needslist", activity.needsList),
-            (
-              <TinderCard
-                //preventSwipe={["up", "down"]}
-                flickOnSwipe={true}
-                ref={childRefs[index]}
-                key={activity.id}
-                onSwipe={(dir) => swiped(dir, activity.id)}
-                //onCardLeftScreen={() => outOfFrame(activity.id)}
-              >
-                <ActivityCard
-                  activityTitle={activity.activityTitle}
-                  activityImageUri={activity.activityImageUri}
-                  quickInfo={activity.quickInfo}
-                  interestedFriends={activity.interestedFriends}
-                  description={activity.description}
-                  needsList={activity.needs}
-                />
-              </TinderCard>
-            )
-          )
-        )}
+        {activities.map((activity, index) => (
+          // console.log("activity", activity),
+          // console.log("id", activity.id),
+          // console.log("needslist", activity.needsList),
+          <TinderCard
+            //preventSwipe={["up", "down"]}
+            flickOnSwipe={true}
+            ref={childRefs[index]}
+            key={activity.id}
+            onSwipe={(dir) => swiped(dir, activity.id)}
+            //onCardLeftScreen={() => outOfFrame(activity.id)}
+          >
+            <ActivityCard
+              activityTitle={activity.activityTitle}
+              activityImageUri={activity.activityImageUri}
+              quickInfo={activity.quickInfo}
+              interestedFriends={activity.interestedFriends}
+              description={activity.description}
+              needsList={activity.needs}
+            />
+          </TinderCard>
+        ))}
       </View>
     </SafeAreaView>
   );

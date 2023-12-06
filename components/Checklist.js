@@ -34,8 +34,8 @@ export default function Checklist({ needsList }) {
   }
   return (
     <View style={styles.app}>
-      {needsList.map((item) => {
-        return <Checkbox title={item} />;
+      {needsList.map((item, index) => {
+        return <Checkbox title={item} key={index} />;
       })}
     </View>
   );

@@ -1,9 +1,9 @@
-import { useCallback } from "react";
-import { Tabs } from "expo-router";
+import { useEffect } from "react";
+import { Tabs, SplashScreen } from "expo-router";
 import { ThemeProvider, createTheme } from "@rneui/themed";
 import { theme } from "../assets/Themes";
 
-import * as SplashScreen from "expo-splash-screen";
+// import * as SplashScreen from "expo-splash-screen";
 import { useFonts, SpicyRice_400Regular } from "@expo-google-fonts/spicy-rice";
 import {
   Montserrat_100Thin,
@@ -58,11 +58,16 @@ export default function HomeLayout() {
     Montserrat_900Black_Italic,
   });
 
-  const onLayoutRootView = useCallback(async () => {
+  useEffect(() => {
     if (fontsLoaded || fontError) {
-      await SplashScreen.hideAsync();
+      // Hide the splash screen after the fonts have loaded (or an error was returned) and the UI is ready.
+      SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
 
   return (
     <ThemeProvider theme={createTheme(theme)}>
