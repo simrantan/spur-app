@@ -1,34 +1,55 @@
-import { StyleSheet, View } from "react-native";
-
-import { Button, Text } from "@rneui/themed";
-
-import { Link, router, Stack } from "expo-router";
+import { StyleSheet, SafeAreaView, Dimensions, FlatList } from "react-native";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Stack, router } from "expo-router";
+import { supabase } from "../../utils/supabase";
+import { Button } from "@rneui/themed";
+import SpurInvite from "./SpurInvite";
 
 export default function Page() {
+  const [invites, setInvites] = useState([]);
+  const table = "spurInvite";
+
+  const fetchInvites = async () => {
+    const { data, error } = await supabase.from(table).select("*");
+    if (error) console.error(error);
+    else {
+      setInvites(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchInvites();
+  }, []);
+
+  const renderInvite = ({ item }) => (
+    <SpurInvite
+      activityImageUri={item.activityImageUri}
+      activityTitle={item.activityTitle}
+      friend={item.friend}
+      time={item.time}
+      address={item.address}
+    />
+  );
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
           title: "Spurs",
         }}
       />
-
-      <View style={styles.main}>
-        <Text h1 style={styles.title}>
-          Spurs
-        </Text>
-        <Button
-          title="button"
-          onPress={() => {
-            router.push({ pathname: "spurs/NewSpurPage", params: { id: 4 } });
-          }}
-        />
-        <Button
-          title="invites"
-          onPress={() => router.push("spurs/spurInvitePending")}
-        />
-      </View>
-    </View>
+      <FlatList
+        data={invites}
+        renderItem={(item) => renderInvite(item)}
+        keyExtractor={(item) => item.id}
+      />
+      <Button
+        title="Create a New Spur"
+        size="lg"
+        onPress={() => {
+          router.push("spurs/NewSpurPage");
+        }}
+      />
+    </SafeAreaView>
   );
 }
 

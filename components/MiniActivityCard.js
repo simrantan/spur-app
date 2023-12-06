@@ -2,8 +2,7 @@ import { StyleSheet, View, Image, Dimensions, Pressable } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import QuickInfo from "./QuickInfo";
-import { Link, router } from "expo-router";
-// import ActivityPage from "../app/activities/screens/activityPage";
+import { router } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
