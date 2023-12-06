@@ -1,17 +1,37 @@
-
 import { Pressable, StyleSheet, View } from "react-native";
-
+import { useState, useEffect } from "react";
 import ActivityCard from "../../components/ActivityCard.js";
 
 import { Text } from "@rneui/themed";
 
-import { Link } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import { Themes } from "../../assets/Themes";
 import { Stack } from "expo-router";
 
+import { supabase, activitesTable } from "../../utils/supabase";
+import { Button } from "@rneui/themed";
+
 export default function Page() {
+  const [activities, setActivities] = useState();
+
+  const fetchActivities = async () => {
+    const { data, error } = await supabase
+      .from(activitesTable)
+      .select("*")
+      .eq("isLiked", "true");
+    if (error) console.log("error", error);
+    else {
+      console.log("fetched activities", data);
+      setActivities(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchActivities();
+    console.log("activities are: ", activities);
+  }, []);
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -20,24 +40,19 @@ export default function Page() {
         }}
       />
       <View style={styles.main}>
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderItem={(item, index) => (
-            // <Pressable
-            //   onPress={() =>
-            //     router.push({
-            //       pathname: "activities/activityPage",
-            //       params: { activityInfo: item },
-            //     })
-            //   }
-            // >
-            <MiniActivityCard />
-            // </Pressable>
-          )}
-          ItemSeparatorComponent={
-            <View style={{ height: 1, backgroundColor: "lightgray" }} />
-          }
-        />
+        {activities ? (
+          <FlatList
+            data={activities}
+            renderItem={(item, index) => {
+              return <MiniActivityCard activityInfo={item.item} />;
+            }}
+            ItemSeparatorComponent={
+              <View style={{ height: 1, backgroundColor: "lightgray" }} />
+            }
+          />
+        ) : (
+          <Button loading />
+        )}
       </View>
     </View>
   );

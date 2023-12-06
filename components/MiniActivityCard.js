@@ -9,6 +9,7 @@ export default function MiniActivityCard({ activityInfo }) {
   const activityImageUri = activityInfo.activityImageUri;
   const activityTitle = activityInfo.activityTitle;
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
+
   return (
     <View style={styles.mini_card_box}>
       <Image style={styles.image} source={{ uri: activityImageUri }} />
