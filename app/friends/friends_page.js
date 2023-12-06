@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, SafeAreaView } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../../assets/Themes";
 import { router, Stack, useNavigation } from "expo-router";
@@ -7,7 +7,7 @@ import FriendProfileAndNameHorizontal from "../../components/friendComponents/Fr
 
 export default function Page() {
   const [friends, setFriends] = useState([]);
-  const table = "Friends";
+  const table = "friends";
   const fetchFriends = async () => {
     const { data, error } = await supabase.from(table).select("*");
     if (error) console.log("error", error);
@@ -19,23 +19,30 @@ export default function Page() {
   useEffect(() => {
     fetchFriends();
   }, []);
+
+  const renderFriends = ({ item }) => (
+    <FriendProfileAndNameHorizontal friend={item.friend} />
+  );
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
           title: "Friends",
         }}
       />
-      <View style={styles.main}>
-        <FlatList
-          data={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderItem={() => <FriendProfileAndNameHorizontal />}
-          ItemSeparatorComponent={() => (
-            <View style={{ height: 1, backgroundColor: "lightgray" }} />
-          )}
-        />
-      </View>
-    </View>
+      {invites.map((invite, index) => (
+        <View key={index} style={styles.main}>
+          <FlatList
+            data={friends}
+            renderItem={(item) => renderFriends(item)}
+            keyExtractor={(item) => item.id}
+            ItemSeparatorComponent={() => (
+              <View style={{ height: 1, backgroundColor: "lightgray" }} />
+            )}
+          />
+        </View>
+      ))}
+    </SafeAreaView>
   );
 }
 
