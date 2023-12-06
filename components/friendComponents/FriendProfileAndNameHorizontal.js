@@ -2,6 +2,7 @@ import { StyleSheet, View, Image, Pressable } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../../assets/Themes";
 import { Dimensions } from "react-native";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -15,7 +16,7 @@ export default function FriendProfileAndNameHorizontal({ friend }) {
           style={styles.friendimage}
           source={{ uri: friend.profileImage }}
         />
-        <Text style={styles.friendName} numberOfLines={1}>
+        <Text h3 style={styles.friendName} numberOfLines={1}>
           {friend.name}
         </Text>
       </View>
@@ -35,8 +36,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   friendName: {
-    fontSize: 20,
-    color: Themes.textPrimary,
     textAlign: "left",
   },
   friendbox: {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { View, SafeAreaView, Dimensions } from "react-native";
+import { View, SafeAreaView, Dimensions, StyleSheet } from "react-native";
 import { supabase } from "../../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "../../components/ActivityCard";

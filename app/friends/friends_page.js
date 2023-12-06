@@ -3,6 +3,8 @@ import { Text } from "@rneui/themed";
 import { Themes } from "../../assets/Themes";
 import { router, Stack, useNavigation } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { supabase } from "../../utils/supabase";
 import FriendProfileAndNameHorizontal from "../../components/friendComponents/FriendProfileAndNameHorizontal";
 
 export default function Page() {
@@ -13,6 +15,7 @@ export default function Page() {
     if (error) console.log("error", error);
     else {
       setFriends(data);
+      console.log("friends", friends);
     }
   };
 
@@ -30,14 +33,14 @@ export default function Page() {
           title: "Friends",
         }}
       />
-      {invites.map((invite, index) => (
+      {friends.map((friend, index) => (
         <View key={index} style={styles.main}>
           <FlatList
-            data={friends}
+            data={friend}
             renderItem={(item) => renderFriends(item)}
             keyExtractor={(item) => item.id}
             ItemSeparatorComponent={() => (
-              <View style={{ height: 1, backgroundColor: "lightgray" }} />
+              <View style={{ height: 1, backgroundColor: "beige" }} />
             )}
           />
         </View>
