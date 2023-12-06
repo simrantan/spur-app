@@ -1,10 +1,11 @@
 import { StyleSheet, View, SafeAreaView } from "react-native";
 import { Text } from "@rneui/themed";
-import { Themes } from "../../assets/Themes";
+
 import { router, Stack, useNavigation } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { supabase } from "../../utils/supabase";
+import { palette } from "../../assets/Themes/palette";
 import FriendProfileAndNameHorizontal from "../../components/friendComponents/FriendProfileAndNameHorizontal";
 
 export default function Page() {
@@ -15,7 +16,6 @@ export default function Page() {
     if (error) console.log("error", error);
     else {
       setFriends(data);
-      console.log("friends", friends);
     }
   };
 
@@ -23,9 +23,9 @@ export default function Page() {
     fetchFriends();
   }, []);
 
-  const renderFriends = ({ item }) => (
-    <FriendProfileAndNameHorizontal friend={item.friend} />
-  );
+  const renderFriends = ({ item }) => {
+    return <FriendProfileAndNameHorizontal friend={item} />;
+  };
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
@@ -33,18 +33,16 @@ export default function Page() {
           title: "Friends",
         }}
       />
-      {friends.map((friend, index) => (
-        <View key={index} style={styles.main}>
-          <FlatList
-            data={friend}
-            renderItem={(item) => renderFriends(item)}
-            keyExtractor={(item) => item.id}
-            ItemSeparatorComponent={() => (
-              <View style={{ height: 1, backgroundColor: "beige" }} />
-            )}
-          />
-        </View>
-      ))}
+      <View style={styles.main}>
+        <FlatList
+          data={friends}
+          renderItem={(item) => renderFriends(item)}
+          keyExtractor={(item) => item.id}
+          ItemSeparatorComponent={() => (
+            <View style={{ height: 1, backgroundColor: palette.accent }} />
+          )}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -54,14 +52,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingHorizontal: 10,
-    backgroundColor: Themes.bg,
+    backgroundColor: palette.white,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
-    backgroundColor: Themes.bgSecondary,
   },
   title: {
     fontSize: 64,
