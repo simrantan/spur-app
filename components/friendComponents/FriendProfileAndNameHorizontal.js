@@ -14,7 +14,7 @@ export default function FriendProfileAndNameHorizontal({ friend }) {
           source={{ uri: friend.profileImageUri }}
         />
         <Text style={styles.friendName} numberOfLines={1}>
-          {friend.name}
+          {friend.firstName} {friend.lastName}
         </Text>
       </View>
     </Pressable>
@@ -56,8 +56,9 @@ const styles = StyleSheet.create({
 
 FriendProfileAndNameHorizontal.defaultProps = {
   friend: {
-    name: "Friend Name",
-    profileImage:
+    firstName: "Friend",
+    lastName: "Name",
+    profileImageUri:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
   },
 };
