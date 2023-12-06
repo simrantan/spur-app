@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Modal } from "react-native";
 import { Text, Button, Dialog, useTheme, ButtonSmall } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
-import { supabase, activitesTable } from "../../utils/supabase";
+import { supabase, activitiesTable } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -36,6 +36,7 @@ export default function NewSpurPage() {
 
   const fetchActivity = async () => {
     console.log("searching for id: ", activityId);
+    console.log(activitiesTable);
     const { data, error } = await supabase
       .from(activitiesTable)
       .select("*")
