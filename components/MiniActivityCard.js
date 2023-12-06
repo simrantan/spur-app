@@ -13,14 +13,6 @@ export default function MiniActivityCard({ activityInfo }) {
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
 
   return (
-    // <Pressable
-    //   onPress={() =>
-    //     router.push({
-    //       pathname: "components/../app/activities/screens/activityPage.js",
-    //       params: { activityInfo: activityInfo },
-    //     })
-    //   }
-    // >
     <View style={styles.mini_card_box}>
       <Pressable
         onPress={() => {
@@ -39,7 +31,6 @@ export default function MiniActivityCard({ activityInfo }) {
         </View>
       </Pressable>
     </View>
-    // </Pressable>
   );
 }
 
