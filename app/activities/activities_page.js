@@ -1,14 +1,9 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useState, useEffect } from "react";
-import ActivityCard from "../../components/ActivityCard.js";
-
-import { Text } from "@rneui/themed";
-
 import { FlatList } from "react-native-gesture-handler";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import { Themes } from "../../assets/Themes";
 import { Stack } from "expo-router";
-
 import { supabase, activitesTable } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
 
