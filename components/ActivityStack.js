@@ -61,7 +61,6 @@ export default ActivityStack = () => {
       )}
       {activities ? (
         <Swiper
-          style={styles.swiper}
           cards={activities}
           renderCard={(activity, i) => {
             if (activity) {
@@ -103,6 +102,77 @@ export default ActivityStack = () => {
           verticalSwipe={false}
           marginTop={-50}
           backgroundColor={theme.colors.background}
+          overlayLabels={{
+            bottom: {
+              title: "BLEAH",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+              },
+            },
+            left: {
+              title: "NOPE",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                  justifyContent: "flex-start",
+                  marginTop: 30,
+                  marginLeft: -30,
+                },
+              },
+            },
+            right: {
+              title: "LIKE",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                  justifyContent: "flex-start",
+                  marginTop: 30,
+                  marginLeft: 30,
+                },
+              },
+            },
+            top: {
+              title: "SUPER LIKE",
+              style: {
+                label: {
+                  backgroundColor: "black",
+                  borderColor: "black",
+                  color: "white",
+                  borderWidth: 1,
+                },
+                wrapper: {
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                },
+              },
+            },
+          }}
+          animateOverlayLabelsOpacity
         ></Swiper>
       ) : (
         <Button loading />
@@ -116,11 +186,9 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    borderWidth: 1,
     paddingVertical: 10,
     overflow: "hidden",
   },
-  swiper: { backgroundColor: "#4FD0E9" },
   cardContainer: {
     maxHeight: windowHeight * 0.75,
     borderRadius: 10,
