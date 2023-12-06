@@ -24,7 +24,7 @@ export default function InterestedFriendsList({
     const interestedFriends = friends.filter((friend) => {
       return interestedFriendIds.includes(friend.id);
     });
-    console.log("interestedFriends", interestedFriends);
+    // console.log("interestedFriends", interestedFriends);
     return (
       <View style={styles.container}>
         {interestedFriends.map((item, index) => {
