@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Modal } from "react-native";
 import { Text, Button, Dialog, useTheme, ButtonSmall } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
-import { supabase } from "../../utils/supabase";
+import { supabase, activitesTable } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -10,7 +10,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../assets/Themes";
 
-const table = "Activities v4";
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const dateFormat = {
   year: "numeric",
@@ -38,7 +37,7 @@ export default function NewSpurPage() {
   const fetchActivity = async () => {
     console.log("searching for id: ", activityId);
     const { data, error } = await supabase
-      .from(table)
+      .from(activitiesTable)
       .select("*")
       .eq("id", activityId);
     if (error) console.log("error", error);
