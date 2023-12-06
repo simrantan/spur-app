@@ -89,7 +89,7 @@ export default ActivityStack = () => {
               activityTitle={activity.activityTitle}
               activityImageUri={activity.activityImageUri}
               quickInfo={activity.quickInfo}
-              interestedFriends={activity.interestedFriends}
+              interestedFriendIds={activity.interestedFriendIds}
               description={activity.description}
               needsList={activity.needs}
             />

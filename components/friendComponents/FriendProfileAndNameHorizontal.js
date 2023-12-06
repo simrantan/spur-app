@@ -6,14 +6,12 @@ import { Dimensions } from "react-native";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function FriendProfileAndNameHorizontal({ friend }) {
-  if (!friend) return <View />;
   return (
-    // <View style={styles.container}>
     <Pressable style={styles.container}>
       <View style={styles.friendbox}>
         <Image
           style={styles.friendimage}
-          source={{ uri: friend.profileImage }}
+          source={{ uri: friend.profileImageUri }}
         />
         <Text style={styles.friendName} numberOfLines={1}>
           {friend.name}
