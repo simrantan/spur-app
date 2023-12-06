@@ -44,8 +44,8 @@ export default function NewSpurPage() {
     else {
       console.log("got data!", data[0]);
       setActivity(data[0]);
-      if (data[0].interestedFriends) {
-        setFriends(JSON.parse(data[0].interestedFriends));
+      if (data[0].interestedFriendIds) {
+        setFriends(JSON.parse(data[0].interestedFriendIds));
       }
       setLikedFriends(Array(friends.length).fill(true));
       setIsReady(true);
@@ -125,7 +125,7 @@ export default function NewSpurPage() {
           </View>
           <View style={styles.sectionBodyContainer}>
             <InterestedFriendsList
-              interestedFriends={friends.filter((item, i) => likedFriends[i])}
+              interestedFriendIds={friends.filter((item, i) => likedFriends[i])}
               emptyMessage={"Tap 'Change People' to select friends to spur."}
             />
           </View>

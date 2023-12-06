@@ -2,17 +2,33 @@ import { StyleSheet, View } from "react-native";
 import { Text } from "@rneui/themed";
 import FriendProfileAndName from "./FriendProfileAndName";
 import { Themes } from "../../assets/Themes";
+import { supabase, friendsTable } from "../../utils/supabase";
+import { useState, useEffect, useContext } from "react";
+import FriendsContext from "../../contexts/FriendsContext";
 
 export default function InterestedFriendsList({
-  interestedFriends,
+  interestedFriendIds,
   emptyMessage,
 }) {
-  if (!Array.isArray(interestedFriends)) {
-    if (typeof interestedFriends === "string") {
-      interestedFriends = JSON.parse(interestedFriends);
-    } else return <Text>Error: interestedFriends is not an array.</Text>;
-  }
-  if (interestedFriends.length > 0) {
+  const [friends, setFriends] = useState([]);
+
+  const fetchFriends = async () => {
+    const { data, error } = await supabase.from(friendsTable).select("*");
+    if (error) console.log("error", error);
+    else {
+      setFriends(data);
+    }
+  };
+  fetchFriends();
+  // const friends = useContext(FriendsContext);
+  // console.log("friends: ", friends);
+  if (interestedFriendIds.length > 0) {
+    console.log("interestedFriendIds", interestedFriendIds);
+    // return <View />;
+    const interestedFriends = friends.filter((friend) => {
+      return interestedFriendIds.includes(friend.id);
+    });
+    console.log("interestedFriends", interestedFriends);
     return (
       <View style={styles.container}>
         {interestedFriends.map((item, index) => {
@@ -44,37 +60,6 @@ const styles = StyleSheet.create({
 });
 
 InterestedFriendsList.defaultProps = {
-  interestedFriends: [
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "Nils Forstall",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "Jeremy Bentham Nickels",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-  ],
+  interestedFriendIds: [0, 1, 2, 3],
   emptyMessage: "None of your friends share this interest.",
 };
