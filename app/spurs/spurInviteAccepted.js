@@ -10,7 +10,6 @@ import {
 import { Text } from "@rneui/themed";
 import { router, Stack, useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
-import QuickInfo from "../../components/QuickInfo";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import Checklist from "../../components/Checklist";
 import { palette } from "../../assets/Themes/palette";
@@ -26,7 +25,7 @@ export default function Accepted() {
 
   const fetchInvites = async () => {
     const { data, error } = await supabase.from(table).select("*");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       setInvites(data);
     }

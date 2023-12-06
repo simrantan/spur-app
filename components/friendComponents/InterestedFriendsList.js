@@ -13,7 +13,7 @@ export default function InterestedFriendsList({
 
   const fetchFriends = async () => {
     const { data, error } = await supabase.from(friendsTable).select("*");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       setFriends(data);
     }
