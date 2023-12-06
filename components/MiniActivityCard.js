@@ -11,7 +11,6 @@ export default function MiniActivityCard({ activityInfo }) {
   const activityImageUri = activityInfo.activityImageUri;
   const activityTitle = activityInfo.activityTitle;
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
-  console.log("quick", quickInfo);
 
   return (
     <View style={styles.container}>
