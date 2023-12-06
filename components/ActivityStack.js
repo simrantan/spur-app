@@ -4,7 +4,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase, activitiesTable } from "../utils/supabase";
 import Swiper from "react-native-deck-swiper";
 import ActivityCard from "./ActivityCard";
-import { Button, Dialog } from "@rneui/themed";
+import { Button, Dialog, useTheme } from "@rneui/themed";
+import ActivityCardSwipable from "./ActivityCardForSwiping";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -12,6 +13,8 @@ export default ActivityStack = () => {
   const [activities, setActivities] = useState([]);
   const [isVisible, setisVisible] = useState(false);
   const [currActivity, setcurrActivity] = useState(0);
+
+  const { theme } = useTheme();
 
   const fetchActivities = async () => {
     const { data, error } = await supabase.from(activitiesTable).select("*");
@@ -64,18 +67,16 @@ export default ActivityStack = () => {
             if (activity) {
               return (
                 <View>
-                  <Button
+                  {/* <Button
                     onPress={() => setisVisible(true)}
                     title={"More Info"}
-                  />
+                  /> */}
                   <View style={styles.cardContainer}>
-                    <ActivityCard
+                    <ActivityCardSwipable
                       activityTitle={activity.activityTitle}
                       activityImageUri={activity.activityImageUri}
                       quickInfo={activity.quickInfo}
-                      interestedFriends={activity.interestedFriends}
-                      description={activity.description}
-                      needsList={activity.needs}
+                      onPress={() => setisVisible(true)}
                     />
                   </View>
                 </View>
@@ -86,7 +87,6 @@ export default ActivityStack = () => {
             return activity ? activity.id : Math.random(); // I know this is bad style but it keeps trying to render undefined objects
           }}
           onSwiped={(cardIndex) => {
-            console.log(cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
           onSwipedAll={() => {
@@ -98,11 +98,11 @@ export default ActivityStack = () => {
           onSwipedRight={(cardIndex) =>
             updateDB(activities[cardIndex].id, true)
           }
-          onTapCard={(cardIndex) => console.log(cardIndex)}
           cardIndex={0}
           stackSize={3}
           verticalSwipe={false}
           marginTop={-50}
+          backgroundColor={theme.colors.background}
         ></Swiper>
       ) : (
         <Button loading />
@@ -116,17 +116,14 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: "#aa00ee",
-    borderColor: "red",
     borderWidth: 1,
     paddingVertical: 10,
     overflow: "hidden",
   },
+  swiper: { backgroundColor: "#4FD0E9" },
   cardContainer: {
     maxHeight: windowHeight * 0.75,
     borderRadius: 10,
-    borderColor: "magenta",
-    borderWidth: 1,
     overflow: "hidden",
   },
 });
