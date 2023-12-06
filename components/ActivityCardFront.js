@@ -28,8 +28,8 @@ export default function ActivityCardFront({
         >
           <LinearGradient
             // Background Linear Gradient
-            colors={["transparent", "rgba(255,255,255,0.9)"]}
-            locations={[0.0, 0.6]}
+            colors={["rgba(255,255,255,0.0)", "rgba(255,255,255,0.85)"]}
+            locations={[0.0, 0.3]}
             style={styles.textBox}
           >
             <Text style={styles.bigtitle}>{activityTitle}</Text>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     paddingTop: 20,
-    paddingBottom: 10,
+    // paddingBottom: 10,
     paddingHorizontal: 10,
   },
   bigtitle: {

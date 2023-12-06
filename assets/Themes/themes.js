@@ -43,6 +43,7 @@ const Themes = {
   bg: palette.beige,
   bgSecondary: palette.white,
   textPrimary: palette.lightBlack,
+  textSecondary: palette.white,
 
   buttonPrimaryFill: palette.accent,
   buttonPrimaryText: palette.white,

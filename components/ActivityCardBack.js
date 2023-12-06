@@ -16,23 +16,23 @@ export default function ActivityCard({
   needsList,
 }) {
   return (
-    <View style={styles.card_box}>
-      <View style={styles.aboveButton}>
-        <View style={styles.aboveChecklist}>
-          <Text style={styles.smalltitle}>What is it?</Text>
-          <Text style={styles.bodytext} numberOfLines={5}>
-            {description}
-          </Text>
-          <Text style={styles.smalltitle}>What you'll need</Text>
-          <Checklist needsList={needsList} />
-          <Text style={styles.smalltitle}>Interested Friends</Text>
+    <ScrollView>
+      <View style={styles.card_box}>
+        <View style={styles.aboveButton}>
+          <View style={styles.aboveChecklist}>
+            <Text style={styles.smalltitle}>What is it?</Text>
+            <Text style={styles.bodytext}>{description}</Text>
+            <Text style={styles.smalltitle}>What you'll need</Text>
+            <Checklist needsList={needsList} />
+            <Text style={styles.smalltitle}>Interested Friends</Text>
+          </View>
+          <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
         </View>
-        <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Spur Friends</Text>
+        </View>
       </View>
-      <View style={styles.button}>
-        <Text style={styles.buttonText}>Spur Friends</Text>
-      </View>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
 
     margin: 20,
-    marginBottom: 30,
   },
   buttonText: {
     color: Themes.buttonPrimaryText,

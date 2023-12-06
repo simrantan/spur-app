@@ -48,6 +48,7 @@ export default ActivityStack = () => {
         <Dialog
           isVisible={isVisible}
           onBackdropPress={() => setisVisible(false)}
+          overlayStyle={styles.moreInfoDialog}
         >
           <ActivityCardBack
             activityTitle={activities[currActivity].activityTitle}
@@ -120,6 +121,12 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     maxHeight: windowHeight * 0.75,
+    borderRadius: 10,
+    overflow: "hidden",
+  },
+  moreInfoDialog: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.6,
     borderRadius: 10,
     overflow: "hidden",
   },
