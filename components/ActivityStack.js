@@ -3,9 +3,9 @@ import { View, Dimensions, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase, activitiesTable } from "../utils/supabase";
 import Swiper from "react-native-deck-swiper";
-import ActivityCard from "./ActivityCard";
 import { Button, Dialog, useTheme } from "@rneui/themed";
-import ActivityCardSwipable from "./ActivityCardForSwiping";
+import ActivityCardFront from "./ActivityCardFront";
+import ActivityCardBack from "./ActivityCardBack";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -49,7 +49,7 @@ export default ActivityStack = () => {
           isVisible={isVisible}
           onBackdropPress={() => setisVisible(false)}
         >
-          <ActivityCard
+          <ActivityCardBack
             activityTitle={activities[currActivity].activityTitle}
             activityImageUri={activities[currActivity].activityImageUri}
             quickInfo={activities[currActivity].quickInfo}
@@ -71,7 +71,7 @@ export default ActivityStack = () => {
                     title={"More Info"}
                   /> */}
                   <View style={styles.cardContainer}>
-                    <ActivityCardSwipable
+                    <ActivityCardFront
                       activityTitle={activity.activityTitle}
                       activityImageUri={activity.activityImageUri}
                       quickInfo={activity.quickInfo}
@@ -102,77 +102,6 @@ export default ActivityStack = () => {
           verticalSwipe={false}
           marginTop={-50}
           backgroundColor={theme.colors.background}
-          overlayLabels={{
-            bottom: {
-              title: "BLEAH",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                },
-              },
-            },
-            left: {
-              title: "NOPE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-end",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: -30,
-                },
-              },
-            },
-            right: {
-              title: "LIKE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                  justifyContent: "flex-start",
-                  marginTop: 30,
-                  marginLeft: 30,
-                },
-              },
-            },
-            top: {
-              title: "SUPER LIKE",
-              style: {
-                label: {
-                  backgroundColor: "black",
-                  borderColor: "black",
-                  color: "white",
-                  borderWidth: 1,
-                },
-                wrapper: {
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                },
-              },
-            },
-          }}
-          animateOverlayLabelsOpacity
         ></Swiper>
       ) : (
         <Button loading />
