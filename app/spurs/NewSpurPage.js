@@ -126,7 +126,7 @@ export default function NewSpurPage() {
           <View style={styles.sectionBodyContainer}>
             <InterestedFriendsList
               interestedFriends={friends.filter((item, i) => likedFriends[i])}
-              emptyMessage={"Press 'Change People' to select friends to spur."}
+              emptyMessage={"Tap 'Change People' to select friends to spur."}
             />
           </View>
         </View>
@@ -154,25 +154,26 @@ export default function NewSpurPage() {
           isVisible={visibleDateDialog}
           onBackdropPress={() => setVisibleDateDialog(false)}
         >
-          <Text h3>selected: {date.toLocaleString(undefined, dateFormat)}</Text>
-          <Text>
+          <Text style={{ fontSize: 16 }}>
             Most of your friends are available at this time:{" "}
             {suggestedDateTime.toLocaleString(undefined, dateFormat)}
           </Text>
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="date"
-            is24Hour={true}
-            onChange={onDateChange}
-          />
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={date}
-            mode="time"
-            is24Hour={true}
-            onChange={onDateChange}
-          />
+          <View style={styles.timeBox}>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="date"
+              is24Hour={true}
+              onChange={onDateChange}
+            />
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="time"
+              is24Hour={true}
+              onChange={onDateChange}
+            />
+          </View>
         </Dialog>
 
         <Dialog
@@ -230,6 +231,7 @@ const styles = StyleSheet.create({
   },
   peopleChecklist: {
     flexDirection: "column",
+    backgroundColor: Themes.bgSecondary,
     // flexDirection: "row",
     // width: "100%",
     // flexWrap: "wrap",
@@ -253,5 +255,10 @@ const styles = StyleSheet.create({
   createSpurSection: {
     width: "100%",
     marginBottom: 20,
+  },
+  timeBox: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    marginTop: 10,
   },
 });
