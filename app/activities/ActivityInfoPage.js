@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { View, SafeAreaView, Dimensions } from "react-native";
-import { supabase } from "../..supabase/utils/supabase";
+import { supabase } from "../../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "../../components/ActivityCard";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
