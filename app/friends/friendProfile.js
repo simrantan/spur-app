@@ -74,7 +74,7 @@ export default function Page() {
 
         <FlatList
           data={activities}
-          renderItem={(item) => {
+          renderItem={({ item }) => {
             return <MiniActivityCard activityInfo={item} />;
           }}
         />
