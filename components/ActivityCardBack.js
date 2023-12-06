@@ -44,9 +44,10 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bgSecondary,
     flexDirection: "column",
     // justifyContent: "flex-start",
-    flex: 1,
+    // flex: 1,
     borderRadius: 10,
     justifyContent: "space-between",
+    minheight: windowHeight * 0.7,
   },
   button: {
     width: windowWidth * 0.6,
@@ -90,9 +91,6 @@ const styles = StyleSheet.create({
   bodytext: {
     fontSize: 16,
     color: Themes.textPrimary,
-  },
-  container: {
-    flex: 1,
   },
 });
 

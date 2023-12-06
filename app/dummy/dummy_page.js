@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCardBack />
+        <ActivityCardFront />
       </View>
     </View>
   );
