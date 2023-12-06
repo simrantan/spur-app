@@ -1,13 +1,9 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { View, SafeAreaView, Dimensions } from "react-native";
 import { supabase } from "../../utils/supabase";
-import { supabase } from "../../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "../../components./../components/ActivityCard";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-
-import { useLocalSearchParams } from "expo-router";
-import { Stack } from "expo-router";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Page() {
