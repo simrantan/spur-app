@@ -11,13 +11,22 @@ export default function MiniActivityCard({ activityInfo }) {
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
   return (
     <View style={styles.mini_card_box}>
-      <Image style={styles.image} source={{ uri: activityImageUri }} />
-      <View style={styles.info}>
-        <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
-          {activityTitle}
-        </Text>
-        <QuickInfo quickInfo={quickInfo} size={20} />
-      </View>
+      <Pressable
+        onPress={() => {
+          router.push({
+            pathname: "activities/ActivityInfoPage",
+            params: activityInfo,
+          });
+        }}
+      >
+        <Image style={styles.image} source={{ uri: activityImageUri }} />
+        <View style={styles.info}>
+          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+            {activityTitle}
+          </Text>
+          <QuickInfo quickInfo={quickInfo} size={20} />
+        </View>
+      </Pressable>
     </View>
   );
 }
