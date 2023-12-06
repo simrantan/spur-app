@@ -16,33 +16,28 @@ export default function ActivityCard({
   needsList,
 }) {
   return (
-    <View styles={styles.container}>
-      <ScrollView>
-        <View style={styles.card_box}>
-          <View style={styles.aboveChecklist}>
-            <Image style={styles.image} source={{ uri: activityImageUri }} />
-            <Text style={styles.bigtitle}>{activityTitle}</Text>
-            <QuickInfo quickInfo={quickInfo} size={20} />
-            <Text style={styles.smalltitle}>What is it?</Text>
-            <Text style={styles.bodytext}>{description}</Text>
-            <Text style={styles.smalltitle}>What you'll need</Text>
-            <Checklist needsList={needsList} />
-            <Text style={styles.smalltitle}>Interested Friends</Text>
-          </View>
-          <InterestedFriendsList interestedFriends={interestedFriends} />
-          <View style={styles.button}>
-            <Text style={styles.buttonText}>Spur Friends</Text>
-          </View>
+    <ScrollView>
+      <View style={styles.card_box}>
+        <View style={styles.aboveChecklist}>
+          <Image style={styles.image} source={{ uri: activityImageUri }} />
+          <Text style={styles.bigtitle}>{activityTitle}</Text>
+          <QuickInfo quickInfo={quickInfo} size={20} />
+          <Text style={styles.smalltitle}>What is it?</Text>
+          <Text style={styles.bodytext}>{description}</Text>
+          <Text style={styles.smalltitle}>What you'll need</Text>
+          <Checklist needsList={needsList} />
+          <Text style={styles.smalltitle}>Interested Friends</Text>
         </View>
-      </ScrollView>
-    </View>
+        <InterestedFriendsList interestedFriends={interestedFriends} />
+        <View style={styles.button}>
+          <Text style={styles.buttonText}>Spur Friends</Text>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    maxHeight: 100,
-  },
   aboveChecklist: {
     marginHorizontal: 10,
   },
