@@ -4,7 +4,6 @@ import FriendProfileAndName from "./FriendProfileAndName";
 import { Themes } from "../../assets/Themes";
 import { supabase, friendsTable } from "../../utils/supabase";
 import { useState, useEffect, useContext } from "react";
-import FriendsContext from "../../contexts/FriendsContext";
 
 export default function InterestedFriendsList({
   interestedFriendIds,
