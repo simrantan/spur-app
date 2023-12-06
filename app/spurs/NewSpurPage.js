@@ -24,7 +24,7 @@ export default function NewSpurPage() {
   const { theme } = useTheme();
 
   const [isReady, setIsReady] = useState(false);
-  const [activityId, setactivityId] = useState(1);
+  const [activityId, setActivityId] = useState(1);
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
@@ -41,7 +41,7 @@ export default function NewSpurPage() {
       .from(activitiesTable)
       .select("*")
       .eq("id", activityId);
-    if (error) console.log("error", error);
+    if (error) console.error("error", error);
     else {
       console.log("got data!", data[0]);
       setActivity(data[0]);
@@ -54,7 +54,7 @@ export default function NewSpurPage() {
   };
 
   useEffect(() => {
-    setactivityId(Number(id));
+    setActivityId(Number(id));
   }, []);
 
   useEffect(() => {
@@ -62,7 +62,7 @@ export default function NewSpurPage() {
   }, [activityId]);
 
   const changeActivity = () => {
-    setactivityId(activityId + 1);
+    setActivityId(activityId + 1);
     setIsReady(false);
   };
 

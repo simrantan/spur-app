@@ -18,7 +18,7 @@ export default ActivityStack = () => {
 
   const fetchActivities = async () => {
     const { data, error } = await supabase.from(activitiesTable).select("*");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       setActivities(data);
     }

@@ -46,7 +46,7 @@ export default function Page() {
         title="Create a New Spur"
         size="lg"
         onPress={() => {
-          router.push("spurs/NewSpurPage");
+          router.push({ pathname: "spurs/NewSpurPage", params: { id: 1 } });
         }}
       />
     </SafeAreaView>

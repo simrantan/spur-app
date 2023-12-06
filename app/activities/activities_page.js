@@ -15,7 +15,7 @@ export default function Page() {
       .from(activitiesTable)
       .select("*")
       .eq("isLiked", "true");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       console.log("fetched activities", data);
       setActivities(data);
