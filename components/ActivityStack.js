@@ -137,8 +137,4 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     overflow: "hidden",
   },
-  // swiper: {
-  //   borderColor: "blue",
-  //   borderWidth: 1,
-  // },
 });
