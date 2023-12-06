@@ -83,7 +83,7 @@ export default ActivityStack = () => {
             }
           }}
           keyExtractor={(activity) => {
-            activity ? activity.id : null;
+            return activity ? activity.id : Math.random(); // I know this is bad style but it keeps trying to render undefined objects
           }}
           onSwiped={(cardIndex) => {
             console.log(cardIndex);
