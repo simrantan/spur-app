@@ -11,7 +11,7 @@ export default function ActivityCard({
   activityImageUri,
   activityTitle,
   quickInfo, // dist, time, participants, activityType, cost
-  interestedFriends, // array of friend objects, each of which has a name and profile image
+  interestedFriendIds, // array of friend objects, each of which has a name and profile image
   description,
   needsList,
 }) {
@@ -28,7 +28,7 @@ export default function ActivityCard({
           <Checklist needsList={needsList} />
           <Text style={styles.smalltitle}>Interested Friends</Text>
         </View>
-        <InterestedFriendsList interestedFriends={interestedFriends} />
+        <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
         <View style={styles.button}>
           <Text style={styles.buttonText}>Spur Friends</Text>
         </View>
@@ -99,38 +99,7 @@ ActivityCard.defaultProps = {
   activityImageUri:
     "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
   activityTitle: "Pickleball",
-  interestedFriends: [
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "Nils Forstall",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "Jeremy Bentham Nickels",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-    {
-      name: "John Doe",
-      profileImage:
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
-    },
-  ],
+  interestedFriendIds: "[0, 1, 3, 4]",
   description:
     "Lorem ipsum dolor sit amet, ulla sit amet enim scelerisque varius. Aenean euismod, nisl eget ultricies dapibus, erat velit aliquet leo, sed venenatis tellus nisi nec augue. Sed eget justo quis metus lacinia aliquet. Sed sed justo quis nunc ultricies porta. Donec nec nisi sit amet ante ultrices tincidunt. Nulla facilisi. Nulla facilisi. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi.",
   needsList: ["water", "snacks", "sunscreen", "hat"],

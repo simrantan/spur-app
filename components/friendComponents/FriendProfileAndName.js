@@ -11,10 +11,10 @@ export default function FriendProfileAndName({ friend }) {
       <Pressable>
         <Image
           style={styles.friendimage}
-          source={{ uri: friend.profileImage }}
+          source={{ uri: friend.profileImageHci }}
         />
         <Text style={styles.friendName} numberOfLines={1}>
-          {friend.name}
+          {friend.firstName} {friend.lastName}
         </Text>
       </Pressable>
     </View>
