@@ -38,8 +38,8 @@ export default function Page() {
         {activities ? (
           <FlatList
             data={activities}
-            renderItem={(item, index) => {
-              return <MiniActivityCard activityInfo={item.item} />;
+            renderItem={({ item, index }) => {
+              return <MiniActivityCard activityInfo={item} />;
             }}
             ItemSeparatorComponent={
               <View style={{ height: 1, backgroundColor: "lightgray" }} />
