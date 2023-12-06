@@ -68,7 +68,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flexGrow: 1,
     flexShrink: 1,
+    height: "100%",
     justifyContent: "space-between",
+    borderColor: "black",
   },
 });
 

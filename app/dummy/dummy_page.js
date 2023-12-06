@@ -10,12 +10,13 @@ import { Link } from "expo-router";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList.js";
 import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem.js";
 import ActivityCardFront from "../../components/ActivityCardFront.js";
+import ActivityCardBack from "../../components/ActivityCardBack.js";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <ActivityCardFront />
+        <ActivityCardBack />
       </View>
     </View>
   );
