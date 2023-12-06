@@ -71,11 +71,13 @@ export default function Page() {
         <View style={styles.bio}>
           <Text>{friend.bio}</Text>
         </View>
-
+        <Text h2 style={styles.like}>
+          Liked Activities
+        </Text>
         <FlatList
           data={activities}
           renderItem={(item) => {
-            return <MiniActivityCard activityInfo={item} />;
+            return <MiniActivityCard activityInfo={item.item} />;
           }}
         />
       </View>
@@ -137,5 +139,9 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 10,
     padding: 5,
+  },
+  like: {
+    alignSelf: "flex-start",
+    margin: 10,
   },
 });
