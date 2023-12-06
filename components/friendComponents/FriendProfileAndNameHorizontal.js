@@ -7,6 +7,7 @@ import { router, Stack, useNavigation } from "expo-router";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function FriendProfileAndNameHorizontal({ friend }) {
+
   if (!friend) return <View />;
 
   return (
@@ -24,6 +25,7 @@ export default function FriendProfileAndNameHorizontal({ friend }) {
         <Image
           style={styles.friendimage}
           source={{ uri: friend.profileImageHci }}
+
         />
         <View style={styles.friendName}>
           <Text h3>{friend.firstName}</Text>

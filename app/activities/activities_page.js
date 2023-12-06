@@ -4,7 +4,7 @@ import { FlatList } from "react-native-gesture-handler";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import { Themes } from "../../assets/Themes";
 import { Stack } from "expo-router";
-import { supabase, activitesTable } from "../../utils/supabase";
+import { supabase, activitiesTable } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
 
 export default function Page() {
@@ -12,7 +12,7 @@ export default function Page() {
 
   const fetchActivities = async () => {
     const { data, error } = await supabase
-      .from(activitesTable)
+      .from(activitiesTable)
       .select("*")
       .eq("isLiked", "true");
     if (error) console.log("error", error);

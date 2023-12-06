@@ -1,15 +1,7 @@
-import {
-  StyleSheet,
-  SafeAreaView,
-  Pressable,
-  Image,
-  Dimensions,
-  FlatList,
-} from "react-native";
+import { StyleSheet, SafeAreaView, Dimensions, FlatList } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Link, Stack, router } from "expo-router";
+import { Stack, router } from "expo-router";
 import { supabase } from "../../utils/supabase";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import { Button, Text } from "@rneui/themed";
 
 import SpurInvite from "./SpurInvite";

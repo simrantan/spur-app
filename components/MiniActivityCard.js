@@ -14,7 +14,7 @@ export default function MiniActivityCard({ activityInfo }) {
   console.log("quick", quickInfo);
 
   return (
-    <View style={styles.mini_card_box}>
+    <View style={styles.container}>
       <Pressable
         onPress={() => {
           router.push({
@@ -23,12 +23,14 @@ export default function MiniActivityCard({ activityInfo }) {
           });
         }}
       >
-        <Image style={styles.image} source={{ uri: activityImageUri }} />
-        <View style={styles.info}>
-          <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
-            {activityTitle}
-          </Text>
-          <QuickInfo quickInfo={quickInfo} size={20} />
+        <View style={styles.mini_card_box}>
+          <Image style={styles.image} source={{ uri: activityImageUri }} />
+          <View style={styles.info}>
+            <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
+              {activityTitle}
+            </Text>
+            <QuickInfo quickInfo={quickInfo} size={20} />
+          </View>
         </View>
       </Pressable>
     </View>

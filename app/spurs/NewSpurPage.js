@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View, Modal } from "react-native";
 import { Text, Button, Dialog, useTheme, ButtonSmall } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
-import { supabase, activitesTable } from "../../utils/supabase";
+import { supabase, activitiesTable } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -36,6 +36,7 @@ export default function NewSpurPage() {
 
   const fetchActivity = async () => {
     console.log("searching for id: ", activityId);
+    console.log(activitiesTable);
     const { data, error } = await supabase
       .from(activitiesTable)
       .select("*")
@@ -44,8 +45,8 @@ export default function NewSpurPage() {
     else {
       console.log("got data!", data[0]);
       setActivity(data[0]);
-      if (data[0].interestedFriends) {
-        setFriends(JSON.parse(data[0].interestedFriends));
+      if (data[0].interestedFriendIds) {
+        setFriends(JSON.parse(data[0].interestedFriendIds));
       }
       setLikedFriends(Array(friends.length).fill(true));
       setIsReady(true);
@@ -125,7 +126,7 @@ export default function NewSpurPage() {
           </View>
           <View style={styles.sectionBodyContainer}>
             <InterestedFriendsList
-              interestedFriends={friends.filter((item, i) => likedFriends[i])}
+              interestedFriendIds={friends.filter((item, i) => likedFriends[i])}
               emptyMessage={"Tap 'Change People' to select friends to spur."}
             />
           </View>

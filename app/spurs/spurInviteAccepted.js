@@ -83,7 +83,7 @@ export default function Accepted() {
           <View style={styles.attendeebox}>
             <Text h3>Attendees</Text>
             <InterestedFriendsList
-              interestedFriends={invite.interestedFriends}
+              interestedFriendIds={invite.interestedFriendIds}
             />
           </View>
           <View style={styles.needsbox}>
