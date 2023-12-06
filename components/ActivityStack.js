@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { View, SafeAreaView, Dimensions, StyleSheet } from "react-native";
-import { supabase, activitesTable } from "../utils/supabase";
+import { supabase, activitiesTable } from "../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "./ActivityCard";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -14,7 +14,7 @@ export default ActivityStack = () => {
   const [activities, setActivities] = useState([]);
 
   const fetchActivities = async () => {
-    const { data, error } = await supabase.from(activitesTable).select("*");
+    const { data, error } = await supabase.from(activitiesTable).select("*");
     if (error) console.log("error", error);
     else {
       setActivities(data);
@@ -58,7 +58,7 @@ export default ActivityStack = () => {
       liked = true;
     }
     const { data, error } = await supabase
-      .from(activitesTable)
+      .from(activitiesTable)
       .update({ isLiked: liked })
       .eq("id", id)
       .select();

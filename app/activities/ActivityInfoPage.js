@@ -3,6 +3,8 @@ import { View, SafeAreaView, Dimensions } from "react-native";
 import { supabase } from "../../utils/supabase";
 import TinderCard from "react-tinder-card";
 import ActivityCard from "../../components/ActivityCard";
+import { useLocalSearchParams } from "expo-router";
+import { Stack } from "expo-router";
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Page() {

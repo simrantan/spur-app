@@ -13,7 +13,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   },
 });
 
-const activitesTable = "Activities v5";
+const activitiesTable = "Activities v5";
 const friendsTable = "friends";
 
-export { supabase, activitesTable, friendsTable };
+export { supabase, activitiesTable, friendsTable };

@@ -20,6 +20,7 @@ export default function InterestedFriendsList({
     }
   };
   fetchFriends();
+  console.log("Friends", friends);
   // const friends = useContext(FriendsContext);
   // console.log("friends: ", friends);
   if (interestedFriendIds.length > 0) {

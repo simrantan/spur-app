@@ -30,7 +30,7 @@ export default function SpurInvite({
         <View style={styles.activityInfo}>
           <Image
             style={styles.image}
-            source={{ uri: activityPhotoUri }}
+            source={{ uri: activityImageUri }}
           ></Image>
           <View style={styles.activityDetails}>
             <Text h2>{activityTitle}</Text>
