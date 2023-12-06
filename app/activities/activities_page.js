@@ -1,4 +1,6 @@
+
 import { Pressable, StyleSheet, View } from "react-native";
+
 import ActivityCard from "../../components/ActivityCard.js";
 
 import { Text } from "@rneui/themed";
