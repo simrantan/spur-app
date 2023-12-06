@@ -11,7 +11,7 @@ import { Text } from "@rneui/themed";
 import { router, Stack, useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
 import QuickInfo from "../../components/QuickInfo";
-import InterestedFriendsList from "../../components/InterestedFriendsList";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import Checklist from "../../components/Checklist";
 import { palette } from "../../assets/Themes/palette";
 import { supabase } from "../../utils/supabase";
