@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { View, SafeAreaView, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase, activitiesTable } from "../utils/supabase";
-import TinderCard from "react-tinder-card";
+import Swiper from "react-native-deck-swiper";
 import ActivityCard from "./ActivityCard";
+import { Button, Text } from "@rneui/themed";
+
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 const alreadyRemoved = [];
@@ -52,11 +55,7 @@ export default ActivityStack = () => {
     [activities]
   );
 
-  const updateDB = async (id, direction) => {
-    let liked = false;
-    if (direction === "right") {
-      liked = true;
-    }
+  const updateDB = async (id, liked) => {
     const { data, error } = await supabase
       .from(activitiesTable)
       .update({ isLiked: liked })
@@ -72,83 +71,74 @@ export default ActivityStack = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.cardContainer}>
-        {activities.map((activity, index) => (
-          // console.log("activity", activity),
-          // console.log("id", activity.id),
-          // console.log("needslist", activity.needsList),
-          <TinderCard
-            //preventSwipe={["up", "down"]}
-            flickOnSwipe={true}
-            ref={childRefs[index]}
-            key={activity.id}
-            onSwipe={(dir) => swiped(dir, activity.id)}
-            //onCardLeftScreen={() => outOfFrame(activity.id)}
-          >
-            <ActivityCard
-              activityTitle={activity.activityTitle}
-              activityImageUri={activity.activityImageUri}
-              quickInfo={activity.quickInfo}
-              interestedFriends={activity.interestedFriends}
-              description={activity.description}
-              needsList={activity.needs}
-            />
-          </TinderCard>
-        ))}
-      </View>
+      {activities ? (
+        <Swiper
+          style={styles.swiper}
+          cards={activities}
+          renderCard={(activity) => {
+            console.log("rendering activity", activity);
+            if (activity) {
+              return (
+                <View style={styles.cardContainer}>
+                  <ActivityCard
+                    activityTitle={activity.activityTitle}
+                    activityImageUri={activity.activityImageUri}
+                    quickInfo={activity.quickInfo}
+                    interestedFriends={activity.interestedFriends}
+                    description={activity.description}
+                    needsList={activity.needs}
+                  />
+                </View>
+              );
+            }
+          }}
+          keyExtractor={(activity) => {
+            activity ? activity.id : null;
+          }}
+          onSwiped={(cardIndex) => {
+            console.log(cardIndex);
+          }}
+          onSwipedAll={() => {
+            console.log("onSwipedAll");
+          }}
+          onSwipedLeft={(cardIndex) =>
+            updateDB(activities[cardIndex].id, false)
+          }
+          onSwipedRight={(cardIndex) =>
+            updateDB(activities[cardIndex].id, true)
+          }
+          cardIndex={0}
+          stackSize={3}
+          verticalSwipe={false}
+          marginTop={-50}
+        ></Swiper>
+      ) : (
+        <Button loading />
+      )}
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
     flex: 1,
-  },
-  header: {
-    color: "#000",
-    fontSize: 30,
-    marginBottom: 30,
+    width: windowWidth,
+    height: windowHeight,
+    backgroundColor: "#aa00ee",
+    borderColor: "red",
+    borderWidth: 1,
+    paddingVertical: 10,
+    overflow: "hidden",
   },
   cardContainer: {
-    width: "95%",
-    height: "95%",
-  },
-  card: {
-    position: "absolute",
-    backgroundColor: "green",
-    width: "100%",
-    maxWidth: 260,
-    height: 300,
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 20,
-    borderRadius: 20,
-    resizeMode: "cover",
-  },
-  cardImage: {
-    width: "100%",
-    height: "100%",
+    maxHeight: windowHeight * 0.75,
+    borderRadius: 10,
+    borderColor: "magenta",
+    borderWidth: 1,
     overflow: "hidden",
-    borderRadius: 20,
   },
-  cardTitle: {
-    position: "absolute",
-    bottom: 0,
-    margin: 10,
-    color: "blue",
-  },
-  buttons: {
-    margin: 20,
-    zIndex: -100,
-  },
-  infoText: {
-    height: 28,
-    justifyContent: "center",
-    display: "flex",
-    zIndex: -100,
-  },
+  // swiper: {
+  //   borderColor: "blue",
+  //   borderWidth: 1,
+  // },
 });
