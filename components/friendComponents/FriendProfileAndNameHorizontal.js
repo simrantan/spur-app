@@ -30,9 +30,6 @@ export default function FriendProfileAndNameHorizontal({ friend }) {
           <Text h3> </Text>
           <Text h3>{friend.lastName}</Text>
         </View>
-        <Text style={styles.friendName} numberOfLines={1}>
-          {friend.firstName} {friend.lastName}
-        </Text>
       </View>
     </Pressable>
     // </View>
