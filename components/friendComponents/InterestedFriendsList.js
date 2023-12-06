@@ -4,7 +4,6 @@ import FriendProfileAndName from "./FriendProfileAndName";
 import { Themes } from "../../assets/Themes";
 import { supabase, friendsTable } from "../../utils/supabase";
 import { useState, useEffect, useContext } from "react";
-import FriendsContext from "../../contexts/FriendsContext";
 
 export default function InterestedFriendsList({
   interestedFriendIds,
@@ -20,12 +19,8 @@ export default function InterestedFriendsList({
     }
   };
   fetchFriends();
-  // console.log("Friends", friends);
-  // const friends = useContext(FriendsContext);
-  // console.log("friends: ", friends);
   if (interestedFriendIds.length > 0) {
-    // console.log("interestedFriendIds", interestedFriendIds);
-    // return <View />;
+    console.log("interestedFriendIds", interestedFriendIds);
     const interestedFriends = friends.filter((friend) => {
       return interestedFriendIds.includes(friend.id);
     });
@@ -40,7 +35,6 @@ export default function InterestedFriendsList({
   } else {
     return <Text style={styles.noFriends}>{emptyMessage}</Text>;
   }
-  // return <View />;
 }
 
 const styles = StyleSheet.create({
@@ -55,8 +49,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     flexWrap: "wrap",
-    // flexGrow: 1,
-    // justifyContent: "space-around",
   },
 });
 

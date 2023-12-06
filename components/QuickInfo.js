@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bg,
     // marginHorizontal: 10,
     borderRadius: 10,
+    maxHeight: symbolSize * 1.3,
+    minHeight: symbolSize * 1.3,
   },
   timebox: {
     flexDirection: "row",

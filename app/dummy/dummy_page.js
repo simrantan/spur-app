@@ -8,12 +8,15 @@ import { Image } from "react-native";
 
 import { Link } from "expo-router";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList.js";
+import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem.js";
+import ActivityCardFront from "../../components/ActivityCardFront.js";
+import ActivityCardBack from "../../components/ActivityCardBack.js";
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <View style={styles.main}>
-        <MiniActivityCard />
+        <ActivityCardBack />
       </View>
     </View>
   );
@@ -23,15 +26,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    paddingLeft: 10,
-    paddingRight: 10,
     backgroundColor: Themes.bg,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
-    marginHorizontal: "auto",
+    width: "100%",
+    borderColor: "red",
+    borderWidth: 3,
   },
   title: {
     fontSize: 64,
