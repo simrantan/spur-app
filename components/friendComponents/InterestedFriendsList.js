@@ -18,13 +18,16 @@ export default function InterestedFriendsList({
       setFriends(data);
     }
   };
-  fetchFriends();
+
+  useEffect(() => {
+    fetchFriends();
+  }, []);
+
   if (interestedFriendIds.length > 0) {
     console.log("interestedFriendIds", interestedFriendIds);
     const interestedFriends = friends.filter((friend) => {
       return interestedFriendIds.includes(friend.id);
     });
-    // console.log("interestedFriends", interestedFriends);
     return (
       <View style={styles.container}>
         {interestedFriends.map((item, index) => {

@@ -2,8 +2,6 @@ import { useEffect } from "react";
 import { Tabs, SplashScreen } from "expo-router";
 import { ThemeProvider, createTheme } from "@rneui/themed";
 import { theme } from "../assets/Themes";
-
-// import * as SplashScreen from "expo-splash-screen";
 import { useFonts, SpicyRice_400Regular } from "@expo-google-fonts/spicy-rice";
 import {
   Montserrat_100Thin,
@@ -126,13 +124,11 @@ export default function HomeLayout() {
           }}
         />
         <Tabs.Screen
-          name="dummy"
+          // Name of the route to hide.
+          name="index"
           options={{
-            tabBarLabel: "Dummy",
-            title: "Dummy",
-            // tabBarIcon: ({ size, color }) => (
-            //   <FontAwesome name="dummy" size={size} color={color} />
-            // ),
+            // This tab will no longer show up in the tab bar.
+            href: null,
           }}
         />
       </Tabs>
