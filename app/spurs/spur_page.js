@@ -30,6 +30,7 @@ export default function Page() {
       address={item.address}
     />
   );
+
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen
@@ -46,7 +47,10 @@ export default function Page() {
         title="Create a New Spur"
         size="lg"
         onPress={() => {
-          router.push({ pathname: "spurs/NewSpurPage", params: { id: 1 } });
+          router.push({
+            pathname: "spurs/screens/NewSpurPage",
+            params: { id: 1 },
+          });
         }}
       />
     </SafeAreaView>

@@ -115,7 +115,10 @@ export default function spurInvitePending() {
         title="Create a New Spur"
         size="lg"
         onPress={() => {
-          router.push("spurs/NewSpurPage");
+          router.push({
+            pathname: "spurs/screens/NewSpurPage",
+            params: { id: 1 },
+          });
         }}
       />
     </SafeAreaView>
