@@ -1,13 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  Image,
-  Dimensions,
-  Pressable,
-  ScrollView,
-  FlatList,
-  ImageBackground,
-} from "react-native";
+import { StyleSheet, View, Image, Dimensions, ScrollView } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import Checklist from "./Checklist";
@@ -52,7 +43,6 @@ const styles = StyleSheet.create({
   },
   card_box: {
     backgroundColor: Themes.bgSecondary,
-    marginVertical: 8,
     flexDirection: "column",
     justifyContent: "flex-start",
     borderRadius: 10,
@@ -85,7 +75,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginTop: 10,
   },
-
   bigtitle: {
     fontSize: 40,
     color: Themes.textPrimary,
