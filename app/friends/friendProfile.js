@@ -19,33 +19,33 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Page() {
   const friend = useLocalSearchParams();
-  console.log("friend", friend);
+  //console.log("friend", friend);
   const [activities, setActivities] = useState();
 
   const fetchActivities = async () => {
     const id = [1, 2, 3, 4];
-    console.log("friendinterest", friend.interests);
+    //console.log("friendinterest", friend.interests);
     if (!friend.interests || friend.interests.length === 0) {
       console.log("No interests to fetch activities for.");
       return;
     }
     const { data, error } = await supabase
-      .from("activitiesTable")
+      .from("Activities v5")
       .select("*")
       .in("id", id);
 
     if (error) {
       console.error("Error fetching activities:", error);
     } else {
-      console.log("Fetched activities:", data);
+      //console.log("Fetched activities:", data);
       setActivities(data);
     }
   };
 
   useEffect(() => {
     fetchActivities();
-    console.log("activities are: ", activities);
   }, []);
+  console.log("activities are: ", activities);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -77,9 +77,6 @@ export default function Page() {
           renderItem={(item) => {
             return <MiniActivityCard activityInfo={item} />;
           }}
-          ItemSeparatorComponent={
-            <View style={{ height: 1, backgroundColor: "lightgray" }} />
-          }
         />
       </View>
     </SafeAreaView>
