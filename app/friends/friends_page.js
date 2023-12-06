@@ -1,12 +1,24 @@
 import { StyleSheet, View } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../../assets/Themes";
-
-import { Stack, Link } from "expo-router";
+import { router, Stack, useNavigation } from "expo-router";
 import { FlatList } from "react-native-gesture-handler";
 import FriendProfileAndNameHorizontal from "../../components/friendComponents/FriendProfileAndNameHorizontal";
 
 export default function Page() {
+  const [friends, setFriends] = useState([]);
+  const table = "Friends";
+  const fetchFriends = async () => {
+    const { data, error } = await supabase.from(table).select("*");
+    if (error) console.log("error", error);
+    else {
+      setFriends(data);
+    }
+  };
+
+  useEffect(() => {
+    fetchFriends();
+  }, []);
   return (
     <View style={styles.container}>
       <Stack.Screen
