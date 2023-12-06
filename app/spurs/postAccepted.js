@@ -62,7 +62,7 @@ export default function spurInvitePending() {
             <View style={styles.activityInfo}>
               <Image
                 style={styles.image}
-                source={{ uri: invite.activityPhoto }}
+                source={{ uri: invite.activityImageUri }}
               ></Image>
               <View style={styles.activityDetails}>
                 <Text h2>{invite.activityTitle}</Text>

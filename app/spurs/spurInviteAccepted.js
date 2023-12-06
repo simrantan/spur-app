@@ -11,10 +11,11 @@ import { Text } from "@rneui/themed";
 import { router, Stack, useNavigation } from "expo-router";
 import React, { useState, useEffect } from "react";
 import QuickInfo from "../../components/QuickInfo";
-import InterestedFriendsList from "../../components/InterestedFriendsList";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import Checklist from "../../components/Checklist";
 import { palette } from "../../assets/Themes/palette";
 import { supabase } from "../../utils/supabase";
+import MiniActivityCard from "../../components/MiniActivityCard";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const table = "spurInvite";
@@ -46,12 +47,15 @@ export default function Accepted() {
     });
   }, []);
 
+  console.log("invites", invites);
+
   return (
     <SafeAreaView style={styles.container}>
       {invites.map((invite, index) => (
         <View key={index} style={styles.moreinfobox}>
-          <Text h2>{invite.activityTitle}</Text>
-          <QuickInfo quickInfo={invite.quickInfo} size={30} />
+          {/* <Text h2>{invite.activityTitle}</Text>
+          <QuickInfo quickInfo={invite.quickInfo} size={30} /> */}
+          <MiniActivityCard activityInfo={invite} />
           <View style={styles.from}>
             <View h4 style={styles.promptbox}>
               <Text style={styles.textalign}> When </Text>

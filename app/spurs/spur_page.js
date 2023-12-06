@@ -2,16 +2,13 @@ import { StyleSheet, View } from "react-native";
 
 import { Button, Text } from "@rneui/themed";
 
-
 import { Link, router, Stack } from "expo-router";
-
 
 export default function Page() {
   return (
     <View style={styles.container}>
       <Stack.Screen
         options={{
-
           title: "Spurs",
         }}
       />

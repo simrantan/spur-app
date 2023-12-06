@@ -18,7 +18,7 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function SpurInvite({
   id,
-  activityPhoto,
+  activityImageUri,
   activityTitle,
   friend,
   time,
@@ -28,7 +28,10 @@ export default function SpurInvite({
     <SafeAreaView style={styles.item}>
       <View>
         <View style={styles.activityInfo}>
-          <Image style={styles.image} source={{ uri: activityPhoto }}></Image>
+          <Image
+            style={styles.image}
+            source={{ uri: activityPhotoUri }}
+          ></Image>
           <View style={styles.activityDetails}>
             <Text h2>{activityTitle}</Text>
             <View style={styles.from}>

@@ -34,7 +34,7 @@ export default function spurInvitePending() {
 
   const renderInvite = ({ item }) => (
     <SpurInvite
-      activityPhoto={item.activityPhoto}
+      activityImageUri={item.activityImageUri}
       activityTitle={item.activityTitle}
       friend={item.friend}
       time={item.time}
