@@ -73,21 +73,6 @@ export default function Page() {
             {friend.pronouns}
           </Text>
         </View>
-<<<<<<< HEAD
-        <View style={styles.bio}>
-          <Text>{friend.bio}</Text>
-        </View>
-        <Text h2 style={styles.like}>
-          Liked Activities
-        </Text>
-        <FlatList
-          data={activities}
-          renderItem={({ item }) => {
-            return <MiniActivityCard activityInfo={item} />;
-          }}
-        />
-=======
->>>>>>> nils-styling-work
       </View>
       <Text h3 style={styles.sectionHeaderText}>
         Bio
@@ -248,10 +233,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 5,
   },
-<<<<<<< HEAD
-  like: {
-    alignSelf: "flex-start",
-=======
   interestsList: {
     flex: 1,
     backgroundColor: palette.white,
@@ -272,7 +253,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: palette.beige,
     borderRadius: 10,
->>>>>>> nils-styling-work
     margin: 10,
   },
 });
