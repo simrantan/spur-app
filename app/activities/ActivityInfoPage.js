@@ -17,6 +17,7 @@ export default function Page() {
         }}
       />
       <ActivityCard
+        id={activity.id}
         activityTitle={activity.activityTitle}
         activityImageUri={activity.activityImageUri}
         quickInfo={activity.quickInfo}

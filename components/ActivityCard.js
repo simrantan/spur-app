@@ -1,13 +1,17 @@
 import { StyleSheet, View, Image, Dimensions, ScrollView } from "react-native";
-import { Text } from "@rneui/themed";
+import { Text, Button } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
 import InterestedFriendsList from "./friendComponents/InterestedFriendsList";
+import { router } from "expo-router";
+import ActivityCardFront from "./ActivityCardFront";
+import ActivityCardBack from "./ActivityCardBack";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function ActivityCard({
+  id,
   activityImageUri,
   activityTitle,
   quickInfo, // dist, time, participants, activityType, cost
@@ -15,6 +19,7 @@ export default function ActivityCard({
   description,
   needsList,
 }) {
+  const index = id;
   return (
     <ScrollView>
       <View style={{ height: 10 }}></View>
@@ -30,10 +35,30 @@ export default function ActivityCard({
           <Text style={styles.smalltitle}>Interested Friends</Text>
         </View>
         <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Spur Friends</Text>
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Spur Friends"
+            size="sm"
+            onPress={() => {
+              router.push({
+                pathname: "spurs/screens/NewSpurPage",
+                params: { id: index },
+              });
+            }}
+          />
         </View>
       </View>
+      {/* <ActivityCardFront
+        activityImageUri={activityImageUri}
+        activityTitle={activityTitle}
+        quickInfo={quickInfo}
+      />
+      <ActivityCardBack
+        index={index}
+        interestedFriendIds={interestedFriendIds}
+        description={description}
+        needsList={needsList}
+      /> */}
       <View style={{ height: 10 }}></View>
     </ScrollView>
   );
@@ -93,6 +118,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  buttonContainer: {
+    marginHorizontal: 50,
+    marginVertical: 30,
   },
 });
 

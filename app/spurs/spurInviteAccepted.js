@@ -113,8 +113,12 @@ const styles = StyleSheet.create({
     // flex: 1,
     // borderWidth: 1,
   },
+  loc: {
+    flexDirection: "column",
+    marginTop: 20,
+  },
   moreinfobox: {
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "flex-start",
   },
   promptbox: {
@@ -136,6 +140,8 @@ const styles = StyleSheet.create({
   },
   from: {
     flexDirection: "row",
+
+    margin: 10,
   },
   activityInfo: {
     flexDirection: "row",

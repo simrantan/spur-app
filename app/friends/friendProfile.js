@@ -20,21 +20,9 @@ const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Page() {
   const friend = useLocalSearchParams();
-  //console.log("friend", friend);
   const [activities, setActivities] = useState();
   const [filteredActivities, setFilteredActivities] = useState();
-
-  // const fetchActivities = async () => {
-  //   const { data, error } = await supabase
-  //     .from(activitiesTable)
-  //     .select("*")
-  //     .eq("isLiked", "true");
-  //   if (error) console.error(error);
-  //   else {
-  //     console.log("fetched activities", data);
-  //     setActivities(data);
-  //   }
-  // };
+  const screenTitle = friend.firstName + "'s Profile";
 
   const fetchActivities = async () => {
     console.log("Friend interests", friend.interests);
@@ -61,6 +49,12 @@ export default function Page() {
   console.log("activities are: ", activities);
   const header = (
     <View style={styles.header}>
+      <Stack.Screen
+        options={{
+          title: screenTitle,
+        }}
+      />
+
       <View style={styles.photoAndName}>
         <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
         <View style={styles.nameAndPronoun}>
@@ -78,7 +72,7 @@ export default function Page() {
         Bio
       </Text>
       <View style={styles.bio}>
-        <Text>{friend.bio}</Text>
+        <Text style={{ fontSize: 16 }}>{friend.bio}</Text>
       </View>
       <Text h3 style={styles.sectionHeaderText}>
         Interests
@@ -88,10 +82,6 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <FlatList
-        // data={activities.filter((activity) => {
-        //   friend.interests.includes(activity.id);
-        //   console.log("activity", activity);
-        // })}
         data={activities?.filter((activity) => {
           return friend.interests.includes(activity.id);
         })}
@@ -232,6 +222,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     borderRadius: 10,
     padding: 5,
+    // fontSize: 16,
   },
   interestsList: {
     flex: 1,

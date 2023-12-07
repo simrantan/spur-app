@@ -1,13 +1,15 @@
 import { StyleSheet, View, Image, Dimensions, ScrollView } from "react-native";
-import { Text } from "@rneui/themed";
+import { Text, Button } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
 import InterestedFriendsList from "./friendComponents/InterestedFriendsList";
+import { router, Stack, useNavigation } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function ActivityCard({
+  index,
   activityImageUri,
   activityTitle,
   quickInfo, // dist, time, participants, activityType, cost
@@ -30,9 +32,16 @@ export default function ActivityCard({
             <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
           </View>
         </View>
-        <View style={styles.button}>
-          <Text style={styles.buttonText}>Spur Friends</Text>
-        </View>
+        <Button
+          title="Spur Friends"
+          size="sm"
+          onPress={() => {
+            router.push({
+              pathname: "spurs/screens/NewSpurPage",
+              params: { id: index },
+            });
+          }}
+        />
       </View>
     </ScrollView>
   );

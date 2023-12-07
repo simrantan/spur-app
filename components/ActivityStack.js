@@ -52,6 +52,7 @@ export default ActivityStack = () => {
           overlayStyle={styles.moreInfoDialog}
         >
           <ActivityCardBack
+            index={activities[currActivity].id}
             activityTitle={activities[currActivity].activityTitle}
             activityImageUri={activities[currActivity].activityImageUri}
             quickInfo={activities[currActivity].quickInfo}
@@ -82,8 +83,10 @@ export default ActivityStack = () => {
             return activity ? activity.id : Math.random(); // I know this is bad style but it keeps trying to render undefined objects
           }}
           onSwiped={(cardIndex) => {
+            console.log("onSwiped - cardIndex:", cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
+          setIndex={currActivity}
           onSwipedAll={() => {
             console.log("onSwipedAll");
           }}
@@ -93,11 +96,12 @@ export default ActivityStack = () => {
           onSwipedRight={(cardIndex) =>
             updateDB(activities[cardIndex].id, true)
           }
-          cardIndex={0}
+          //cardIndex={0}
           stackSize={3}
           verticalSwipe={false}
           marginTop={-50}
           backgroundColor={theme.colors.background}
+          cardIndex={isVisible ? -1 : 0}
         ></Swiper>
       ) : (
         <Button loading />

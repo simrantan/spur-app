@@ -37,11 +37,13 @@ export default function Page() {
         options={{
           title: "Spurs",
         }}
+        style={styles.spacer}
       />
       <FlatList
         data={invites}
         renderItem={(item) => renderInvite(item)}
         keyExtractor={(item) => item.id}
+        style={styles.spacer}
       />
       <Button
         title="Create a New Spur"
@@ -52,6 +54,7 @@ export default function Page() {
             params: { id: 1 },
           });
         }}
+        style={styles.spacer}
       />
     </SafeAreaView>
   );
@@ -61,7 +64,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+
     padding: 24,
+    justifyContent: "space-between",
+  },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
   },
   main: {
     flex: 1,
