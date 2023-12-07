@@ -2,8 +2,7 @@ import { StyleSheet, View, Image, Dimensions, Pressable } from "react-native";
 import { Text } from "@rneui/themed";
 import { Themes } from "../assets/Themes";
 import QuickInfo from "./QuickInfo";
-import { Link, router } from "expo-router";
-// import ActivityPage from "../app/activities/screens/activityPage";
+import { router } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -11,7 +10,6 @@ export default function MiniActivityCard({ activityInfo }) {
   const activityImageUri = activityInfo.activityImageUri;
   const activityTitle = activityInfo.activityTitle;
   const quickInfo = activityInfo.quickInfo; // dist, time, participants, activityType, cost
-  console.log("id", activityInfo.id);
 
   return (
     <View style={styles.container}>
@@ -69,7 +67,9 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flexGrow: 1,
     flexShrink: 1,
+    height: "100%",
     justifyContent: "space-between",
+    borderColor: "black",
   },
 });
 

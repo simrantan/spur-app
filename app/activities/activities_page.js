@@ -6,6 +6,7 @@ import { Themes } from "../../assets/Themes";
 import { Stack } from "expo-router";
 import { supabase, activitiesTable } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
+import { palette } from "../../assets/Themes/palette";
 
 export default function Page() {
   const [activities, setActivities] = useState();
@@ -15,7 +16,7 @@ export default function Page() {
       .from(activitiesTable)
       .select("*")
       .eq("isLiked", "true");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       //console.log("fetched activities", data);
       setActivities(data);
@@ -38,12 +39,12 @@ export default function Page() {
         {activities ? (
           <FlatList
             data={activities}
-            renderItem={(item, index) => {
-              return <MiniActivityCard activityInfo={item.item} />;
+            renderItem={({ item, index }) => {
+              return <MiniActivityCard activityInfo={item} />;
             }}
-            ItemSeparatorComponent={
-              <View style={{ height: 1, backgroundColor: "lightgray" }} />
-            }
+            ItemSeparatorComponent={() => (
+              <View style={{ height: 1, backgroundColor: palette.accent }} />
+            )}
           />
         ) : (
           <Button loading />
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     paddingHorizontal: 10,
-    backgroundColor: Themes.bg,
+    backgroundColor: Themes.bgSecondary,
   },
   main: {
     flex: 1,

@@ -102,25 +102,32 @@ export default function QuickInfo({ quickInfo, size }) {
       console.log("error parsing quick info: ", e);
     }
   }
-  return (
-    <View style={styles.iconsbox}>
-      <View style={styles.icon}>
-        <ParticipantsSymbol participants={quickInfo.participants} />
+  var component = <View />;
+  try {
+    component = (
+      <View style={styles.iconsbox}>
+        <View style={styles.icon}>
+          <ParticipantsSymbol participants={quickInfo.participants} />
+        </View>
+        <View style={styles.icon}>
+          <PriceSymbol cost={quickInfo.cost} />
+        </View>
+        <View style={styles.icon}>
+          <ActivitySymbol activityType={quickInfo.activityType} />
+        </View>
+        <View style={styles.icon}>
+          <DistanceSymbol dist={quickInfo.dist} />
+        </View>
+        <View style={styles.icon}>
+          <TimeSymbol time={quickInfo.time} />
+        </View>
       </View>
-      <View style={styles.icon}>
-        <PriceSymbol cost={quickInfo.cost} />
-      </View>
-      <View style={styles.icon}>
-        <ActivitySymbol activityType={quickInfo.activityType} />
-      </View>
-      <View style={styles.icon}>
-        <DistanceSymbol dist={quickInfo.dist} />
-      </View>
-      <View style={styles.icon}>
-        <TimeSymbol time={quickInfo.time} />
-      </View>
-    </View>
-  );
+    );
+  } catch (e) {
+    console.log("error rendering quick info: ", e);
+    console.log("quick info: ", quickInfo);
+  }
+  return component;
 }
 
 const styles = StyleSheet.create({
@@ -138,6 +145,8 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bg,
     // marginHorizontal: 10,
     borderRadius: 10,
+    maxHeight: symbolSize * 1.3,
+    minHeight: symbolSize * 1.3,
   },
   timebox: {
     flexDirection: "row",

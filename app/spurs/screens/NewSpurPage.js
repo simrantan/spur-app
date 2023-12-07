@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View, Modal } from "react-native";
-import { Text, Button, Dialog, useTheme, ButtonSmall } from "@rneui/themed";
+import { StyleSheet, View } from "react-native";
+import { Text, Button, Dialog, useTheme } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
-import { supabase, activitiesTable } from "../../utils/supabase";
-import MiniActivityCard from "../../components/MiniActivityCard";
-import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
+import { supabase, activitiesTable } from "../../../utils/supabase";
+import MiniActivityCard from "../../../components/MiniActivityCard";
+import InterestedFriendsList from "../../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
-import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
-import { Themes } from "../../assets/Themes";
+import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
+import { Themes } from "../../../assets/Themes";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const dateFormat = {
@@ -25,7 +25,7 @@ export default function NewSpurPage() {
   const { theme } = useTheme();
 
   const [isReady, setIsReady] = useState(false);
-  const [activityId, setactivityId] = useState(1);
+  const [activityId, setActivityId] = useState(1);
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
@@ -42,7 +42,7 @@ export default function NewSpurPage() {
       .from(activitiesTable)
       .select("*")
       .eq("id", activityId);
-    if (error) console.log("error", error);
+    if (error) console.error("error", error);
     else {
       console.log("got data!", data[0]);
       setActivity(data[0]);
@@ -63,7 +63,7 @@ export default function NewSpurPage() {
   }, [activityId]);
 
   const changeActivity = () => {
-    setactivityId((prevId) => prevId + 1);
+    setActivityId(activityId + 1);
     setIsReady(false);
   };
 
@@ -86,7 +86,12 @@ export default function NewSpurPage() {
   };
 
   if (!isReady) {
-    return <Button title="Solid" type="solid" loading />;
+    return (
+      <View style={styles.container}>
+        <Stack.Screen />
+        <Button title="Solid" type="solid" loading />
+      </View>
+    );
   } else {
     return (
       <View style={styles.container}>

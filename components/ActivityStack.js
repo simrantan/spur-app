@@ -1,24 +1,24 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase, activitiesTable } from "../utils/supabase";
 import Swiper from "react-native-deck-swiper";
-import ActivityCard from "./ActivityCard";
-import { Button, Text } from "@rneui/themed";
+import { Button, Dialog, useTheme } from "@rneui/themed";
+import ActivityCardFront from "./ActivityCardFront";
+import ActivityCardBack from "./ActivityCardBack";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-const alreadyRemoved = [];
-//let activityState = table; // This fixes issues with updating characters state forcing it to use the current state and not the state that was active when the card was created.
-
 export default ActivityStack = () => {
-  const [lastRemovedActivity, setLastRemovedActivity] = useState();
-  const [lastDirection, setLastDirection] = useState();
   const [activities, setActivities] = useState([]);
+  const [isVisible, setisVisible] = useState(false);
+  const [currActivity, setcurrActivity] = useState(0);
+
+  const { theme } = useTheme();
 
   const fetchActivities = async () => {
     const { data, error } = await supabase.from(activitiesTable).select("*");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       setActivities(data);
     }
@@ -27,33 +27,6 @@ export default ActivityStack = () => {
   useEffect(() => {
     fetchActivities();
   }, []);
-
-  useEffect(() => {
-    if (lastDirection && lastRemovedActivity) {
-      updateDB(lastRemovedActivity, lastDirection);
-    }
-  }, [activities]);
-
-  const childRefs = useMemo(
-    () =>
-      Array(activities.length)
-        .fill(0)
-        .map((i) => React.createRef()),
-    []
-  );
-
-  const swiped = useCallback(
-    (direction, id) => {
-      console.log("removing: " + id + " to the " + direction);
-      setLastDirection(direction);
-      setLastRemovedActivity(id);
-      alreadyRemoved.push(id);
-      console.log(id + " left the screen!");
-      let newActivities = activities.filter((item) => item.id !== id);
-      setActivities(newActivities);
-    },
-    [activities]
-  );
 
   const updateDB = async (id, liked) => {
     const { data, error } = await supabase
@@ -71,32 +44,50 @@ export default ActivityStack = () => {
 
   return (
     <SafeAreaView style={styles.container}>
+      {activities[currActivity] && (
+        <Dialog
+          isVisible={isVisible}
+          onBackdropPress={() => setisVisible(false)}
+          overlayStyle={styles.moreInfoDialog}
+        >
+          <ActivityCardBack
+            activityTitle={activities[currActivity].activityTitle}
+            activityImageUri={activities[currActivity].activityImageUri}
+            quickInfo={activities[currActivity].quickInfo}
+            interestedFriends={activities[currActivity].interestedFriends}
+            description={activities[currActivity].description}
+            needsList={activities[currActivity].needs}
+          />
+        </Dialog>
+      )}
       {activities ? (
         <Swiper
-          style={styles.swiper}
           cards={activities}
-          renderCard={(activity) => {
-            console.log("rendering activity", activity);
+          renderCard={(activity, i) => {
             if (activity) {
               return (
-                <View style={styles.cardContainer}>
-                  <ActivityCard
-                    activityTitle={activity.activityTitle}
-                    activityImageUri={activity.activityImageUri}
-                    quickInfo={activity.quickInfo}
-                    interestedFriends={activity.interestedFriends}
-                    description={activity.description}
-                    needsList={activity.needs}
-                  />
+                <View>
+                  {/* <Button
+                    onPress={() => setisVisible(true)}
+                    title={"More Info"}
+                  /> */}
+                  <View style={styles.cardContainer}>
+                    <ActivityCardFront
+                      activityTitle={activity.activityTitle}
+                      activityImageUri={activity.activityImageUri}
+                      quickInfo={activity.quickInfo}
+                      onPress={() => setisVisible(true)}
+                    />
+                  </View>
                 </View>
               );
             }
           }}
           keyExtractor={(activity) => {
-            activity ? activity.id : null;
+            return activity ? activity.id : Math.random(); // I know this is bad style but it keeps trying to render undefined objects
           }}
           onSwiped={(cardIndex) => {
-            console.log(cardIndex);
+            setcurrActivity(cardIndex + 1);
           }}
           onSwipedAll={() => {
             console.log("onSwipedAll");
@@ -111,6 +102,7 @@ export default ActivityStack = () => {
           stackSize={3}
           verticalSwipe={false}
           marginTop={-50}
+          backgroundColor={theme.colors.background}
         ></Swiper>
       ) : (
         <Button loading />
@@ -124,17 +116,18 @@ const styles = StyleSheet.create({
     flex: 1,
     width: windowWidth,
     height: windowHeight,
-    backgroundColor: "#aa00ee",
-    borderColor: "red",
-    borderWidth: 1,
     paddingVertical: 10,
     overflow: "hidden",
   },
   cardContainer: {
     maxHeight: windowHeight * 0.75,
     borderRadius: 10,
-    borderColor: "magenta",
-    borderWidth: 1,
+    overflow: "hidden",
+  },
+  moreInfoDialog: {
+    width: windowWidth * 0.8,
+    height: windowHeight * 0.6,
+    borderRadius: 10,
     overflow: "hidden",
   },
 });

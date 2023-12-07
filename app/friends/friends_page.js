@@ -13,7 +13,7 @@ export default function Page() {
   const table = "friends";
   const fetchFriends = async () => {
     const { data, error } = await supabase.from(table).select("*");
-    if (error) console.log("error", error);
+    if (error) console.error(error);
     else {
       setFriends(data);
     }

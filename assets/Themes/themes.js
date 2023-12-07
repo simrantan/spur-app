@@ -6,7 +6,7 @@ const theme = {
     secondary: palette.accent2,
     background: palette.beige,
   },
-  // mode: "light",
+  mode: "light",
   components: {
     Text: {
       style: {
@@ -43,6 +43,7 @@ const Themes = {
   bg: palette.beige,
   bgSecondary: palette.white,
   textPrimary: palette.lightBlack,
+  textSecondary: palette.white,
 
   buttonPrimaryFill: palette.accent,
   buttonPrimaryText: palette.white,

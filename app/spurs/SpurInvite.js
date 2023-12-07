@@ -3,18 +3,14 @@ import {
   View,
   Image,
   Dimensions,
-  Pressable,
-  ImageBackground,
   SafeAreaView,
   Linking,
 } from "react-native";
 import { Button, Text } from "@rneui/themed";
 import React from "react";
-
-import { Link, Stack, router } from "expo-router";
+import { router } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
-//set table
 
 export default function SpurInvite({
   id,
