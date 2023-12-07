@@ -17,7 +17,7 @@ export default function Page() {
       .eq("isLiked", "true");
     if (error) console.log("error", error);
     else {
-      console.log("fetched activities", data);
+      //console.log("fetched activities", data);
       setActivities(data);
     }
   };

@@ -20,16 +20,15 @@ export default function InterestedFriendsList({
     }
   };
   fetchFriends();
-  console.log("Friends", friends);
+  // console.log("Friends", friends);
   // const friends = useContext(FriendsContext);
   // console.log("friends: ", friends);
   if (interestedFriendIds.length > 0) {
-    console.log("interestedFriendIds", interestedFriendIds);
     // return <View />;
     const interestedFriends = friends.filter((friend) => {
       return interestedFriendIds.includes(friend.id);
     });
-    console.log("interestedFriends", interestedFriends);
+    //console.log("interestedFriends", interestedFriends);
     return (
       <View style={styles.container}>
         {interestedFriends.map((item, index) => {
