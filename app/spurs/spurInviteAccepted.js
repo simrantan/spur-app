@@ -6,6 +6,7 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { Themes } from "../../assets/Themes";
 
 import { Text } from "@rneui/themed";
 import { router, Stack, useNavigation } from "expo-router";
@@ -15,6 +16,7 @@ import Checklist from "../../components/Checklist";
 import { palette } from "../../assets/Themes/palette";
 import { supabase } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
+import { ScrollView } from "react-native-gesture-handler";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const table = "spurInvite";
@@ -49,28 +51,30 @@ export default function Accepted() {
   console.log("invites", invites);
 
   return (
-    <SafeAreaView style={styles.container}>
-      {invites.map((invite, index) => (
-        <View key={index} style={styles.moreinfobox}>
-          {/* <Text h2>{invite.activityTitle}</Text>
+    <View style={{ flex: 1, backgroundColor: Themes.bg }}>
+      <ScrollView contentContainerStyle={styles.scrollviewContainer}>
+        {invites.map((invite, index) => (
+          <View key={index} style={styles.moreinfobox}>
+            {/* <Text h2>{invite.activityTitle}</Text>
           <QuickInfo quickInfo={invite.quickInfo} size={30} /> */}
-          <MiniActivityCard activityInfo={invite} />
-          <View style={styles.from}>
-            <View h4 style={styles.promptbox}>
-              <Text style={styles.textalign}> When </Text>
+            <Text h3 style={styles.sectionHeader}>
+              Event
+            </Text>
+            <View style={styles.sectionBodyContainer}>
+              <MiniActivityCard activityInfo={invite} />
             </View>
-            <View style={styles.textbox}>
-              <Text style={styles.textalign}>{invite.time}</Text>
+            <Text h3 style={styles.sectionHeader}>
+              Time
+            </Text>
+            <View style={[styles.sectionBodyContainer, { padding: 5 }]}>
+              <Text style={styles.textbox}>{invite.time}</Text>
             </View>
-          </View>
-          <View style={styles.from}>
-            <View h3 style={styles.promptbox}>
-              <Text style={styles.textalign}> Where </Text>
-            </View>
-            <View style={styles.textbox}>
+            <Text h3 style={styles.sectionHeader}>
+              Location
+            </Text>
+            <View style={[styles.sectionBodyContainer, { padding: 5 }]}>
               <Text
-                style={styles.textalign}
-                numberOfLines={1}
+                style={styles.textbox}
                 onPress={() =>
                   Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
                 }
@@ -78,28 +82,36 @@ export default function Accepted() {
                 {invite.address}
               </Text>
             </View>
+            <Text h3 style={styles.sectionHeader}>
+              Attendees
+            </Text>
+            <View style={styles.sectionBodyContainer}>
+              <InterestedFriendsList
+                interestedFriendIds={invite.interestedFriendIds}
+              />
+            </View>
+
+            <Text h3 style={styles.sectionHeader}>
+              What You Need:
+            </Text>
+            <View style={[styles.sectionBodyContainer, { padding: 5 }]}>
+              <Checklist needsList={invite.needsList} />
+            </View>
           </View>
-          <View style={styles.attendeebox}>
-            <Text h3>Attendees</Text>
-            <InterestedFriendsList
-              interestedFriendIds={invite.interestedFriendIds}
-            />
-          </View>
-          <View style={styles.needsbox}>
-            <Text h3>What You Need:</Text>
-            <Checklist needsList={invite.needsList} />
-          </View>
-        </View>
-      ))}
-    </SafeAreaView>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  scrollviewContainer: {
     backgroundColor: palette.beige,
     justifyContent: "flex-start",
     alignItems: "flex-start",
+    padding: 10,
+    // flex: 1,
+    // borderWidth: 1,
   },
   moreinfobox: {
     justifyContent: "flex-start",
@@ -112,56 +124,47 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textbox: {
-    width: windowWidth * 0.5,
-    height: windowWidth * 0.1,
-    backgroundColor: "white",
-    borderRadius: 10,
-    marginVertical: 3,
-    justifyContent: "center",
-    margin: 3,
+    // width: windowWidth * 0.5,
+    // flex: 1,
+    // height: windowWidth * 0.1,
+    // backgroundColor: "white",
+    // borderRadius: 10,
+    // marginVertical: 3,
+    // justifyContent: "center",
+    // margin: 10,
+    fontSize: 20,
   },
   from: {
     flexDirection: "row",
-    flex: 1,
   },
   activityInfo: {
     flexDirection: "row",
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
-  activityDetails: {
-    flexDirection: "column",
-    alignContent: "flex-start",
-    justifyContent: "flex-start",
-    direction: "ltr",
-    margin: 15,
-  },
-  col: {
-    flexDirection: "col",
-    width: windowWidth * 0.95,
-    alignSelf: "center",
-    shadowColor: "black",
-    shadowOpacity: 0.4,
-    shadowRadius: 5,
-    shadowOffset: { width: -1, height: 5 },
-    backgroundColor: palette.beige,
-    borderRadius: 10,
-  },
-  textalign: {
-    margin: 10,
-  },
-  details: {
-    color: palette.accent2,
-  },
   needsbox: {
+    marginTop: 10,
     alignSelf: "flex-start",
     justifyContent: "space-around",
-    flex: 3,
-    margin: 10,
   },
   attendeebox: {
+    marginTop: 10,
     alignSelf: "flex-start",
-    margin: 10,
-    flex: 3,
+    // flex: 3,
+  },
+  sectionBodyContainer: {
+    flexDirection: "row",
+    backgroundColor: Themes.bgSecondary,
+    borderRadius: 10,
+    shadowColor: "black",
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
+    // borderWidth: 1,
+    width: windowWidth - 20,
+    marginBottom: 20,
+  },
+  sectionHeader: {
+    // fontSize: 24,
+    marginBottom: 5,
   },
 });

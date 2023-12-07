@@ -26,7 +26,9 @@ export default function ActivityCard({
             <Checklist needsList={needsList} />
             <Text style={styles.smalltitle}>Interested Friends</Text>
           </View>
-          <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
+          <View style={{ margin: 10 }}>
+            <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
+          </View>
         </View>
         <View style={styles.button}>
           <Text style={styles.buttonText}>Spur Friends</Text>
