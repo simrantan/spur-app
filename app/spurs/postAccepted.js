@@ -10,6 +10,7 @@ import {
   Linking,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import { Link, Stack, router, useNavigation } from "expo-router";
 import { supabase } from "../../utils/supabase";
@@ -42,7 +43,7 @@ export default function spurInvitePending() {
             router.push("spurs/postAccepted");
           }}
         >
-          <Text></Text>
+          <Ionicons name="chevron-back" size={24} color={palette.accent} />
         </TouchableOpacity>
       ),
     });
@@ -50,7 +51,7 @@ export default function spurInvitePending() {
 
   return (
     <SafeAreaView style={styles.item}>
-      <Stack.Screen options={{ title: "" }}></Stack.Screen>
+      <Stack.Screen options={{ title: "Spurs" }}></Stack.Screen>
       {invites.map((invite, index) => (
         <Pressable
           key={index}
