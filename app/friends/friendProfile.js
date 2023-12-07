@@ -7,9 +7,10 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import { Themes } from "../../assets/Themes";
 
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { Text } from "@rneui/base";
+import { Text } from "@rneui/themed";
 import { palette } from "../../assets/Themes/palette";
 import { FlatList } from "react-native-gesture-handler";
 import MiniActivityCard from "../../components/MiniActivityCard";
@@ -21,23 +22,34 @@ export default function Page() {
   const friend = useLocalSearchParams();
   //console.log("friend", friend);
   const [activities, setActivities] = useState();
+  const [filteredActivities, setFilteredActivities] = useState();
+
+  // const fetchActivities = async () => {
+  //   const { data, error } = await supabase
+  //     .from(activitiesTable)
+  //     .select("*")
+  //     .eq("isLiked", "true");
+  //   if (error) console.error(error);
+  //   else {
+  //     console.log("fetched activities", data);
+  //     setActivities(data);
+  //   }
+  // };
 
   const fetchActivities = async () => {
-    const id = [1, 2, 3, 4];
+    console.log("Friend interests", friend.interests);
+    const id = friend.interests;
     //console.log("friendinterest", friend.interests);
     if (!friend.interests || friend.interests.length === 0) {
       console.log("No interests to fetch activities for.");
       return;
     }
-    const { data, error } = await supabase
-      .from("Activities v5")
-      .select("*")
-      .in("id", id);
+    const { data, error } = await supabase.from("Activities v5").select("*");
+    // .in("id", id);
 
     if (error) {
       console.error("Error fetching activities:", error);
     } else {
-      //console.log("Fetched activities:", data);
       setActivities(data);
     }
   };
@@ -45,29 +57,23 @@ export default function Page() {
   useEffect(() => {
     fetchActivities();
   }, []);
-  console.log("activities are: ", activities);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <Stack.Screen
-        options={{
-          title: "",
-        }}
-      />
-      <View style={styles.profileCard}>
+  console.log("activities are: ", activities);
+  const header = (
+    <View style={styles.header}>
+      <View style={styles.photoAndName}>
         <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
-        <View style={styles.pronoun}>
-          <View style={styles.profileName}>
-            <Text h2>{friend.firstName}</Text>
-            <Text h2> </Text>
-            <Text h2>{friend.lastName}</Text>
-          </View>
-          <View style={styles.profilePhoto}>
-            <Text h4 style={styles.pronounText}>
-              {friend.pronouns}
-            </Text>
-          </View>
+        <View style={styles.nameAndPronoun}>
+          {/* <View style={styles.profileNasme}> */}
+          <Text h3 style={styles.profileName}>
+            {friend.firstName} {friend.lastName}
+          </Text>
+          {/* </View> */}
+          <Text h4 style={styles.pronounText}>
+            {friend.pronouns}
+          </Text>
         </View>
+<<<<<<< HEAD
         <View style={styles.bio}>
           <Text>{friend.bio}</Text>
         </View>
@@ -80,20 +86,117 @@ export default function Page() {
             return <MiniActivityCard activityInfo={item} />;
           }}
         />
+=======
+>>>>>>> nils-styling-work
       </View>
-    </SafeAreaView>
+      <Text h3 style={styles.sectionHeaderText}>
+        Bio
+      </Text>
+      <View style={styles.bio}>
+        <Text>{friend.bio}</Text>
+      </View>
+      <Text h3 style={styles.sectionHeaderText}>
+        Interests
+      </Text>
+    </View>
   );
+  return (
+    <View style={styles.container}>
+      <FlatList
+        // data={activities.filter((activity) => {
+        //   friend.interests.includes(activity.id);
+        //   console.log("activity", activity);
+        // })}
+        data={activities?.filter((activity) => {
+          return friend.interests.includes(activity.id);
+        })}
+        renderItem={({ item, index }) => {
+          return (
+            <View style={styles.interestsList} key={index}>
+              <MiniActivityCard activityInfo={item} />
+            </View>
+          );
+        }}
+        ItemSeparatorComponent={() => (
+          <View style={{ flexDirection: "row" }}>
+            <View
+              style={{
+                height: 1,
+                backgroundColor: palette.white,
+                width: 10,
+              }}
+            />
+            <View
+              style={{
+                height: 1,
+                backgroundColor: palette.accent,
+                flex: 1,
+                // paddingHorizontal: 10,
+              }}
+            />
+            <View
+              style={{
+                height: 1,
+                backgroundColor: palette.white,
+                width: 10,
+              }}
+            />
+          </View>
+        )}
+        ListHeaderComponent={header}
+      />
+    </View>
+  );
+  // return header;
+  // return (
+  //   <ScrollView contentContainerStyle={styles.container}>
+  //     <Stack.Screen
+  //       options={{
+  //         title: "",
+  //       }}
+  //     />
+  //     <View style={styles.profileCard}>
+  //       <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
+  //       <View style={styles.pronoun}>
+  //         <View style={styles.profileName}>
+  //           <Text h2>{friend.firstName}</Text>
+  //           <Text h2> </Text>
+  //           <Text h2>{friend.lastName}</Text>
+  //         </View>
+  //         <View style={styles.profilePhoto}>
+  //           <Text h4 style={styles.pronounText}>
+  //             {friend.pronouns}
+  //           </Text>
+  //         </View>
+  //       </View>
+  //       <View style={styles.bio}>
+  //         <Text>{friend.bio}</Text>
+  //       </View>
+  //       <View style={styles.interestsList}>
+  //         <FlatList
+  //           data={activities}
+  //           renderItem={({ item, index }) => {
+  //             return <MiniActivityCard activityInfo={item} />;
+  //           }}
+  //           ItemSeparatorComponent={() => (
+  //             <View style={{ height: 1, backgroundColor: palette.accent }} />
+  //           )}
+  //           ListHeaderComponent={<View />}
+  //         />
+  //       </View>
+  //     </View>
+  //   </ScrollView>
+  // );
 }
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "column",
-    alignItems: "center",
-    paddingHorizontal: 10,
-    padding: 10,
+    backgroundColor: Themes.bg,
+    flex: 1,
+    // marginHorizontal: 10,
   },
   profilePhoto: {
-    justifyContent: "center",
-    alignItems: "center", // Aligns items (Text, Image) horizontally in the center
+    // justifyContent: "center",
+    // alignItems: "center", // Aligns items (Text, Image) horizontally in the center
   },
   profileCard: {
     justifyContent: "center",
@@ -112,36 +215,64 @@ const styles = StyleSheet.create({
   profileName: {
     justifyContent: "center",
     flexDirection: "row",
+    textAlign: "center",
   },
-  pronoun: {
+  nameAndPronoun: {
     justifyContent: "center",
     flexDirection: "column",
     alignItems: "center", // Aligns items (Text) horizontally in the center
     margin: 10,
+    flex: 1,
+    // textAlign: "center",
   },
   image: {
     borderRadius: 100,
     resizeMode: "cover",
-    width: 200,
-    height: 200,
+    width: 100,
+    aspectRatio: 1,
     margin: 10,
+    // alignSelf: "flex-start",
+    // alignSelf: "center",
   },
   pronounText: {
-    color: palette.gray,
+    color: "grey",
     margin: 5,
   },
   bio: {
-    backgroundColor: palette.white,
-    shadowColor: "black",
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    shadowOffset: { width: -1, height: 5 },
-    margin: 5,
+    // backgroundColor: palette.white,
+    // shadowColor: "black",
+    // shadowOpacity: 0.2,
+    // shadowRadius: 5,
+    // shadowOffset: { width: -1, height: 5 },
+    marginHorizontal: 5,
     borderRadius: 10,
     padding: 5,
   },
+<<<<<<< HEAD
   like: {
     alignSelf: "flex-start",
+=======
+  interestsList: {
+    flex: 1,
+    backgroundColor: palette.white,
+    paddingHorizontal: 10,
+  },
+  sectionHeaderText: {
+    marginLeft: 10,
+    marginTop: 10,
+    alignSelf: "left",
+  },
+  photoAndName: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    // verticalAlign: "center",
+  },
+  header: {
+    flex: 1,
+    backgroundColor: palette.beige,
+    borderRadius: 10,
+>>>>>>> nils-styling-work
     margin: 10,
   },
 });

@@ -20,6 +20,7 @@ export default function ActivityCard({
   const index = id;
   return (
     <ScrollView>
+      <View style={{ height: 10 }}></View>
       <View style={styles.card_box}>
         <View style={styles.aboveChecklist}>
           <Image style={styles.image} source={{ uri: activityImageUri }} />
@@ -44,6 +45,7 @@ export default function ActivityCard({
           }}
         />
       </View>
+      <View style={{ height: 10 }}></View>
     </ScrollView>
   );
 }
