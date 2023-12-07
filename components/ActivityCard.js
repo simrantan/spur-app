@@ -17,6 +17,7 @@ export default function ActivityCard({
 }) {
   return (
     <ScrollView>
+      <View style={{ height: 10 }}></View>
       <View style={styles.card_box}>
         <View style={styles.aboveChecklist}>
           <Image style={styles.image} source={{ uri: activityImageUri }} />
@@ -33,6 +34,7 @@ export default function ActivityCard({
           <Text style={styles.buttonText}>Spur Friends</Text>
         </View>
       </View>
+      <View style={{ height: 10 }}></View>
     </ScrollView>
   );
 }
