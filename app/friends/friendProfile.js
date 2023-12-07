@@ -22,23 +22,34 @@ export default function Page() {
   const friend = useLocalSearchParams();
   //console.log("friend", friend);
   const [activities, setActivities] = useState();
+  const [filteredActivities, setFilteredActivities] = useState();
+
+  // const fetchActivities = async () => {
+  //   const { data, error } = await supabase
+  //     .from(activitiesTable)
+  //     .select("*")
+  //     .eq("isLiked", "true");
+  //   if (error) console.error(error);
+  //   else {
+  //     console.log("fetched activities", data);
+  //     setActivities(data);
+  //   }
+  // };
 
   const fetchActivities = async () => {
-    const id = [1, 2, 3, 4];
+    console.log("Friend interests", friend.interests);
+    const id = friend.interests;
     //console.log("friendinterest", friend.interests);
     if (!friend.interests || friend.interests.length === 0) {
       console.log("No interests to fetch activities for.");
       return;
     }
-    const { data, error } = await supabase
-      .from("Activities v5")
-      .select("*")
-      .in("id", id);
+    const { data, error } = await supabase.from("Activities v5").select("*");
+    // .in("id", id);
 
     if (error) {
       console.error("Error fetching activities:", error);
     } else {
-      //console.log("Fetched activities:", data);
       setActivities(data);
     }
   };
@@ -46,13 +57,14 @@ export default function Page() {
   useEffect(() => {
     fetchActivities();
   }, []);
+
   console.log("activities are: ", activities);
   const header = (
     <View style={styles.header}>
       <View style={styles.photoAndName}>
         <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
         <View style={styles.nameAndPronoun}>
-          {/* <View style={styles.profileName}> */}
+          {/* <View style={styles.profileNasme}> */}
           <Text h3 style={styles.profileName}>
             {friend.firstName} {friend.lastName}
           </Text>
@@ -76,7 +88,13 @@ export default function Page() {
   return (
     <View style={styles.container}>
       <FlatList
-        data={activities}
+        // data={activities.filter((activity) => {
+        //   friend.interests.includes(activity.id);
+        //   console.log("activity", activity);
+        // })}
+        data={activities?.filter((activity) => {
+          return friend.interests.includes(activity.id);
+        })}
         renderItem={({ item, index }) => {
           return (
             <View style={styles.interestsList} key={index}>
