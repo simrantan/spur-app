@@ -55,28 +55,30 @@ export default function Accepted() {
           {/* <Text h2>{invite.activityTitle}</Text>
           <QuickInfo quickInfo={invite.quickInfo} size={30} /> */}
           <MiniActivityCard activityInfo={invite} />
-          <View style={styles.from}>
-            <View h4 style={styles.promptbox}>
-              <Text style={styles.textalign}> When </Text>
+          <View style={styles.loc}>
+            <View style={styles.from}>
+              <View h4 style={styles.promptbox}>
+                <Text style={styles.textalign}> When </Text>
+              </View>
+              <View style={styles.textbox}>
+                <Text style={styles.textalign}>{invite.time}</Text>
+              </View>
             </View>
-            <View style={styles.textbox}>
-              <Text style={styles.textalign}>{invite.time}</Text>
-            </View>
-          </View>
-          <View style={styles.from}>
-            <View h3 style={styles.promptbox}>
-              <Text style={styles.textalign}> Where </Text>
-            </View>
-            <View style={styles.textbox}>
-              <Text
-                style={styles.textalign}
-                numberOfLines={1}
-                onPress={() =>
-                  Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
-                }
-              >
-                {invite.address}
-              </Text>
+            <View style={styles.from}>
+              <View h3 style={styles.promptbox}>
+                <Text style={styles.textalign}> Where </Text>
+              </View>
+              <View style={styles.textbox}>
+                <Text
+                  style={styles.textalign}
+                  numberOfLines={1}
+                  onPress={() =>
+                    Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
+                  }
+                >
+                  {invite.address}
+                </Text>
+              </View>
             </View>
           </View>
           <View style={styles.attendeebox}>
@@ -101,8 +103,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  loc: {
+    flexDirection: "column",
+    marginTop: 20,
+  },
   moreinfobox: {
-    justifyContent: "flex-start",
+    justifyContent: "space-between",
     alignItems: "flex-start",
   },
   promptbox: {
@@ -122,7 +128,7 @@ const styles = StyleSheet.create({
   },
   from: {
     flexDirection: "row",
-    flex: 1,
+    margin: 10,
   },
   activityInfo: {
     flexDirection: "row",

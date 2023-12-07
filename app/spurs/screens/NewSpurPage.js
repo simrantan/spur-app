@@ -1,5 +1,12 @@
 import { useState, useEffect } from "react";
-import { StyleSheet, View } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Modal,
+  Alert,
+  Pressable,
+  Dimensions,
+} from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
 import { supabase, activitiesTable } from "../../../utils/supabase";
@@ -9,8 +16,10 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../../assets/Themes";
+import { palette } from "../../../assets/Themes/palette";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const dateFormat = {
   year: "numeric",
   month: "numeric",
@@ -29,6 +38,7 @@ export default function NewSpurPage() {
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const [date, setDate] = useState(new Date(Date.now()));
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
@@ -55,7 +65,7 @@ export default function NewSpurPage() {
   };
 
   useEffect(() => {
-    setactivityId(Number(id));
+    setActivityId(Number(id));
   }, [id]);
 
   useEffect(() => {
@@ -198,6 +208,32 @@ export default function NewSpurPage() {
             ))}
           </View>
         </Dialog>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text h2 style={styles.textStyle}>
+                Successfly Sent!
+              </Text>
+              <Text h4 style={styles.textStyle}>
+                We'll notify you when someone accepts this invitation.
+              </Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => setModalVisible(!modalVisible)}
+              >
+                <Text style={styles.close}>Close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
         <Button
           title="Send Spur"
           icon={
@@ -208,6 +244,7 @@ export default function NewSpurPage() {
               color={theme.colors.white}
             />
           }
+          onPress={() => setModalVisible(true)}
         />
       </View>
     );
@@ -267,5 +304,35 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     marginTop: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    justifyContent: "space-around",
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.4,
+    margin: 20,
+    backgroundColor: palette.beige,
+    borderRadius: 20,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 70,
+    elevation: 5,
+  },
+  textStyle: {
+    color: palette.accent,
+  },
+  close: {
+    color: palette.lightblack,
   },
 });
