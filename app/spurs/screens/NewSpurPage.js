@@ -21,6 +21,7 @@ const dateFormat = {
 
 export default function NewSpurPage() {
   const { id } = useLocalSearchParams();
+  console.log(id);
   const { theme } = useTheme();
 
   const [isReady, setIsReady] = useState(false);
@@ -36,7 +37,7 @@ export default function NewSpurPage() {
 
   const fetchActivity = async () => {
     console.log("searching for id: ", activityId);
-    console.log(activitiesTable);
+    //console.log(activitiesTable);
     const { data, error } = await supabase
       .from(activitiesTable)
       .select("*")
@@ -54,8 +55,8 @@ export default function NewSpurPage() {
   };
 
   useEffect(() => {
-    setActivityId(Number(id));
-  }, []);
+    setactivityId(Number(id));
+  }, [id]);
 
   useEffect(() => {
     fetchActivity();
