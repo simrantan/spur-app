@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     backgroundColor: Themes.bgSecondary,
-    marginVertical: -20,
+    // marginVertical: -20,
   },
   container: {
     flexDirection: "row",
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     padding: 8,
     flexGrow: 1,
     backgroundColor: Themes.bgSecondary,
-    paddingVertical: 40,
-    marginVertical: -20,
+    // paddingVertical: 40,
+    // marginVertical: -20,
   },
 });
 
