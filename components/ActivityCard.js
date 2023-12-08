@@ -39,7 +39,7 @@ export default function ActivityCard({
           onPress={() => {
             router.push({
               pathname: "spurs/screens/NewSpurPage",
-              params: { id: index },
+              params: { id: index, pagename: "activities/activities_page" },
             });
           }}
         />
