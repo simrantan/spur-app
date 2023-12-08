@@ -21,6 +21,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../../assets/Themes";
 import { palette } from "../../../assets/Themes/palette";
+import { ScrollView } from "react-native-gesture-handler";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -167,150 +168,156 @@ export default function NewSpurPage() {
     );
   } else {
     return (
-      <View style={styles.container}>
-        <Stack.Screen
-          options={{
-            title: "Create New Spur",
-          }}
-        />
-        <View style={styles.createSpurSection}>
-          <View style={styles.headerContainer}>
-            <Text h3 style={styles.title}>
-              Activity
-            </Text>
-            <Button
-              title="Change Activity"
-              type="outline"
-              onPress={changeActivity}
-              style={styles.smallButton}
-              titleStyle={styles.smallButtonTitle}
+      <View style={styles.outerContainer}>
+        <ScrollView>
+          <View style={styles.container}>
+            <Stack.Screen
+              options={{
+                title: "Create New Spur",
+              }}
             />
-          </View>
-          <View style={styles.sectionBodyContainer}>
-            <MiniActivityCard activityInfo={activities[activityIndex]} />
-          </View>
-        </View>
-        <View style={styles.createSpurSection}>
-          <View style={styles.headerContainer}>
-            <Text h3 style={styles.title}>
-              People
-            </Text>
-            <Button
-              title="Change People"
-              type="outline"
-              onPress={showPeoplePicker}
-              style={styles.smallButton}
-              titleStyle={styles.smallButtonTitle}
-            />
-          </View>
-          <View style={styles.sectionBodyContainer}>
-            <InterestedFriendsList
-              interestedFriendIds={selectedFriends}
-              emptyMessage={"Tap 'Change People' to select friends to spur."}
-            />
-          </View>
-        </View>
-        <View style={styles.createSpurSection}>
-          <View style={styles.headerContainer}>
-            <Text h3 style={styles.title}>
-              Time
-            </Text>
-            <Button
-              title="Change Time"
-              type="outline"
-              onPress={showDatePicker}
-              style={styles.smallButton}
-              titleStyle={styles.smallButtonTitle}
-            />
-          </View>
-          <View style={styles.sectionBodyContainer}>
-            <Text h4 style={{ padding: 10 }}>
-              {date.toLocaleString(undefined, dateFormat)}
-            </Text>
-          </View>
-        </View>
-
-        <Dialog
-          isVisible={visibleDateDialog}
-          onBackdropPress={() => setVisibleDateDialog(false)}
-        >
-          <Text style={{ fontSize: 16 }}>
-            Most of your friends are available at this time:{" "}
-            {suggestedDateTime.toLocaleString(undefined, dateFormat)}
-          </Text>
-          <View style={styles.timeBox}>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode="date"
-              is24Hour={true}
-              onChange={onDateChange}
-            />
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode="time"
-              is24Hour={true}
-              onChange={onDateChange}
-            />
-          </View>
-        </Dialog>
-
-        <Dialog
-          isVisible={visiblePeopleDialog}
-          onBackdropPress={() => setVisiblePeopleDialog(false)}
-        >
-          <View style={styles.peopleChecklist}>
-            {JSON.parse(activities[activityIndex].interestedFriendIds).map(
-              (friendId, index) => (
-                <PeopleChecklistItem
-                  person={friends.find((f) => f.id === friendId)}
-                  key={index}
-                  toggleChecked={() => changeSelectedFriends(friendId)}
-                  isChecked={selectedFriends.includes(friendId)}
+            <View style={styles.createSpurSection}>
+              <View style={styles.headerContainer}>
+                <Text h3 style={styles.title}>
+                  Activity
+                </Text>
+                <Button
+                  title="Change Activity"
+                  type="outline"
+                  onPress={changeActivity}
+                  style={styles.smallButton}
+                  titleStyle={styles.smallButtonTitle}
                 />
-              )
-            )}
-          </View>
-        </Dialog>
-        <Modal
-          animationType="slide"
-          transparent={true}
-          visible={modalVisible}
-          onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
-          }}
-        >
-          <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <Text h2 style={styles.textStyle}>
-                Successfly Sent!
-              </Text>
-              <Text h4 style={styles.textStyle}>
-                We'll notify you when someone accepts this invitation.
-              </Text>
-              <Pressable
-                style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
-              >
-                <Text style={styles.close}>Close</Text>
-              </Pressable>
+              </View>
+              <View style={styles.sectionBodyContainer}>
+                <MiniActivityCard activityInfo={activities[activityIndex]} />
+              </View>
             </View>
-          </View>
-        </Modal>
-        <Button
-          title="Send Spur"
-          icon={
-            <FontAwesome
-              name="send"
-              size={20}
-              marginRight={10}
-              color={theme.colors.white}
+            <View style={styles.createSpurSection}>
+              <View style={styles.headerContainer}>
+                <Text h3 style={styles.title}>
+                  People
+                </Text>
+                <Button
+                  title="Change People"
+                  type="outline"
+                  onPress={showPeoplePicker}
+                  style={styles.smallButton}
+                  titleStyle={styles.smallButtonTitle}
+                />
+              </View>
+              <View style={styles.sectionBodyContainer}>
+                <InterestedFriendsList
+                  interestedFriendIds={selectedFriends}
+                  emptyMessage={
+                    "Tap 'Change People' to select friends to spur."
+                  }
+                />
+              </View>
+            </View>
+            <View style={styles.createSpurSection}>
+              <View style={styles.headerContainer}>
+                <Text h3 style={styles.title}>
+                  Time
+                </Text>
+                <Button
+                  title="Change Time"
+                  type="outline"
+                  onPress={showDatePicker}
+                  style={styles.smallButton}
+                  titleStyle={styles.smallButtonTitle}
+                />
+              </View>
+              <View style={styles.sectionBodyContainer}>
+                <Text h4 style={{ padding: 10 }}>
+                  {date.toLocaleString(undefined, dateFormat)}
+                </Text>
+              </View>
+            </View>
+
+            <Dialog
+              isVisible={visibleDateDialog}
+              onBackdropPress={() => setVisibleDateDialog(false)}
+            >
+              <Text style={{ fontSize: 16 }}>
+                Most of your friends are available at this time:{" "}
+                {suggestedDateTime.toLocaleString(undefined, dateFormat)}
+              </Text>
+              <View style={styles.timeBox}>
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="date"
+                  is24Hour={true}
+                  onChange={onDateChange}
+                />
+                <DateTimePicker
+                  testID="dateTimePicker"
+                  value={date}
+                  mode="time"
+                  is24Hour={true}
+                  onChange={onDateChange}
+                />
+              </View>
+            </Dialog>
+
+            <Dialog
+              isVisible={visiblePeopleDialog}
+              onBackdropPress={() => setVisiblePeopleDialog(false)}
+            >
+              <View style={styles.peopleChecklist}>
+                {JSON.parse(activities[activityIndex].interestedFriendIds).map(
+                  (friendId, index) => (
+                    <PeopleChecklistItem
+                      person={friends.find((f) => f.id === friendId)}
+                      key={index}
+                      toggleChecked={() => changeSelectedFriends(friendId)}
+                      isChecked={selectedFriends.includes(friendId)}
+                    />
+                  )
+                )}
+              </View>
+            </Dialog>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Modal has been closed.");
+                setModalVisible(!modalVisible);
+              }}
+            >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text h2 style={styles.textStyle}>
+                    Successfly Sent!
+                  </Text>
+                  <Text h4 style={styles.textStyle}>
+                    We'll notify you when someone accepts this invitation.
+                  </Text>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.close}>Close</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+            <Button
+              title="Send Spur"
+              icon={
+                <FontAwesome
+                  name="send"
+                  size={20}
+                  marginRight={10}
+                  color={theme.colors.white}
+                />
+              }
+              onPress={() => setModalVisible(true)}
             />
-          }
-          onPress={() => setModalVisible(true)}
-        />
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -401,5 +408,9 @@ const styles = StyleSheet.create({
   },
   close: {
     color: palette.lightblack,
+  },
+  outerContainer: {
+    flex: 1,
+    backgroundColor: palette.beige,
   },
 });
