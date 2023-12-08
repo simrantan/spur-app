@@ -2,11 +2,13 @@ import { ListItem, Avatar, CheckBox } from "@rneui/themed";
 import FriendProfileAndName from "./FriendProfileAndName";
 import { StyleSheet, View } from "react-native";
 import FriendProfileAndNameHorizontal from "./FriendProfileAndNameHorizontal";
+import { Themes } from "../../assets/Themes";
 
 export default function PeopleChecklistItem({
   person,
   isChecked,
   toggleChecked,
+  size,
 }) {
   return (
     <ListItem>
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     overflow: "hidden",
+    // backgroundColor: Themes.bgSecondary,
     // flex: 1,
   },
   iconBorder: {
@@ -35,3 +38,7 @@ const styles = StyleSheet.create({
     marginVertical: -10,
   },
 });
+
+PeopleChecklistItem.defaultProps = {
+  size: 30,
+};
