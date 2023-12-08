@@ -35,6 +35,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 64,
     fontWeight: "bold",
+    // position: "absolute",
+    marginTop: 100,
+    zIndex: -1,
   },
   subtitle: {
     fontSize: 36,

@@ -477,7 +477,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Themes.bg,
     padding: 10,
-    // padding: 24,
   },
   main: {
     flex: 1,
@@ -490,9 +489,10 @@ const styles = StyleSheet.create({
     backgroundColor: Themes.bgSecondary,
     borderRadius: 10,
     shadowColor: "black",
-    shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
-    minHeight: 50,
+    shadowOffset: { width: 0, height: 0 },
+    minHeight: 48,
+    alignItems: "center",
   },
   peopleChecklist: {
     flexDirection: "column",

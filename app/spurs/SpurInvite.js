@@ -31,7 +31,7 @@ export default function SpurInvite({
             source={{ uri: activityImageUri }}
           ></Image>
           <View style={styles.activityDetails}>
-            <Text h2>{activityTitle}</Text>
+            <Text style={styles.title}>{activityTitle}</Text>
             <View style={styles.from}>
               <View style={styles.promptbox}>
                 <Text style={styles.textalign}> From </Text>
@@ -81,7 +81,7 @@ export default function SpurInvite({
           title="Accept"
           size="sm"
           onPress={() => {
-            router.push("spurs/spurInviteAccepted");
+            router.replace("spurs/spurInviteAcceptedPage");
           }}
         />
       </View>
@@ -149,5 +149,14 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     borderRadius: 5,
     margin: 6,
+  },
+
+  title: {
+    fontSize: 32,
+    color: Themes.textPrimary,
+    paddingBottom: 5,
+    flexWrap: "wrap",
+    flexShrink: 1,
+    overflow: "hidden",
   },
 });

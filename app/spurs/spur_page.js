@@ -5,6 +5,9 @@ import { supabase } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
 import SpurInvite from "./SpurInvite";
 import { Themes } from "../../assets/Themes";
+import SpurInvitePending from "./SpurInvitePending";
+import { View } from "react-native";
+import { Text } from "@rneui/themed";
 
 export default function Page() {
   const [invites, setInvites] = useState([]);
@@ -23,17 +26,25 @@ export default function Page() {
   }, []);
 
   const renderInvite = ({ item }) => (
-    <SpurInvite
+    <SpurInvitePending
       activityImageUri={item.activityImageUri}
       activityTitle={item.activityTitle}
       friend={item.friend}
       time={item.time}
       address={item.address}
+      quickInfo={item.quickInfo}
     />
+    // <SpurInvitePending
+    //   activityImageUri={item.activityImageUri}
+    //   activityTitle={item.activityTitle}
+    //   friend={item.friend}
+    //   time={item.time}
+    //   address={item.address}
+    // />
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <Stack.Screen
         options={{
           title: "Spurs",
@@ -45,6 +56,11 @@ export default function Page() {
         renderItem={(item) => renderInvite(item)}
         keyExtractor={(item) => item.id}
         style={styles.spacer}
+        ListHeaderComponent={
+          <Text h3 style={{ marginBottom: 10 }}>
+            Pending Spurs
+          </Text>
+        }
       />
       <Button
         title="Create a New Spur"
@@ -57,7 +73,7 @@ export default function Page() {
         }}
         style={styles.spacer}
       />
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -65,19 +81,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-
-    padding: 24,
     justifyContent: "space-between",
     backgroundColor: Themes.bg,
   },
   spacer: {
-    marginBottom: 20, // Adjust the margin as needed
-    marginTop: 20,
+    marginBottom: 10, // Adjust the margin as needed
+    marginTop: 10,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
-    marginHorizontal: "auto",
+    // marginHorizontal: "auto",
   },
 });
