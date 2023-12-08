@@ -36,6 +36,11 @@ const theme = {
       },
       titleStyle: { fontSize: 24, fontWeight: "bold" },
     },
+    CheckBox: {
+      containerStyle: {
+        backgroundColor: palette.white,
+      },
+    },
   },
 };
 

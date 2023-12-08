@@ -26,12 +26,8 @@ export default function FriendProfileAndNameHorizontal({ friend, size }) {
           source={{ uri: friend.profileImageHci }}
         />
         <View style={styles.friendName}>
-          <Text h3 style={styles.friendName}>
-            {friend.firstName}
-          </Text>
-          <Text h3> </Text>
-          <Text h3 style={styles.friendName}>
-            {friend.lastName}
+          <Text h4 style={styles.friendName}>
+            {friend.firstName} {friend.lastName}
           </Text>
         </View>
       </View>
@@ -54,7 +50,6 @@ const styles = StyleSheet.create({
     textAlign: "left",
     flexDirection: "row",
     alignItems: "stretch",
-    fontSize: 10,
   },
   friendbox: {
     flexDirection: "row",
@@ -62,6 +57,8 @@ const styles = StyleSheet.create({
     // justifyContent: "center",
     width: "100%",
     alignItems: "center",
+    backgroundColor: Themes.bgSecondary,
+    marginVertical: -20,
   },
   container: {
     flexDirection: "row",
@@ -70,6 +67,9 @@ const styles = StyleSheet.create({
     // width: "100%",
     padding: 8,
     flexGrow: 1,
+    backgroundColor: Themes.bgSecondary,
+    paddingVertical: 40,
+    marginVertical: -20,
   },
 });
 

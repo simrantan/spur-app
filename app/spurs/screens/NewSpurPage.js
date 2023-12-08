@@ -40,9 +40,11 @@ export default function NewSpurPage() {
   const [activityIndex, setActivityIndex] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [date, setDate] = useState(new Date(Date.now()));
+  const [location, setLocation] = useState("TBD");
 
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
   const [visiblePeopleDialog, setVisiblePeopleDialog] = useState(false);
+  const [visibleLocationDialog, setVisibleLocationDialog] = useState(false);
 
   const [friends, setFriends] = useState([]);
 
@@ -123,6 +125,10 @@ export default function NewSpurPage() {
 
   const showPeoplePicker = () => {
     setVisiblePeopleDialog(true);
+  };
+
+  const showLocationPicker = () => {
+    setVisibleLocationDialog(true);
   };
 
   const changeActivity = () => {
@@ -234,30 +240,52 @@ export default function NewSpurPage() {
                 </Text>
               </View>
             </View>
+            <View style={styles.createSpurSection}>
+              <View style={styles.headerContainer}>
+                <Text h3 style={styles.title}>
+                  Location
+                </Text>
+                <Button
+                  title="Change Location"
+                  type="outline"
+                  onPress={showLocationPicker}
+                  style={styles.smallButton}
+                  titleStyle={styles.smallButtonTitle}
+                />
+              </View>
+              <View style={styles.sectionBodyContainer}>
+                <Text h4 style={{ padding: 10 }}>
+                  {location}
+                </Text>
+              </View>
+            </View>
 
             <Dialog
               isVisible={visibleDateDialog}
               onBackdropPress={() => setVisibleDateDialog(false)}
+              style={styles.dialogBox}
             >
-              <Text style={{ fontSize: 16 }}>
-                Most of your friends are available at this time:{" "}
-                {suggestedDateTime.toLocaleString(undefined, dateFormat)}
-              </Text>
-              <View style={styles.timeBox}>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="date"
-                  is24Hour={true}
-                  onChange={onDateChange}
-                />
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="time"
-                  is24Hour={true}
-                  onChange={onDateChange}
-                />
+              <View style={styles.dialogContainer}>
+                <Text style={{ fontSize: 16 }}>
+                  Most of your friends are available at this time:{" "}
+                  {suggestedDateTime.toLocaleString(undefined, dateFormat)}
+                </Text>
+                <View style={styles.timeBox}>
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="date"
+                    is24Hour={true}
+                    onChange={onDateChange}
+                  />
+                  <DateTimePicker
+                    testID="dateTimePicker"
+                    value={date}
+                    mode="time"
+                    is24Hour={true}
+                    onChange={onDateChange}
+                  />
+                </View>
               </View>
             </Dialog>
 
@@ -265,17 +293,28 @@ export default function NewSpurPage() {
               isVisible={visiblePeopleDialog}
               onBackdropPress={() => setVisiblePeopleDialog(false)}
             >
-              <View style={styles.peopleChecklist}>
-                {JSON.parse(activities[activityIndex].interestedFriendIds).map(
-                  (friendId, index) => (
+              <View style={styles.dialogContainer}>
+                <View style={styles.interestedFiendsContainer}>
+                  {JSON.parse(
+                    activities[activityIndex].interestedFriendIds
+                  ).map((friendId, index) => (
                     <PeopleChecklistItem
                       person={friends.find((f) => f.id === friendId)}
                       key={index}
                       toggleChecked={() => changeSelectedFriends(friendId)}
                       isChecked={selectedFriends.includes(friendId)}
                     />
-                  )
-                )}
+                  ))}
+                </View>
+              </View>
+            </Dialog>
+
+            <Dialog
+              isVisible={visibleLocationDialog}
+              onBackdropPress={() => setVisibleLocationDialog(false)}
+            >
+              <View style={styles.dialogContainer}>
+                <Text style={{ fontSize: 16 }}></Text>
               </View>
             </Dialog>
             <Modal
@@ -412,5 +451,35 @@ const styles = StyleSheet.create({
   outerContainer: {
     flex: 1,
     backgroundColor: palette.beige,
+  },
+  dialogContainer: {
+    width: "130%",
+    height: "fit-content",
+    position: "relative",
+
+    alignSelf: "center",
+    verticalAlign: "center",
+    // justifyContent: "center",
+    // alignItems: "center",
+    margin: -20,
+    padding: 20,
+    borderRadius: 10,
+    // overflow: "hidden",
+    backgroundColor: palette.white,
+    shadowColor: "black",
+    shadowOpacity: 0.4,
+    shadowRadius: 5,
+    shadowOffset: { width: 0, height: 3 },
+  },
+  interestedFriendsContainer: {
+    flexDirection: "column",
+    width: "100%",
+    // alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    borderColor: "red",
+    borderWidth: 1,
+    // backgroundColor: palette.white,
+    // overlayColor: "red",
   },
 });
