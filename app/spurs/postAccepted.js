@@ -18,7 +18,7 @@ import { Themes } from "../../assets/Themes";
 import { Button, Text } from "@rneui/themed";
 
 import { palette } from "../../assets/Themes/palette";
-import SpurInviteAccepted from "./SpurInviteAccepted";
+import SpurInviteAccepted from "./spurInviteAccepted";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const table = "spurInvite";
