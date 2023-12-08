@@ -26,7 +26,7 @@ export default function Page() {
   useEffect(() => {
     fetchActivities();
     console.log("activities are: ", activities);
-  }, []);
+  });
 
   return (
     <View style={styles.container}>
