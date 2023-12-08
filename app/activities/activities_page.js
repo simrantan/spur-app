@@ -7,6 +7,7 @@ import { Stack } from "expo-router";
 import { supabase, activitiesTable } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
 import { palette } from "../../assets/Themes/palette";
+import { Text } from "@rneui/themed";
 
 export default function Page() {
   const [activities, setActivities] = useState();
@@ -45,6 +46,16 @@ export default function Page() {
             ItemSeparatorComponent={() => (
               <View style={{ height: 1, backgroundColor: palette.accent }} />
             )}
+            ListEmptyComponent={
+              <View style={{ padding: 20 }}>
+                <Text h3 style={{ textAlign: "center", marginVertical: 30 }}>
+                  No saved activities.
+                </Text>
+                <Text h4 style={{ textAlign: "center" }}>
+                  Go to explore and swipe right to save activities!
+                </Text>
+              </View>
+            }
           />
         ) : (
           <Button loading />
