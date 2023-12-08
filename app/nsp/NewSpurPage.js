@@ -63,7 +63,7 @@ export default function NewSpurPage() {
     const { data, error } = await supabase
       .from(activitiesTable)
       .select("*")
-      .eq("isLiked", "true");
+      .eq("id", activityIndex);
 
     if (error) console.error(error);
     else {
@@ -76,7 +76,14 @@ export default function NewSpurPage() {
       //   setActivities(parsedActivities);
 
       //   interestedFriendIds
-      setActivities(data);
+      const parsedData = data.map((activity) => ({
+        ...activity,
+        interestedFriendIds: JSON.parse(activity.interestedFriendIds),
+        needs: JSON.parse(activity.needs),
+      }));
+
+      setActivities(parsedData);
+      //setActivities(data);
       // console.log("fetched activities", activities);
       // console.log("first activity", activities[0]);
       // console.log("first activity type", typeof activities[0]);
@@ -88,10 +95,13 @@ export default function NewSpurPage() {
     console.log("fetched activities", data);
     setIsReady(true);
   };
+  useEffect(() => {
+    setActivityIndex(Number(id));
+  }, [id]);
 
   useEffect(() => {
     fetchActivities();
-  }, []);
+  }, [activityIndex]);
 
   const fetchFriends = async () => {
     const { data, error } = await supabase.from(friendsTable).select("*");
@@ -121,6 +131,7 @@ export default function NewSpurPage() {
       setIsReady(true);
     }
   }, [activities, friends]);
+  console.log("activities", activities);
 
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -164,9 +175,7 @@ export default function NewSpurPage() {
       setSelectedFriends([]);
       return;
     }
-    setSelectedFriends(
-      JSON.parse(activities[activityIndex].interestedFriendIds)
-    );
+    setSelectedFriends(activities[0].interestedFriendIds);
   };
 
   useEffect(() => {
@@ -175,8 +184,8 @@ export default function NewSpurPage() {
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
-            console.log("\n\n\n\n\n\n\npagename", pagename);
-            router.replace(pagename);
+            console.log("pagename", pagename);
+            router.push(pagename);
           }}
           style={{ marginLeft: -17 }}
         >
@@ -185,7 +194,8 @@ export default function NewSpurPage() {
       ),
       title: "Spurs",
     });
-  }, [activityIndex]);
+  }, []);
+  console.log("come on", activities);
 
   if (!isReady || activities.length === 0 || friends.length === 0) {
     return (
@@ -218,7 +228,7 @@ export default function NewSpurPage() {
                 />
               </View>
               <View style={styles.sectionBodyContainer}>
-                <MiniActivityCard activityInfo={activities[activityIndex]} />
+                <MiniActivityCard activityInfo={activities[0]} />
               </View>
             </View>
             <View style={styles.createSpurSection}>
@@ -361,13 +371,12 @@ export default function NewSpurPage() {
               onBackdropPress={() => setVisiblePeopleDialog(false)}
             >
               <View style={styles.dialogContainer}>
-                <View style={styles.interestedFiendsContainer}>
-                  {JSON.parse(
-                    activities[activityIndex].interestedFriendIds
-                  ).map((friendId, index) => (
+                <View style={styles.interestedFriendsContainer}>
+                  {/* {activities.map((activity, index) => */}
+                  {activities[0].interestedFriendIds.map((friendId) => (
                     <PeopleChecklistItem
                       person={friends.find((f) => f.id === friendId)}
-                      key={index}
+                      key={friendId} // Use a unique key for each friend
                       toggleChecked={() => changeSelectedFriends(friendId)}
                       isChecked={selectedFriends.includes(friendId)}
                     />
@@ -565,8 +574,7 @@ const styles = StyleSheet.create({
     // alignItems: "center",
     justifyContent: "center",
     padding: 10,
-    borderColor: "red",
-    borderWidth: 1,
+
     // backgroundColor: palette.white,
     // overlayColor: "red",
   },
