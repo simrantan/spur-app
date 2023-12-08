@@ -36,19 +36,18 @@ export default function ActivityCard({
         </View>
         <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
 
-  <View style={styles.buttonContainer}>
-        <Button
-          title="Spur Friends"
-          size="sm"
-          onPress={() => {
-            router.push({
-              pathname: "spurs/screens/NewSpurPage",
-              params: { id: index, pagename: "activities/activities_page" },
-            });
-          }}
-        />
-  </View>
-
+        <View style={styles.buttonContainer}>
+          <Button
+            title="Spur Friends"
+            size="sm"
+            onPress={() => {
+              router.push({
+                pathname: "nsp/NewSpurPage",
+                params: { id: index, pagename: "activities/activities_page" },
+              });
+            }}
+          />
+        </View>
       </View>
       {/* <ActivityCardFront
         activityImageUri={activityImageUri}

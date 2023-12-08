@@ -123,7 +123,7 @@ export default function spurInvitePending() {
         style={styles.button}
         onPress={() => {
           router.push({
-            pathname: "spurs/screens/NewSpurPage",
+            pathname: "nsp/NewSpurPage",
             params: { id: 1, pagename: "spurs/postAccepted" },
           });
         }}

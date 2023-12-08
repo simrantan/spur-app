@@ -51,7 +51,7 @@ export default ActivityStack = () => {
             needsList={activities[currActivity].needs}
             func={() => {
               router.push({
-                pathname: "spurs/screens/NewSpurPage",
+                pathname: "nsp/NewSpurPage",
                 params: {
                   id: activities[currActivity].id,
                   pagename: "explore/explore_page",
@@ -89,7 +89,6 @@ export default ActivityStack = () => {
             console.log("onSwiped - cardIndex:", cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
-
           onSwipedAll={() => {
             console.log("onSwipedAll");
           }}

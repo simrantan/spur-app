@@ -122,10 +122,19 @@ export default function HomeLayout() {
               <FontAwesome name="envelope" size={size} color={color} />
             ),
           }}
+          initialParams={{ initialScreen: "spurs/spur_page" }}
         />
         <Tabs.Screen
           // Name of the route to hide.
           name="index"
+          options={{
+            // This tab will no longer show up in the tab bar.
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          // Name of the route to hide.
+          name="nsp"
           options={{
             // This tab will no longer show up in the tab bar.
             href: null,

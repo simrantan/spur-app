@@ -17,24 +17,19 @@ import {
   router,
 } from "expo-router";
 
-import {
-  supabase,
-  activitiesTable,
-  friendsTable,
-} from "../../../utils/supabase";
+import { supabase, activitiesTable, friendsTable } from "../../utils/supabase";
 
-import MiniActivityCard from "../../../components/MiniActivityCard";
-import InterestedFriendsList from "../../../components/friendComponents/InterestedFriendsList";
+import MiniActivityCard from "../../components/MiniActivityCard";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
-import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
-import { Themes } from "../../../assets/Themes";
-import { palette } from "../../../assets/Themes/palette";
+import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
+import { Themes } from "../../assets/Themes";
+import { palette } from "../../assets/Themes/palette";
 
 import { Ionicons } from "@expo/vector-icons";
 
 import { ScrollView } from "react-native-gesture-handler";
-
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -47,30 +42,24 @@ const dateFormat = {
 };
 
 export default function NewSpurPage() {
-
   const { id, pagename } = useLocalSearchParams();
 
   const navigation = useNavigation();
 
- 
   const { theme } = useTheme();
   const [isReady, setIsReady] = useState(false);
 
-  
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
   const [isVisible, setisVisible] = useState(false);
 
   const [activityIndex, setActivityIndex] = useState(1);
-  
 
   const [date, setDate] = useState(new Date(Date.now()));
 
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
   const [visiblePeopleDialog, setVisiblePeopleDialog] = useState(false);
-
-  const [friends, setFriends] = useState([]);
 
   const [selectedFriends, setSelectedFriends] = useState([]);
 
@@ -121,6 +110,7 @@ export default function NewSpurPage() {
 
   useEffect(() => {
     navigation.setOptions({
+      title: "Create a New Spur",
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
@@ -131,14 +121,12 @@ export default function NewSpurPage() {
           <Ionicons name="chevron-back" size={30} color={palette.accent} />
         </TouchableOpacity>
       ),
-      title: "Spurs",
     });
   }, []);
 
-useEffect(() => {
+  useEffect(() => {
     fetchFriends();
   }, []);
-
 
   useEffect(() => {
     if (
@@ -277,8 +265,8 @@ useEffect(() => {
                 </Text>
               </View>
             </View>
-
-
+          </View>
+        </ScrollView>
         <Dialog
           isVisible={visiblePeopleDialog}
           onBackdropPress={() => setVisiblePeopleDialog(false)}
@@ -288,7 +276,7 @@ useEffect(() => {
               <PeopleChecklistItem
                 person={l}
                 key={i}
-                toggleChecked={() => changePeople(i)}
+                toggleChecked={() => changeSelectedFriends(i)}
                 isChecked={likedFriends[i]}
               />
             ))}
@@ -335,7 +323,6 @@ useEffect(() => {
           }
           onPress={() => setisVisible(true)}
         />
-
       </View>
     );
   }
