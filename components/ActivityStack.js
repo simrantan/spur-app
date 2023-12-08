@@ -1,32 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { View, Dimensions, StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { supabase, activitiesTable } from "../utils/supabase";
 import Swiper from "react-native-deck-swiper";
 import { Button, Dialog, useTheme } from "@rneui/themed";
 import ActivityCardFront from "./ActivityCardFront";
 import ActivityCardBack from "./ActivityCardBack";
+import activitiesDataHardcoded from "../utils/theData";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default ActivityStack = () => {
-  const [activities, setActivities] = useState([]);
+  const activities = activitiesDataHardcoded;
   const [isVisible, setisVisible] = useState(false);
   const [currActivity, setcurrActivity] = useState(0);
-
   const { theme } = useTheme();
-
-  const fetchActivities = async () => {
-    const { data, error } = await supabase.from(activitiesTable).select("*");
-    if (error) console.error(error);
-    else {
-      setActivities(data);
-    }
-  };
-
-  useEffect(() => {
-    fetchActivities();
-  }, []);
 
   const updateDB = async (id, liked) => {
     const { data, error } = await supabase
@@ -43,7 +30,7 @@ export default ActivityStack = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       {activities[currActivity] && (
         <Dialog
           isVisible={isVisible}
@@ -65,13 +52,10 @@ export default ActivityStack = () => {
         <Swiper
           cards={activities}
           renderCard={(activity, i) => {
+            console.log(activity);
             if (activity) {
               return (
                 <View>
-                  {/* <Button
-                    onPress={() => setisVisible(true)}
-                    title={"More Info"}
-                  /> */}
                   <View style={styles.cardContainer}>
                     <ActivityCardFront
                       activityTitle={activity.activityTitle}
@@ -91,7 +75,7 @@ export default ActivityStack = () => {
             console.log("onSwiped - cardIndex:", cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
-          setIndex={currActivity}
+          // setIndex={currActivity}
           onSwipedAll={() => {
             console.log("onSwipedAll");
           }}
@@ -111,7 +95,7 @@ export default ActivityStack = () => {
       ) : (
         <Button loading />
       )}
-    </SafeAreaView>
+    </View>
   );
 };
 
