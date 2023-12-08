@@ -37,21 +37,15 @@ export default function spurInvitePending() {
   useEffect(() => {
     fetchInvites();
     navigation.setOptions({
-      headerLeft: () => (
-        <TouchableOpacity
-          onPress={() => {
-            router.push("spurs/postAccepted");
-          }}
-        >
-          <Ionicons name="chevron-back" size={24} color={palette.accent} />
-        </TouchableOpacity>
-      ),
+      headerLeft: null,
     });
   }, []);
 
   return (
     <SafeAreaView style={styles.item}>
-      <Stack.Screen options={{ title: "Spurs" }}></Stack.Screen>
+      <Stack.Screen
+        options={{ title: "Spurs", headerLeft: null }}
+      ></Stack.Screen>
       {invites.map((invite, index) => (
         <Pressable
           key={index}
@@ -114,11 +108,12 @@ export default function spurInvitePending() {
       ))}
       <Button
         title="Create a New Spur"
-        size="lg"
+        size="md"
+        style={styles.button}
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            params: { id: 1, pagename: "spurs/postAccepted" },
           });
         }}
       />
@@ -132,6 +127,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "column",
     margin: 5,
+  },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
   },
   promptbox: {
     width: windowWidth * 0.2,
@@ -173,11 +172,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -1, height: 5 },
     backgroundColor: palette.beige,
     borderRadius: 10,
+    marginTop: 20,
   },
   textalign: {
     margin: 10,
   },
   details: {
     color: palette.accent2,
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

@@ -7,30 +7,38 @@ import {
   FlatList,
   View,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link, Stack, router } from "expo-router";
+import { Link, Stack, router, useNavigation } from "expo-router";
 
 import { Button, Text } from "@rneui/themed";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Rejected() {
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Spurs",
+      headerLeft: null,
+    });
+  }, [navigation]);
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen
         options={{
-          title: "",
-          headerShown: false, // Hide the default navigation header
+          title: "Spurs",
+          headerLeft: null,
         }}
       ></Stack.Screen>
       <Button
         title="Create a New Spur"
         size="lg"
+        style={styles.button}
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            params: { id: 1, pagename: "spurs/postRejected" },
           });
         }}
       />
@@ -73,5 +81,10 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: "row",
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

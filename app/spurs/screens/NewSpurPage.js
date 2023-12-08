@@ -6,9 +6,15 @@ import {
   Alert,
   Pressable,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
-import { useLocalSearchParams, Stack } from "expo-router";
+import {
+  useLocalSearchParams,
+  Stack,
+  useNavigation,
+  router,
+} from "expo-router";
 import { supabase, activitiesTable } from "../../../utils/supabase";
 import MiniActivityCard from "../../../components/MiniActivityCard";
 import InterestedFriendsList from "../../../components/friendComponents/InterestedFriendsList";
@@ -17,6 +23,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../../assets/Themes";
 import { palette } from "../../../assets/Themes/palette";
+import { Ionicons } from "@expo/vector-icons";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -29,8 +36,9 @@ const dateFormat = {
 };
 
 export default function NewSpurPage() {
-  const { id } = useLocalSearchParams();
-  console.log(id);
+  const { id, pagename } = useLocalSearchParams();
+
+  const navigation = useNavigation();
   const { theme } = useTheme();
 
   const [isReady, setIsReady] = useState(false);
@@ -38,7 +46,7 @@ export default function NewSpurPage() {
   const [activity, setActivity] = useState([]);
   const [friends, setFriends] = useState([]);
   const [likedFriends, setLikedFriends] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
+  const [isVisible, setisVisible] = useState(false);
 
   const [date, setDate] = useState(new Date(Date.now()));
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
@@ -70,6 +78,19 @@ export default function NewSpurPage() {
 
   useEffect(() => {
     fetchActivity();
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push(pagename);
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.accent} />
+        </TouchableOpacity>
+      ),
+      title: "Spurs",
+    });
   }, [activityId]);
 
   const changeActivity = () => {
@@ -208,13 +229,13 @@ export default function NewSpurPage() {
             ))}
           </View>
         </Dialog>
-        <Modal
+        <Dialog
           animationType="slide"
           transparent={true}
-          visible={modalVisible}
+          visible={isVisible}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
-            setModalVisible(!modalVisible);
+            setisVisible(!isVisible);
           }}
         >
           <View style={styles.centeredView}>
@@ -227,13 +248,16 @@ export default function NewSpurPage() {
               </Text>
               <Pressable
                 style={[styles.button, styles.buttonClose]}
-                onPress={() => setModalVisible(!modalVisible)}
+                onPress={() => {
+                  setisVisible(!isVisible);
+                  router.push("spurs/postAccepted");
+                }}
               >
                 <Text style={styles.close}>Close</Text>
               </Pressable>
             </View>
           </View>
-        </Modal>
+        </Dialog>
         <Button
           title="Send Spur"
           icon={
@@ -244,7 +268,7 @@ export default function NewSpurPage() {
               color={theme.colors.white}
             />
           }
-          onPress={() => setModalVisible(true)}
+          onPress={() => setisVisible(true)}
         />
       </View>
     );
@@ -257,7 +281,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Themes.bg,
     padding: 10,
-    // padding: 24,
   },
   main: {
     flex: 1,
@@ -316,7 +339,7 @@ const styles = StyleSheet.create({
     width: windowWidth * 0.9,
     height: windowHeight * 0.4,
     margin: 20,
-    backgroundColor: palette.beige,
+    backgroundColor: palette.white,
     borderRadius: 20,
     padding: 15,
     alignItems: "center",

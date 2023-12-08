@@ -106,6 +106,10 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
   },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
+  },
   loc: {
     flexDirection: "column",
     marginTop: 20,

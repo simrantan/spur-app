@@ -45,7 +45,6 @@ export default function Page() {
   useEffect(() => {
     fetchActivities();
   }, []);
-  console.log("activities are: ", activities);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -76,8 +75,8 @@ export default function Page() {
         </Text>
         <FlatList
           data={activities}
-          renderItem={({ item }) => {
-            return <MiniActivityCard activityInfo={item} />;
+          renderItem={(item) => {
+            return <MiniActivityCard activityInfo={item.item} />;
           }}
         />
       </View>
