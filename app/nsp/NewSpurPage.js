@@ -70,6 +70,7 @@ export default function NewSpurPage() {
       .from(activitiesTable)
       .select("*")
       .eq("isLiked", "true");
+
     if (error) console.error(error);
     else {
       //   let parsedActivities = [];
@@ -82,15 +83,15 @@ export default function NewSpurPage() {
 
       //   interestedFriendIds
       setActivities(data);
-      console.log("fetched activities", activities);
-      console.log("first activity", activities[0]);
-      console.log("first activity type", typeof activities[0]);
-      console.log(
-        "first activity interestedFriendIds",
-        activities[0].interestedFriendIds
-      );
+      // console.log("fetched activities", activities);
+      // console.log("first activity", activities[0]);
+      // console.log("first activity type", typeof activities[0]);
+      // console.log(
+      //   "first activity interestedFriendIds",
+      //   activities[0].interestedFriendIds
+      // );
     }
-    // console.log("fetched activities", data);
+    console.log("fetched activities", data);
     setIsReady(true);
   };
 
