@@ -6,8 +6,6 @@ import { Button, Dialog, useTheme, Text } from "@rneui/themed";
 import ActivityCardFront from "./ActivityCardFront";
 import ActivityCardBack from "./ActivityCardBack";
 
-import { router } from "expo-router";
-
 import activitiesDataHardcoded from "../utils/theData";
 import { Themes } from "../assets/Themes";
 import { palette } from "../assets/Themes/palette";

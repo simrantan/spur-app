@@ -1,8 +1,14 @@
-import { StyleSheet, SafeAreaView, Dimensions, FlatList,  TouchableOpacity,
+import {
+  StyleSheet,
+  SafeAreaView,
+  Dimensions,
+  FlatList,
+  TouchableOpacity,
 } from "react-native";
-import React, { useState, useEffect, useMemo, useCallback, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Stack, router, Header, useNavigation } from "expo-router";
-import { supabase } from "../../utils/supabase";import { Ionicons } from "@expo/vector-icons";
+import { supabase } from "../../utils/supabase";
+import { Ionicons } from "@expo/vector-icons";
 import { palette } from "../../assets/Themes/palette";
 
 import { Button } from "@rneui/themed";
@@ -10,7 +16,9 @@ import SpurInvite from "./SpurInvite";
 import { Themes } from "../../assets/Themes";
 import { Text } from "@rneui/themed";
 
-export default function Page() {
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
+
+export default function Rejected() {
   const [invites, setInvites] = useState([]);
   const table = "spurInvite";
 
@@ -23,8 +31,6 @@ export default function Page() {
       address={item.address}
     />
   );
-
-export default function Rejected() {
   const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({
@@ -46,6 +52,7 @@ export default function Rejected() {
       <Stack.Screen
         options={{
           title: "Spurs",
+          headerLeft: null,
         }}
         style={styles.spacer}
       />
@@ -60,10 +67,7 @@ export default function Rejected() {
           </Text>
         }
       />
-          title: "Spurs",
-          headerLeft: null,
-        }}
-      ></Stack.Screen>
+
       <Button
         title="Create a New Spur"
         size="lg"

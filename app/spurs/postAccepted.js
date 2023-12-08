@@ -100,7 +100,6 @@ export default function spurInvitePending() {
             params: { id: 1, pagename: "spurs/postAccepted" },
           });
         }}
-        style={styles.spacer}
       />
     </View>
   );
