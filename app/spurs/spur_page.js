@@ -54,7 +54,7 @@ export default function Page() {
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1, pagename: "spurs/spur-page" },
+            params: { id: 1, pagename: "spurs/spur_page" },
           });
         }}
       />

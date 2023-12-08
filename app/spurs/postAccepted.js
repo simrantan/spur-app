@@ -36,8 +36,19 @@ export default function spurInvitePending() {
 
   useEffect(() => {
     fetchInvites();
+  }, []);
+  useEffect(() => {
     navigation.setOptions({
-      headerLeft: null,
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push("spurs/postAccepted");
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.beige} />
+        </TouchableOpacity>
+      ),
     });
   }, []);
 

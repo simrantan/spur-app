@@ -6,10 +6,13 @@ import {
   Dimensions,
   FlatList,
   View,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect } from "react";
 
 import { Link, Stack, router, useNavigation } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { palette } from "../../assets/Themes/palette";
 
 import { Button, Text } from "@rneui/themed";
 
@@ -20,9 +23,18 @@ export default function Rejected() {
   useEffect(() => {
     navigation.setOptions({
       title: "Spurs",
-      headerLeft: null,
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push("spurs/postRejected");
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.beige} />
+        </TouchableOpacity>
+      ),
     });
-  }, [navigation]);
+  }, []);
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen
@@ -52,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center", // Align items to the center
     paddingTop: 0, // Set paddingTop to remove the top padding
+    backgroundColor: palette.beige,
   },
   promptbox: {
     width: windowWidth * 0.3,

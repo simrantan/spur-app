@@ -250,7 +250,7 @@ export default function NewSpurPage() {
                 style={[styles.button, styles.buttonClose]}
                 onPress={() => {
                   setisVisible(!isVisible);
-                  router.push("spurs/postAccepted");
+                  router.push(pagename);
                 }}
               >
                 <Text style={styles.close}>Close</Text>
@@ -336,12 +336,12 @@ const styles = StyleSheet.create({
   },
   modalView: {
     justifyContent: "space-around",
-    width: windowWidth * 0.9,
+    width: windowWidth * 0.81,
     height: windowHeight * 0.4,
+    borderRadius: 10,
     margin: 20,
     backgroundColor: palette.white,
-    borderRadius: 20,
-    padding: 15,
+    padding: 1,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {
