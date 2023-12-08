@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
+import { Text } from "@rneui/themed";
 
 import { Themes } from "../assets/Themes";
 import { MaterialIcons, Ionicons, FontAwesome5 } from "@expo/vector-icons";
@@ -112,9 +113,9 @@ export default function QuickInfo({ quickInfo, size }) {
         <View style={styles.icon}>
           <PriceSymbol cost={quickInfo.cost} />
         </View>
-        <View style={styles.icon}>
+        {/* <View style={styles.icon}>
           <ActivitySymbol activityType={quickInfo.activityType} />
-        </View>
+        </View> */}
         <View style={styles.icon}>
           <DistanceSymbol dist={quickInfo.dist} />
         </View>
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     // flex: 1,
-    // alignItems: "center",
+    // alignItems: "space-between",
   },
   text: {
     flexDirection: "row",

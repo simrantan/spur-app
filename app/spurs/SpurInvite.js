@@ -10,6 +10,7 @@ import { Button, Text } from "@rneui/themed";
 import React from "react";
 import { router } from "expo-router";
 import { palette } from "../../assets/Themes/palette";
+import { Themes } from "../../assets/Themes";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -92,7 +93,7 @@ const styles = StyleSheet.create({
   item: {
     width: windowWidth * 0.95,
     flex: 2,
-    backgroundColor: palette.beige,
+    backgroundColor: Themes.bgSecondary,
     borderRadius: 5,
     flexDirection: "center",
     shadowColor: "black",
@@ -132,7 +133,7 @@ const styles = StyleSheet.create({
   textbox: {
     width: windowWidth * 0.4,
     height: windowWidth * 0.07,
-    backgroundColor: "white",
+    backgroundColor: Themes.bg,
     borderRadius: 20,
     marginVertical: 3,
   },

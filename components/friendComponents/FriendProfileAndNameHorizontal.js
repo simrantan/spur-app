@@ -6,7 +6,7 @@ import { router, Stack, useNavigation } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function FriendProfileAndNameHorizontal({ friend }) {
+export default function FriendProfileAndNameHorizontal({ friend, size }) {
   if (!friend) return <View />;
 
   return (
@@ -26,9 +26,13 @@ export default function FriendProfileAndNameHorizontal({ friend }) {
           source={{ uri: friend.profileImageHci }}
         />
         <View style={styles.friendName}>
-          <Text h3>{friend.firstName}</Text>
+          <Text h3 style={styles.friendName}>
+            {friend.firstName}
+          </Text>
           <Text h3> </Text>
-          <Text h3>{friend.lastName}</Text>
+          <Text h3 style={styles.friendName}>
+            {friend.lastName}
+          </Text>
         </View>
       </View>
     </Pressable>
@@ -50,6 +54,7 @@ const styles = StyleSheet.create({
     textAlign: "left",
     flexDirection: "row",
     alignItems: "stretch",
+    fontSize: 10,
   },
   friendbox: {
     flexDirection: "row",
@@ -74,4 +79,5 @@ FriendProfileAndNameHorizontal.defaultProps = {
     profileImage:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
   },
+  size: 40,
 };

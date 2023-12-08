@@ -5,6 +5,8 @@ import Checklist from "./Checklist";
 import QuickInfo from "./QuickInfo";
 import InterestedFriendsList from "./friendComponents/InterestedFriendsList";
 import { router } from "expo-router";
+import ActivityCardFront from "./ActivityCardFront";
+import ActivityCardBack from "./ActivityCardBack";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -20,6 +22,7 @@ export default function ActivityCard({
   const index = id;
   return (
     <ScrollView>
+      <View style={{ height: 10 }}></View>
       <View style={styles.card_box}>
         <View style={styles.aboveChecklist}>
           <Image style={styles.image} source={{ uri: activityImageUri }} />
@@ -33,6 +36,7 @@ export default function ActivityCard({
         </View>
         <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
 
+  <View style={styles.buttonContainer}>
         <Button
           title="Spur Friends"
           size="sm"
@@ -43,7 +47,21 @@ export default function ActivityCard({
             });
           }}
         />
+  </View>
+
       </View>
+      {/* <ActivityCardFront
+        activityImageUri={activityImageUri}
+        activityTitle={activityTitle}
+        quickInfo={quickInfo}
+      />
+      <ActivityCardBack
+        index={index}
+        interestedFriendIds={interestedFriendIds}
+        description={description}
+        needsList={needsList}
+      /> */}
+      <View style={{ height: 10 }}></View>
     </ScrollView>
   );
 }
@@ -102,6 +120,10 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+  },
+  buttonContainer: {
+    marginHorizontal: 50,
+    marginVertical: 30,
   },
 });
 

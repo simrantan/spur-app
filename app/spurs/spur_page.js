@@ -4,6 +4,7 @@ import { Stack, router } from "expo-router";
 import { supabase } from "../../utils/supabase";
 import { Button } from "@rneui/themed";
 import SpurInvite from "./SpurInvite";
+import { Themes } from "../../assets/Themes";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -69,6 +70,7 @@ const styles = StyleSheet.create({
 
     padding: 24,
     justifyContent: "space-between",
+    backgroundColor: Themes.bg,
   },
   spacer: {
     marginBottom: 20, // Adjust the margin as needed
