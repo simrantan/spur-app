@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet, Modal } from "react-native";
 import { supabase, activitiesTable } from "../utils/supabase";
 import Swiper from "react-native-deck-swiper";
-import { Button, Dialog, useTheme } from "@rneui/themed";
+import { Button, Dialog, useTheme, Text } from "@rneui/themed";
 import ActivityCardFront from "./ActivityCardFront";
 import ActivityCardBack from "./ActivityCardBack";
 
-import { router } from "expo-router";
-
 import activitiesDataHardcoded from "../utils/theData";
 import { Themes } from "../assets/Themes";
+import { palette } from "../assets/Themes/palette";
+import { router } from "expo-router";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
@@ -17,6 +17,8 @@ export default ActivityStack = () => {
   const activities = activitiesDataHardcoded;
   const [isVisible, setisVisible] = useState(false);
   const [currActivity, setcurrActivity] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+
   const { theme } = useTheme();
 
   const updateDB = async (id, liked) => {
@@ -91,6 +93,7 @@ export default ActivityStack = () => {
           }}
           onSwipedAll={() => {
             console.log("onSwipedAll");
+            setModalVisible(true);
           }}
           onSwipedLeft={(cardIndex) =>
             updateDB(activities[cardIndex].id, false)
@@ -101,17 +104,74 @@ export default ActivityStack = () => {
           cardIndex={0}
           stackSize={3}
           verticalSwipe={false}
-          marginTop={-50}
+          marginTop={-52}
           backgroundColor={theme.colors.background}
         ></Swiper>
       ) : (
         <Button loading />
       )}
+
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text h2 style={styles.textStyle}>
+              You've been swiping for a while...
+            </Text>
+            <Text h4 style={styles.textStyle}>
+              It's time to do something! Try spurring some friends to join you
+              for an activity.
+            </Text>
+            <Button
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => {
+                setModalVisible(!modalVisible);
+                router.replace("spurs/spur_page");
+              }}
+              title="Spur Friends"
+            />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  textStyle: {
+    color: Themes.textPrimary,
+  },
+  modalView: {
+    justifyContent: "space-around",
+    width: windowWidth * 0.9,
+    height: windowHeight * 0.4,
+    margin: 20,
+    backgroundColor: palette.beige,
+    borderRadius: 20,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 70,
+    elevation: 5,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
   container: {
     flex: 1,
     width: windowWidth,

@@ -1,24 +1,36 @@
 import {
   StyleSheet,
   SafeAreaView,
-  Pressable,
-  Image,
   Dimensions,
   FlatList,
-  View,
   TouchableOpacity,
 } from "react-native";
-import React, { useEffect } from "react";
-
-import { Link, Stack, router, useNavigation } from "expo-router";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Stack, router, Header, useNavigation } from "expo-router";
+import { supabase } from "../../utils/supabase";
 import { Ionicons } from "@expo/vector-icons";
 import { palette } from "../../assets/Themes/palette";
 
-import { Button, Text } from "@rneui/themed";
+import { Button } from "@rneui/themed";
+import SpurInvite from "./SpurInvite";
+import { Themes } from "../../assets/Themes";
+import { Text } from "@rneui/themed";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Rejected() {
+  const [invites, setInvites] = useState([]);
+  const table = "spurInvite";
+
+  const renderInvite = ({ item }) => (
+    <SpurInvite
+      activityImageUri={item.activityImageUri}
+      activityTitle={item.activityTitle}
+      friend={item.friend}
+      time={item.time}
+      address={item.address}
+    />
+  );
   const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({
@@ -36,13 +48,29 @@ export default function Rejected() {
     });
   }, []);
   return (
-    <SafeAreaView style={styles.item}>
-      <Stack.Screen
+    <SafeAreaView style={styles.container}>
+      {/* <Stack.Screen
         options={{
           title: "Spurs",
           headerLeft: null,
         }}
-      ></Stack.Screen>
+        style={styles.spacer}
+      />
+      <FlatList
+        data={invites}
+        renderItem={(item) => renderInvite(item)}
+        keyExtractor={(item) => item.id}
+        style={styles.spacer}
+        ListEmptyComponent={
+          <Text h4 style={{ marginTop: 30, color: "gray" }}>
+            No invites right now!
+          </Text>
+        }
+      /> */}
+      <Text h4 style={{ marginTop: 30, color: "gray" }}>
+        No invites right now!
+      </Text>
+
       <Button
         title="Create a New Spur"
         size="lg"
@@ -57,9 +85,19 @@ export default function Rejected() {
     </SafeAreaView>
   );
 }
+
 const styles = StyleSheet.create({
-  item: {
+  container: {
     flex: 1,
+    alignItems: "center",
+
+    padding: 24,
+    justifyContent: "space-between",
+    backgroundColor: Themes.bg,
+  },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
     width: windowWidth,
     justifyContent: "center",
     alignItems: "center", // Align items to the center

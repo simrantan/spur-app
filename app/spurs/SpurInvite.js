@@ -31,7 +31,7 @@ export default function SpurInvite({
             source={{ uri: activityImageUri }}
           ></Image>
           <View style={styles.activityDetails}>
-            <Text h2>{activityTitle}</Text>
+            <Text style={styles.title}>{activityTitle}</Text>
             <View style={styles.from}>
               <View style={styles.promptbox}>
                 <Text style={styles.textalign}> From </Text>
@@ -70,18 +70,18 @@ export default function SpurInvite({
       </View>
       <View style={styles.acceptAndReject}>
         <Button
-          title="Accept"
-          size="sm"
-          onPress={() => {
-            router.push("spurs/spurInviteAccepted");
-          }}
-        />
-
-        <Button
           title="Reject"
           size="sm"
           onPress={() => {
-            router.push("spurs/postRejected");
+            router.replace("spurs/postRejected");
+          }}
+          type="outline"
+        />
+        <Button
+          title="Accept"
+          size="sm"
+          onPress={() => {
+            router.replace("spurs/spurInviteAcceptedPage");
           }}
         />
       </View>
@@ -91,7 +91,7 @@ export default function SpurInvite({
 
 const styles = StyleSheet.create({
   item: {
-    width: windowWidth * 0.95,
+    width: windowWidth * 0.93,
     flex: 2,
     backgroundColor: Themes.bgSecondary,
     borderRadius: 5,
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   },
   textalign: {
     margin: 5,
+    // padding: 5,
   },
 
   image: {
@@ -148,5 +149,14 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
     borderRadius: 5,
     margin: 6,
+  },
+
+  title: {
+    fontSize: 32,
+    color: Themes.textPrimary,
+    paddingBottom: 5,
+    flexWrap: "wrap",
+    flexShrink: 1,
+    overflow: "hidden",
   },
 });

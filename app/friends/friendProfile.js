@@ -233,7 +233,6 @@ const styles = StyleSheet.create({
   sectionHeaderText: {
     marginLeft: 10,
     marginTop: 10,
-    alignSelf: "left",
   },
   photoAndName: {
     flexDirection: "row",

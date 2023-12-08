@@ -5,13 +5,9 @@ import QuickInfo from "../../components/QuickInfo";
 import { router } from "expo-router";
 import MiniActivityCard from "../../components/MiniActivityCard";
 
-import { Ionicons } from "@expo/vector-icons";
-
-import { Linking } from "react-native";
-
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
-export default function SpurInviteAccepted({
+export default function SpurInvitePending({
   id,
   activityImageUri,
   activityTitle,
@@ -40,14 +36,24 @@ export default function SpurInviteAccepted({
         </View>
         <View style={styles.infoLine}>
           <Text style={styles.label}> Where </Text>
-          <Text
-            style={styles.infoChunk}
-            onPress={() =>
-              Linking.openURL("https://maps.app.goo.gl/95YrRaC6fJzUzkR69")
-            }
-          >
-            {address}
-          </Text>
+          <Text style={styles.infoChunk}>{address}</Text>
+        </View>
+        <View style={styles.acceptAndReject}>
+          <Button
+            title="Reject"
+            size="sm"
+            onPress={() => {
+              router.replace("spurs/postRejected");
+            }}
+            type="outline"
+          />
+          <Button
+            title="Accept"
+            size="sm"
+            onPress={() => {
+              router.replace("spurs/spurInviteAcceptedPage");
+            }}
+          />
         </View>
       </View>
     </View>
@@ -87,7 +93,6 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOpacity: 0.2,
     shadowOffset: { width: 0, height: 0 },
-    marginHorizontal: 10,
   },
   bottomHalfContainer: {
     padding: 10,
@@ -144,7 +149,7 @@ const styles = StyleSheet.create({
   },
 });
 
-SpurInviteAccepted.defaultProps = {
+SpurInvitePending.defaultProps = {
   activityInfo: {
     activityImageUri:
       "https://www.desertsun.com/gcdn/presto/2023/05/09/PPAS/57ffb2bc-ce8e-435a-95e1-008a09acf033-pickleball_feature_1.jpg",
