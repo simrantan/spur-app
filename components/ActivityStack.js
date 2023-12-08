@@ -5,6 +5,9 @@ import Swiper from "react-native-deck-swiper";
 import { Button, Dialog, useTheme, Text } from "@rneui/themed";
 import ActivityCardFront from "./ActivityCardFront";
 import ActivityCardBack from "./ActivityCardBack";
+
+import { router } from "expo-router";
+
 import activitiesDataHardcoded from "../utils/theData";
 import { Themes } from "../assets/Themes";
 import { palette } from "../assets/Themes/palette";
@@ -50,6 +53,16 @@ export default ActivityStack = () => {
             interestedFriendIds={activities[currActivity].interestedFriendIds}
             description={activities[currActivity].description}
             needsList={activities[currActivity].needs}
+            func={() => {
+              router.push({
+                pathname: "nsp/NewSpurPage",
+                params: {
+                  id: activities[currActivity].id,
+                  pagename: "explore/explore_page",
+                },
+              });
+              setisVisible(!isVisible);
+            }}
           />
         </Dialog>
       )}
@@ -80,7 +93,6 @@ export default ActivityStack = () => {
             console.log("onSwiped - cardIndex:", cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
-          // setIndex={currActivity}
           onSwipedAll={() => {
             console.log("onSwipedAll");
             setModalVisible(true);
@@ -91,12 +103,11 @@ export default ActivityStack = () => {
           onSwipedRight={(cardIndex) =>
             updateDB(activities[cardIndex].id, true)
           }
-          //cardIndex={0}
+          cardIndex={0}
           stackSize={3}
           verticalSwipe={false}
           marginTop={-50}
           backgroundColor={theme.colors.background}
-          cardIndex={isVisible ? -1 : 0}
         ></Swiper>
       ) : (
         <Button loading />

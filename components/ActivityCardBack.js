@@ -16,6 +16,7 @@ export default function ActivityCard({
   interestedFriendIds, // array of friend objects, each of which has a name and profile image
   description,
   needsList,
+  func,
 }) {
   return (
     <ScrollView>
@@ -32,16 +33,7 @@ export default function ActivityCard({
             <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
           </View>
         </View>
-        <Button
-          title="Spur Friends"
-          size="sm"
-          onPress={() => {
-            router.push({
-              pathname: "spurs/screens/NewSpurPage",
-              params: { id: index },
-            });
-          }}
-        />
+        <Button title="Spur Friends" size="sm" onPress={func} />
       </View>
     </ScrollView>
   );

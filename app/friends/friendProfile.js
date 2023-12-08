@@ -67,6 +67,7 @@ export default function Page() {
             {friend.pronouns}
           </Text>
         </View>
+
       </View>
       <Text h3 style={styles.sectionHeaderText}>
         Bio

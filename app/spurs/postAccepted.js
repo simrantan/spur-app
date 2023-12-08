@@ -10,6 +10,7 @@ import {
   Linking,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import { Link, Stack, router, useNavigation } from "expo-router";
 import { supabase } from "../../utils/supabase";
@@ -36,13 +37,18 @@ export default function spurInvitePending() {
 
   useEffect(() => {
     fetchInvites();
+  }, []);
+  useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
             router.push("spurs/postAccepted");
           }}
-        />
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.beige} />
+        </TouchableOpacity>
       ),
     });
   }, []);
@@ -86,11 +92,12 @@ export default function spurInvitePending() {
       />
       <Button
         title="Create a New Spur"
-        size="lg"
+        size="md"
+        style={styles.button}
         onPress={() => {
           router.push({
-            pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            pathname: "nsp/NewSpurPage",
+            params: { id: 1, pagename: "spurs/postAccepted" },
           });
         }}
         style={styles.spacer}
@@ -169,5 +176,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });
