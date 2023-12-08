@@ -7,9 +7,15 @@ import {
   Pressable,
   Dimensions,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
-import { useLocalSearchParams, Stack, router } from "expo-router";
+import {
+  useLocalSearchParams,
+  Stack,
+  router,
+  useNavigation,
+} from "expo-router";
 import { supabase, activitiesTable, friendsTable } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
 import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
@@ -19,6 +25,7 @@ import PeopleChecklistItem from "../../components/friendComponents/PeopleCheckli
 import { Themes } from "../../assets/Themes";
 import { palette } from "../../assets/Themes/palette";
 import { ScrollView } from "react-native-gesture-handler";
+import { Ionicons } from "@expo/vector-icons";
 
 const suggestedDateTime = new Date(Date.now() + 90000000);
 const secondSuggestedDateTime = new Date(Date.now() + 180000000);
@@ -32,7 +39,9 @@ const dateFormat = {
 };
 
 export default function NewSpurPage() {
-  //   const { id } = useLocalSearchParams();
+  const { id, pagename } = useLocalSearchParams();
+  const navigation = useNavigation();
+
   const { theme } = useTheme();
   const [isReady, setIsReady] = useState(false);
   const [activityIndex, setActivityIndex] = useState(1);
@@ -49,8 +58,6 @@ export default function NewSpurPage() {
   const [selectedFriends, setSelectedFriends] = useState([]);
 
   const [activities, setActivities] = useState([]);
-
-  const [spurSent, setSpurSent] = useState(false);
 
   const fetchActivities = async () => {
     const { data, error } = await supabase
@@ -119,11 +126,6 @@ export default function NewSpurPage() {
     setDate(currentDate);
   };
 
-  const onChangeLocation = (event, selectedLocation) => {
-    const currentLocation = selectedLocation;
-    setLocation(currentLocation);
-  };
-
   const showDatePicker = () => {
     setVisibleDateDialog(true);
   };
@@ -168,6 +170,20 @@ export default function NewSpurPage() {
 
   useEffect(() => {
     resetSelectedFriends();
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            console.log("\n\n\n\n\n\n\npagename", pagename);
+            router.replace(pagename);
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.accent} />
+        </TouchableOpacity>
+      ),
+      title: "Spurs",
+    });
   }, [activityIndex]);
 
   if (!isReady || activities.length === 0 || friends.length === 0) {
@@ -393,11 +409,16 @@ export default function NewSpurPage() {
                     Spur Sent!
                   </Text>
                   <Text h4 style={styles.textStyle}>
-                    We'll keep you posted when someone accepts this invitation.
+                    We'll notify you when someone accepts this invitation.
                   </Text>
                   <Button
                     style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
+                    onPress={() => {
+                      setModalVisible(!modalVisible);
+                      console.log("\n\n\n\n\n\n\npagename", pagename);
+
+                      router.replace(pagename);
+                    }}
                     title="Close"
                     type="outline"
                   />
@@ -417,7 +438,6 @@ export default function NewSpurPage() {
                 }
                 onPress={() => {
                   setModalVisible(true);
-                  setSpurSent(true);
                 }}
               />
             </View>

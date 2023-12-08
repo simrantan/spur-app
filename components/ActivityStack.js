@@ -104,7 +104,7 @@ export default ActivityStack = () => {
           cardIndex={0}
           stackSize={3}
           verticalSwipe={false}
-          marginTop={-50}
+          marginTop={-52}
           backgroundColor={theme.colors.background}
         ></Swiper>
       ) : (

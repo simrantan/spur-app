@@ -49,7 +49,7 @@ export default function Rejected() {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      <Stack.Screen
+      {/* <Stack.Screen
         options={{
           title: "Spurs",
           headerLeft: null,
@@ -66,7 +66,10 @@ export default function Rejected() {
             No invites right now!
           </Text>
         }
-      />
+      /> */}
+      <Text h4 style={{ marginTop: 30, color: "gray" }}>
+        No invites right now!
+      </Text>
 
       <Button
         title="Create a New Spur"
@@ -129,5 +132,10 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: "row",
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });
