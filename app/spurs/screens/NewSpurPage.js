@@ -21,7 +21,6 @@ import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../../assets/Themes";
 import { palette } from "../../../assets/Themes/palette";
-import InterestedFriendsChecklist from "../../../components/friendComponents/InterestedFriendsChecklist";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
