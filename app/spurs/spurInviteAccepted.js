@@ -4,6 +4,7 @@ import { Themes } from "../../assets/Themes";
 import QuickInfo from "../../components/QuickInfo";
 import { router } from "expo-router";
 import MiniActivityCard from "../../components/MiniActivityCard";
+import { Linking } from "react-native";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 

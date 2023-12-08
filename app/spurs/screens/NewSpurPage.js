@@ -24,7 +24,8 @@ import { Themes } from "../../../assets/Themes";
 import { palette } from "../../../assets/Themes/palette";
 import { ScrollView } from "react-native-gesture-handler";
 
-const suggestedDateTime = new Date(Date.now() + 9000000);
+const suggestedDateTime = new Date(Date.now() + 90000000);
+const secondSuggestedDateTime = new Date(Date.now() + 180000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const dateFormat = {
   year: "numeric",
@@ -274,9 +275,48 @@ export default function NewSpurPage() {
               style={styles.dialogBox}
             >
               <View style={styles.dialogContainer}>
-                <Text style={{ fontSize: 16 }}>
-                  Most of your friends are available at this time:{" "}
-                  {suggestedDateTime.toLocaleString(undefined, dateFormat)}
+                <Text h4 style={{ fontSize: 16 }}>
+                  Suggested times{" "}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: 14,
+                    color: "gray",
+                    marginTop: 2,
+                    marginBottom: 10,
+                  }}
+                >
+                  Based on friends' availability
+                </Text>
+                <Button
+                  title={suggestedDateTime.toLocaleString(
+                    undefined,
+                    dateFormat
+                  )}
+                  type="outline"
+                  titleStyle={{ fontSize: 16 }}
+                  buttonStyle={{ marginBottom: 10 }}
+                  onPress={() => {
+                    setDate(suggestedDateTime);
+                    setVisibleDateDialog(false);
+                  }}
+                />
+                <Button
+                  title={secondSuggestedDateTime.toLocaleString(
+                    undefined,
+                    dateFormat
+                  )}
+                  type="outline"
+                  titleStyle={{ fontSize: 16 }}
+                  buttonStyle={{ marginBottom: 10 }}
+                  onPress={() => {
+                    setDate(secondSuggestedDateTime);
+                    setVisibleDateDialog(false);
+                  }}
+                />
+
+                <Text h4 style={{ fontSize: 16 }}>
+                  Custom time{" "}
                 </Text>
                 <View style={styles.timeBox}>
                   <DateTimePicker
@@ -285,6 +325,8 @@ export default function NewSpurPage() {
                     mode="date"
                     is24Hour={true}
                     onChange={onDateChange}
+                    accentColor={palette.accent}
+                    display="compact"
                   />
                   <DateTimePicker
                     testID="dateTimePicker"
@@ -292,6 +334,10 @@ export default function NewSpurPage() {
                     mode="time"
                     is24Hour={true}
                     onChange={onDateChange}
+                    accentColor={palette.accent}
+                    display="compact"
+                    minuteInterval={15}
+                    style={{ width: 100 }}
                   />
                 </View>
               </View>
@@ -322,15 +368,16 @@ export default function NewSpurPage() {
               onBackdropPress={() => setVisibleLocationDialog(false)}
             >
               <View style={styles.dialogContainer}>
-                <Text style={{ fontSize: 16 }}>
-                  Where do you want to meet people?
+                <Text h4 style={{ fontSize: 16 }}>
+                  Where do you want to meet?
                 </Text>
                 <TextInput
                   onChangeText={(newText) => setLocation(newText)}
                   value={location}
                   style={styles.textInput}
-                  placeholder="Tap here to type"
+                  placeholder="Tap here to enter location"
                   fontSize={16}
+                  backgroundColor={"snow"}
                 />
               </View>
             </Dialog>
@@ -346,7 +393,7 @@ export default function NewSpurPage() {
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text h2 style={styles.textStyle}>
-                    Spur sent!
+                    Spur Sent!
                   </Text>
                   <Text h4 style={styles.textStyle}>
                     We'll notify you when someone accepts this invitation.
