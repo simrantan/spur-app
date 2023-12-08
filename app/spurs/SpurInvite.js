@@ -70,18 +70,18 @@ export default function SpurInvite({
       </View>
       <View style={styles.acceptAndReject}>
         <Button
+          title="Reject"
+          size="sm"
+          onPress={() => {
+            router.replace("spurs/postRejected");
+          }}
+          type="outline"
+        />
+        <Button
           title="Accept"
           size="sm"
           onPress={() => {
             router.push("spurs/spurInviteAccepted");
-          }}
-        />
-
-        <Button
-          title="Reject"
-          size="sm"
-          onPress={() => {
-            router.push("spurs/postRejected");
           }}
         />
       </View>
@@ -91,7 +91,7 @@ export default function SpurInvite({
 
 const styles = StyleSheet.create({
   item: {
-    width: windowWidth * 0.95,
+    width: windowWidth * 0.93,
     flex: 2,
     backgroundColor: Themes.bgSecondary,
     borderRadius: 5,
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   },
   textalign: {
     margin: 5,
+    // padding: 5,
   },
 
   image: {
