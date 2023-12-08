@@ -34,7 +34,11 @@ const theme = {
         paddingVertical: 10,
         borderRadius: 10,
       },
-      titleStyle: { fontSize: 24, fontWeight: "bold" },
+      titleStyle: {
+        fontSize: 24,
+        fontWeight: "bold",
+        fontFamily: "Montserrat_600SemiBold",
+      },
     },
     CheckBox: {
       containerStyle: {

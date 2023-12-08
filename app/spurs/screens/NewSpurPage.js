@@ -6,6 +6,7 @@ import {
   Alert,
   Pressable,
   Dimensions,
+  TextInput,
 } from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
@@ -40,7 +41,7 @@ export default function NewSpurPage() {
   const [activityIndex, setActivityIndex] = useState(1);
   const [modalVisible, setModalVisible] = useState(false);
   const [date, setDate] = useState(new Date(Date.now()));
-  const [location, setLocation] = useState("TBD");
+  const [location, setLocation] = useState("My house");
 
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
   const [visiblePeopleDialog, setVisiblePeopleDialog] = useState(false);
@@ -117,6 +118,11 @@ export default function NewSpurPage() {
   const onDateChange = (event, selectedDate) => {
     const currentDate = selectedDate;
     setDate(currentDate);
+  };
+
+  const onChangeLocation = (event, selectedLocation) => {
+    const currentLocation = selectedLocation;
+    setLocation(currentLocation);
   };
 
   const showDatePicker = () => {
@@ -314,7 +320,16 @@ export default function NewSpurPage() {
               onBackdropPress={() => setVisibleLocationDialog(false)}
             >
               <View style={styles.dialogContainer}>
-                <Text style={{ fontSize: 16 }}></Text>
+                <Text style={{ fontSize: 16 }}>
+                  Where do you want to meet people?
+                </Text>
+                <TextInput
+                  onChangeText={(newText) => setLocation(newText)}
+                  value={location}
+                  style={styles.textInput}
+                  placeholder="Tap here to type"
+                  fontSize={16}
+                />
               </View>
             </Dialog>
             <Modal
@@ -329,32 +344,34 @@ export default function NewSpurPage() {
               <View style={styles.centeredView}>
                 <View style={styles.modalView}>
                   <Text h2 style={styles.textStyle}>
-                    Successfly Sent!
+                    Spur sent!
                   </Text>
                   <Text h4 style={styles.textStyle}>
                     We'll notify you when someone accepts this invitation.
                   </Text>
-                  <Pressable
+                  <Button
                     style={[styles.button, styles.buttonClose]}
                     onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.close}>Close</Text>
-                  </Pressable>
+                    title="Close"
+                    type="outline"
+                  />
                 </View>
               </View>
             </Modal>
-            <Button
-              title="Send Spur"
-              icon={
-                <FontAwesome
-                  name="send"
-                  size={20}
-                  marginRight={10}
-                  color={theme.colors.white}
-                />
-              }
-              onPress={() => setModalVisible(true)}
-            />
+            <View style={{ marginTop: 20, marginBottom: 30 }}>
+              <Button
+                title="Send Spur"
+                icon={
+                  <FontAwesome
+                    name="send"
+                    size={20}
+                    marginRight={10}
+                    color={theme.colors.white}
+                  />
+                }
+                onPress={() => setModalVisible(true)}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -383,6 +400,7 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
+    minHeight: 50,
   },
   peopleChecklist: {
     flexDirection: "column",
@@ -443,7 +461,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   textStyle: {
-    color: palette.accent,
+    color: Themes.textPrimary,
   },
   close: {
     color: palette.lightblack,
@@ -454,7 +472,7 @@ const styles = StyleSheet.create({
   },
   dialogContainer: {
     width: "130%",
-    height: "fit-content",
+    // height: "fit-content",
     position: "relative",
 
     alignSelf: "center",
@@ -481,5 +499,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     // backgroundColor: palette.white,
     // overlayColor: "red",
+  },
+  textInput: {
+    height: 40,
+    borderColor: Themes.buttonPrimaryFill,
+    marginVertical: 10,
+    borderRadius: 10,
+    borderWidth: 1,
+    paddingHorizontal: 10,
   },
 });
