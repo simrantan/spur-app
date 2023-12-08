@@ -10,6 +10,7 @@ import {
   Linking,
 } from "react-native";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 import { Link, Stack, router, useNavigation } from "expo-router";
 import { supabase } from "../../utils/supabase";
@@ -35,14 +36,17 @@ export default function spurInvitePending() {
 
   useEffect(() => {
     fetchInvites();
+  }, []);
+  useEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity
           onPress={() => {
             router.push("spurs/postAccepted");
           }}
+          style={{ marginLeft: -17 }}
         >
-          <Text></Text>
+          <Ionicons name="chevron-back" size={30} color={palette.beige} />
         </TouchableOpacity>
       ),
     });
@@ -50,7 +54,9 @@ export default function spurInvitePending() {
 
   return (
     <SafeAreaView style={styles.item}>
-      <Stack.Screen options={{ title: "" }}></Stack.Screen>
+      <Stack.Screen
+        options={{ title: "Spurs", headerLeft: null }}
+      ></Stack.Screen>
       {invites.map((invite, index) => (
         <Pressable
           key={index}
@@ -113,11 +119,12 @@ export default function spurInvitePending() {
       ))}
       <Button
         title="Create a New Spur"
-        size="lg"
+        size="md"
+        style={styles.button}
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            params: { id: 1, pagename: "spurs/postAccepted" },
           });
         }}
       />
@@ -131,6 +138,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "column",
     margin: 5,
+  },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
   },
   promptbox: {
     width: windowWidth * 0.2,
@@ -172,11 +183,17 @@ const styles = StyleSheet.create({
     shadowOffset: { width: -1, height: 5 },
     backgroundColor: palette.beige,
     borderRadius: 10,
+    marginTop: 20,
   },
   textalign: {
     margin: 10,
   },
   details: {
     color: palette.accent2,
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

@@ -35,18 +35,20 @@ export default function ActivityCard({
           <Text style={styles.smalltitle}>Interested Friends</Text>
         </View>
         <InterestedFriendsList interestedFriendIds={interestedFriendIds} />
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Spur Friends"
-            size="sm"
-            onPress={() => {
-              router.push({
-                pathname: "spurs/screens/NewSpurPage",
-                params: { id: index },
-              });
-            }}
-          />
-        </View>
+
+  <View style={styles.buttonContainer}>
+        <Button
+          title="Spur Friends"
+          size="sm"
+          onPress={() => {
+            router.push({
+              pathname: "spurs/screens/NewSpurPage",
+              params: { id: index, pagename: "activities/activities_page" },
+            });
+          }}
+        />
+  </View>
+
       </View>
       {/* <ActivityCardFront
         activityImageUri={activityImageUri}

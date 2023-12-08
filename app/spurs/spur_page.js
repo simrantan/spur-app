@@ -6,6 +6,8 @@ import { Button } from "@rneui/themed";
 import SpurInvite from "./SpurInvite";
 import { Themes } from "../../assets/Themes";
 
+const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
+
 export default function Page() {
   const [invites, setInvites] = useState([]);
   const table = "spurInvite";
@@ -49,13 +51,13 @@ export default function Page() {
       <Button
         title="Create a New Spur"
         size="lg"
+        style={styles.button}
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            params: { id: 1, pagename: "spurs/spur_page" },
           });
         }}
-        style={styles.spacer}
       />
     </SafeAreaView>
   );
@@ -79,5 +81,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     maxWidth: 960,
     marginHorizontal: "auto",
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

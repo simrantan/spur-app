@@ -6,31 +6,51 @@ import {
   Dimensions,
   FlatList,
   View,
+  TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 
-import { Link, Stack, router } from "expo-router";
+import { Link, Stack, router, useNavigation } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { palette } from "../../assets/Themes/palette";
 
 import { Button, Text } from "@rneui/themed";
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 
 export default function Rejected() {
+  const navigation = useNavigation();
+  useEffect(() => {
+    navigation.setOptions({
+      title: "Spurs",
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push("spurs/postRejected");
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.beige} />
+        </TouchableOpacity>
+      ),
+    });
+  }, []);
   return (
     <SafeAreaView style={styles.item}>
       <Stack.Screen
         options={{
-          title: "",
-          headerShown: false, // Hide the default navigation header
+          title: "Spurs",
+          headerLeft: null,
         }}
       ></Stack.Screen>
       <Button
         title="Create a New Spur"
         size="lg"
+        style={styles.button}
         onPress={() => {
           router.push({
             pathname: "spurs/screens/NewSpurPage",
-            params: { id: 1 },
+            params: { id: 1, pagename: "spurs/postRejected" },
           });
         }}
       />
@@ -44,6 +64,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center", // Align items to the center
     paddingTop: 0, // Set paddingTop to remove the top padding
+    backgroundColor: palette.beige,
   },
   promptbox: {
     width: windowWidth * 0.3,
@@ -73,5 +94,10 @@ const styles = StyleSheet.create({
   },
   col: {
     flexDirection: "row",
+  },
+  button: {
+    width: windowWidth * 0.8,
+    alignSelf: "center",
+    marginBottom: 20,
   },
 });

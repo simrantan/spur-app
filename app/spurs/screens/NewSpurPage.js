@@ -6,14 +6,23 @@ import {
   Alert,
   Pressable,
   Dimensions,
+  TouchableOpacity,
 } from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
-import { useLocalSearchParams, Stack } from "expo-router";
+
+import {
+  useLocalSearchParams,
+  Stack,
+  useNavigation,
+  router,
+} from "expo-router";
+
 import {
   supabase,
   activitiesTable,
   friendsTable,
 } from "../../../utils/supabase";
+
 import MiniActivityCard from "../../../components/MiniActivityCard";
 import InterestedFriendsList from "../../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -21,7 +30,11 @@ import { FontAwesome } from "@expo/vector-icons";
 import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
 import { Themes } from "../../../assets/Themes";
 import { palette } from "../../../assets/Themes/palette";
+
+import { Ionicons } from "@expo/vector-icons";
+
 import { ScrollView } from "react-native-gesture-handler";
+
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
@@ -34,11 +47,24 @@ const dateFormat = {
 };
 
 export default function NewSpurPage() {
-  //   const { id } = useLocalSearchParams();
+
+  const { id, pagename } = useLocalSearchParams();
+
+  const navigation = useNavigation();
+
+ 
   const { theme } = useTheme();
   const [isReady, setIsReady] = useState(false);
+
+  
+  const [activity, setActivity] = useState([]);
+  const [friends, setFriends] = useState([]);
+  const [likedFriends, setLikedFriends] = useState([]);
+  const [isVisible, setisVisible] = useState(false);
+
   const [activityIndex, setActivityIndex] = useState(1);
-  const [modalVisible, setModalVisible] = useState(false);
+  
+
   const [date, setDate] = useState(new Date(Date.now()));
 
   const [visibleDateDialog, setVisibleDateDialog] = useState(false);
@@ -94,8 +120,25 @@ export default function NewSpurPage() {
   };
 
   useEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity
+          onPress={() => {
+            router.push(pagename);
+          }}
+          style={{ marginLeft: -17 }}
+        >
+          <Ionicons name="chevron-back" size={30} color={palette.accent} />
+        </TouchableOpacity>
+      ),
+      title: "Spurs",
+    });
+  }, []);
+
+useEffect(() => {
     fetchFriends();
   }, []);
+
 
   useEffect(() => {
     if (
@@ -235,89 +278,64 @@ export default function NewSpurPage() {
               </View>
             </View>
 
-            <Dialog
-              isVisible={visibleDateDialog}
-              onBackdropPress={() => setVisibleDateDialog(false)}
-            >
-              <Text style={{ fontSize: 16 }}>
-                Most of your friends are available at this time:{" "}
-                {suggestedDateTime.toLocaleString(undefined, dateFormat)}
-              </Text>
-              <View style={styles.timeBox}>
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="date"
-                  is24Hour={true}
-                  onChange={onDateChange}
-                />
-                <DateTimePicker
-                  testID="dateTimePicker"
-                  value={date}
-                  mode="time"
-                  is24Hour={true}
-                  onChange={onDateChange}
-                />
-              </View>
-            </Dialog>
 
-            <Dialog
-              isVisible={visiblePeopleDialog}
-              onBackdropPress={() => setVisiblePeopleDialog(false)}
-            >
-              <View style={styles.peopleChecklist}>
-                {JSON.parse(activities[activityIndex].interestedFriendIds).map(
-                  (friendId, index) => (
-                    <PeopleChecklistItem
-                      person={friends.find((f) => f.id === friendId)}
-                      key={index}
-                      toggleChecked={() => changeSelectedFriends(friendId)}
-                      isChecked={selectedFriends.includes(friendId)}
-                    />
-                  )
-                )}
-              </View>
-            </Dialog>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert("Modal has been closed.");
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text h2 style={styles.textStyle}>
-                    Successfly Sent!
-                  </Text>
-                  <Text h4 style={styles.textStyle}>
-                    We'll notify you when someone accepts this invitation.
-                  </Text>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.close}>Close</Text>
-                  </Pressable>
-                </View>
-              </View>
-            </Modal>
-            <Button
-              title="Send Spur"
-              icon={
-                <FontAwesome
-                  name="send"
-                  size={20}
-                  marginRight={10}
-                  color={theme.colors.white}
-                />
-              }
-              onPress={() => setModalVisible(true)}
-            />
+        <Dialog
+          isVisible={visiblePeopleDialog}
+          onBackdropPress={() => setVisiblePeopleDialog(false)}
+        >
+          <View style={styles.peopleChecklist}>
+            {friends.map((l, i) => (
+              <PeopleChecklistItem
+                person={l}
+                key={i}
+                toggleChecked={() => changePeople(i)}
+                isChecked={likedFriends[i]}
+              />
+            ))}
           </View>
-        </ScrollView>
+        </Dialog>
+        <Dialog
+          animationType="slide"
+          transparent={true}
+          visible={isVisible}
+          onRequestClose={() => {
+            Alert.alert("Modal has been closed.");
+            setisVisible(!isVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Text h2 style={styles.textStyle}>
+                Successfly Sent!
+              </Text>
+              <Text h4 style={styles.textStyle}>
+                We'll notify you when someone accepts this invitation.
+              </Text>
+              <Pressable
+                style={[styles.button, styles.buttonClose]}
+                onPress={() => {
+                  setisVisible(!isVisible);
+                  router.push(pagename);
+                }}
+              >
+                <Text style={styles.close}>Close</Text>
+              </Pressable>
+            </View>
+          </View>
+        </Dialog>
+        <Button
+          title="Send Spur"
+          icon={
+            <FontAwesome
+              name="send"
+              size={20}
+              marginRight={10}
+              color={theme.colors.white}
+            />
+          }
+          onPress={() => setisVisible(true)}
+        />
+
       </View>
     );
   }
@@ -329,7 +347,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Themes.bg,
     padding: 10,
-    // padding: 24,
   },
   main: {
     flex: 1,
@@ -387,12 +404,12 @@ const styles = StyleSheet.create({
   },
   modalView: {
     justifyContent: "space-around",
-    width: windowWidth * 0.9,
+    width: windowWidth * 0.81,
     height: windowHeight * 0.4,
+    borderRadius: 10,
     margin: 20,
-    backgroundColor: palette.beige,
-    borderRadius: 20,
-    padding: 15,
+    backgroundColor: palette.white,
+    padding: 1,
     alignItems: "center",
     shadowColor: "#000",
     shadowOffset: {

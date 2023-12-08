@@ -16,7 +16,11 @@ import Checklist from "../../components/Checklist";
 import { palette } from "../../assets/Themes/palette";
 import { supabase } from "../../utils/supabase";
 import MiniActivityCard from "../../components/MiniActivityCard";
+
+import { Ionicons } from "@expo/vector-icons";
+
 import { ScrollView } from "react-native-gesture-handler";
+
 
 const { height: windowHeight, width: windowWidth } = Dimensions.get("window");
 const table = "spurInvite";
@@ -41,10 +45,12 @@ export default function Accepted() {
           onPress={() => {
             router.push("spurs/postAccepted");
           }}
+          style={{ marginLeft: -17 }}
         >
-          <Text>Back</Text>
+          <Ionicons name="chevron-back" size={30} color={palette.accent} />
         </TouchableOpacity>
       ),
+      title: "Spurs",
     });
   }, []);
 
@@ -112,6 +118,10 @@ const styles = StyleSheet.create({
     padding: 10,
     // flex: 1,
     // borderWidth: 1,
+  },
+  spacer: {
+    marginBottom: 20, // Adjust the margin as needed
+    marginTop: 20,
   },
   loc: {
     flexDirection: "column",
