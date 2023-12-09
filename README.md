@@ -20,3 +20,5 @@ To run this app, you must have a computer with command line access and a mobile 
 4. Scan the QR code provided in the terminal. This will open the app in Expo Go on your phone!
 
 We tried to deploy using `eas` (Expo Application Service), which generated this QR code. However, the eas deployment gave us un-debuggable issues, whereas local deployment works more consistently.
+![image](https://github.com/simrantan/spur-app/assets/61095835/89953ed2-8578-4b2a-99ed-6b74a406ceca)
+
