@@ -126,7 +126,6 @@ export default function QuickInfo({ quickInfo, size }) {
     );
   } catch (e) {
     console.log("error rendering quick info: ", e);
-    console.log("quick info: ", quickInfo);
   }
   return component;
 }

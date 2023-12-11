@@ -36,15 +36,12 @@ export default function NewSpurPage() {
   const [visiblePeopleDialog, setVisiblePeopleDialog] = useState(false);
 
   const fetchActivity = async () => {
-    console.log("searching for id: ", activityId);
-    //console.log(activitiesTable);
     const { data, error } = await supabase
       .from(activitiesTable)
       .select("*")
       .eq("id", activityId);
     if (error) console.error("error", error);
     else {
-      console.log("got data!", data[0]);
       setActivity(data[0]);
       if (data[0].interestedFriendIds) {
         setFriends(JSON.parse(data[0].interestedFriendIds));

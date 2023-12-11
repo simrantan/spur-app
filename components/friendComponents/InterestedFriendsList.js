@@ -24,10 +24,6 @@ export default function InterestedFriendsList({
   }, []);
 
   if (interestedFriendIds.length > 0) {
-    console.log(
-      "interestedFriendIds from interested friend list",
-      interestedFriendIds
-    );
     const interestedFriends = friends.filter((friend) => {
       return interestedFriendIds.includes(friend.id);
     });

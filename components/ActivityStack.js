@@ -31,7 +31,7 @@ export default ActivityStack = () => {
     if (error) {
       console.log("error here", error);
     } else {
-      console.log("successful update, marked:", data);
+      console.log("successful update, marked:");
     }
   };
 
@@ -68,7 +68,6 @@ export default ActivityStack = () => {
         <Swiper
           cards={activities}
           renderCard={(activity, i) => {
-            console.log(activity);
             if (activity) {
               return (
                 <View>
@@ -88,11 +87,9 @@ export default ActivityStack = () => {
             return activity ? activity.id : Math.random(); // I know this is bad style but it keeps trying to render undefined objects
           }}
           onSwiped={(cardIndex) => {
-            console.log("onSwiped - cardIndex:", cardIndex);
             setcurrActivity(cardIndex + 1);
           }}
           onSwipedAll={() => {
-            console.log("onSwipedAll");
             setModalVisible(true);
           }}
           onSwipedLeft={(cardIndex) =>
