@@ -24,18 +24,16 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     backgroundColor: Themes.bg,
-    // padding: 10,
   },
   main: {
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
-    // marginHorizontal: "auto",
   },
   title: {
     fontSize: 64,
     fontWeight: "bold",
-    // position: "absolute",
+
     marginTop: 100,
     zIndex: -1,
   },

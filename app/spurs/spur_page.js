@@ -36,13 +36,6 @@ export default function Page() {
       address={item.address}
       quickInfo={item.quickInfo}
     />
-    // <SpurInvitePending
-    //   activityImageUri={item.activityImageUri}
-    //   activityTitle={item.activityTitle}
-    //   friend={item.friend}
-    //   time={item.time}
-    //   address={item.address}
-    // />
   );
 
   return (
@@ -94,7 +87,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     maxWidth: 960,
-    // marginHorizontal: "auto",
   },
   button: {
     width: windowWidth * 0.8,

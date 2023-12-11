@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     maxHeight: windowHeight * 0.75,
     borderRadius: 10,
-    // overflow: "hidden",
+
     backgroundColor: Themes.bg,
     shadowColor: "black",
     shadowOpacity: 0.4,

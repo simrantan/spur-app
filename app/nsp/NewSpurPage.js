@@ -217,7 +217,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Themes.bg,
     padding: 10,
-    // padding: 24,
   },
   main: {
     flex: 1,
@@ -236,11 +235,6 @@ const styles = StyleSheet.create({
   peopleChecklist: {
     flexDirection: "column",
     backgroundColor: Themes.bgSecondary,
-    // flexDirection: "row",
-    // width: "100%",
-    // flexWrap: "wrap",
-    // flexGrow: 1,
-    // justifyContent: "space-around",
   },
   headerContainer: {
     flexDirection: "row",

@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     padding: 10,
     width: windowWidth - 20,
-    // height: 100,
+
     maxWidth: windowWidth,
     overflow: "hidden",
   },
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   container: {
     width: windowWidth - 20,
-    // height: "100%",
+
     backgroundColor: Themes.bgSecondary,
     borderRadius: 10,
     shadowColor: "black",
@@ -111,8 +111,7 @@ const styles = StyleSheet.create({
   infoLine: {
     flexDirection: "row",
     flexGrow: 1,
-    // justifyContent: "flex-start",
-    // alignItems: "center",
+
     paddingVertical: 3,
   },
   label: {
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
     textAlign: "right",
     paddingRight: 10,
     paddingTop: 7,
-    // borderWidth: 1,
   },
   infoChunk: {
     fontSize: 16,
@@ -135,11 +133,10 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     flexShrink: 1,
     overflow: "hidden",
-    // width: 80,
+
     textAlign: "left",
     backgroundColor: Themes.bg,
     borderRadius: 10,
-    // borderWidth: 1,
   },
   acceptAndReject: {
     flexDirection: "row",

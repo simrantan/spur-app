@@ -64,8 +64,6 @@ export default function Accepted() {
       <ScrollView contentContainerStyle={styles.scrollviewContainer}>
         {invites.map((invite, index) => (
           <View key={index} style={styles.moreinfobox}>
-            {/* <Text h2>{invite.activityTitle}</Text>
-          <QuickInfo quickInfo={invite.quickInfo} size={30} /> */}
             <Text h3 style={styles.sectionHeader}>
               Event
             </Text>
@@ -120,8 +118,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "flex-start",
     padding: 10,
-    // flex: 1,
-    // borderWidth: 1,
   },
   loc: {
     flexDirection: "column",
@@ -138,14 +134,6 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   textbox: {
-    // width: windowWidth * 0.5,
-    // flex: 1,
-    // height: windowWidth * 0.1,
-    // backgroundColor: "white",
-    // borderRadius: 10,
-    // marginVertical: 3,
-    // justifyContent: "center",
-    // margin: 10,
     fontSize: 20,
   },
   from: {
@@ -166,7 +154,6 @@ const styles = StyleSheet.create({
   attendeebox: {
     marginTop: 10,
     alignSelf: "flex-start",
-    // flex: 3,
   },
   sectionBodyContainer: {
     flexDirection: "row",
@@ -175,12 +162,11 @@ const styles = StyleSheet.create({
     shadowColor: "black",
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
-    // borderWidth: 1,
+
     width: windowWidth - 20,
     marginBottom: 20,
   },
   sectionHeader: {
-    // fontSize: 24,
     marginBottom: 5,
   },
 });

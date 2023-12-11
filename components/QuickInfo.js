@@ -113,9 +113,7 @@ export default function QuickInfo({ quickInfo, size }) {
         <View style={styles.icon}>
           <PriceSymbol cost={quickInfo.cost} />
         </View>
-        {/* <View style={styles.icon}>
-          <ActivitySymbol activityType={quickInfo.activityType} />
-        </View> */}
+
         <View style={styles.icon}>
           <DistanceSymbol dist={quickInfo.dist} />
         </View>
@@ -139,11 +137,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    // flexGrow: 1,
-    // marginVertical: 5,
+
     paddingVertical: 5,
     backgroundColor: Themes.bg,
-    // marginHorizontal: 10,
+
     borderRadius: 10,
     maxHeight: symbolSize * 1.3,
     minHeight: symbolSize * 1.3,
@@ -152,10 +149,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  icon: {
-    // flex: 1,
-    // alignItems: "space-between",
-  },
+  icon: {},
   text: {
     flexDirection: "row",
     alignItems: "center",

@@ -54,11 +54,10 @@ export default function Page() {
       <View style={styles.photoAndName}>
         <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
         <View style={styles.nameAndPronoun}>
-          {/* <View style={styles.profileNasme}> */}
           <Text h3 style={styles.profileName}>
             {friend.firstName} {friend.lastName}
           </Text>
-          {/* </View> */}
+
           <Text h4 style={styles.pronounText}>
             {friend.pronouns}
           </Text>
@@ -102,7 +101,6 @@ export default function Page() {
                 height: 1,
                 backgroundColor: palette.accent,
                 flex: 1,
-                // paddingHorizontal: 10,
               }}
             />
             <View
@@ -118,57 +116,13 @@ export default function Page() {
       />
     </View>
   );
-  // return header;
-  // return (
-  //   <ScrollView contentContainerStyle={styles.container}>
-  //     <Stack.Screen
-  //       options={{
-  //         title: "",
-  //       }}
-  //     />
-  //     <View style={styles.profileCard}>
-  //       <Image source={{ uri: friend.profileImageHci }} style={styles.image} />
-  //       <View style={styles.pronoun}>
-  //         <View style={styles.profileName}>
-  //           <Text h2>{friend.firstName}</Text>
-  //           <Text h2> </Text>
-  //           <Text h2>{friend.lastName}</Text>
-  //         </View>
-  //         <View style={styles.profilePhoto}>
-  //           <Text h4 style={styles.pronounText}>
-  //             {friend.pronouns}
-  //           </Text>
-  //         </View>
-  //       </View>
-  //       <View style={styles.bio}>
-  //         <Text>{friend.bio}</Text>
-  //       </View>
-  //       <View style={styles.interestsList}>
-  //         <FlatList
-  //           data={activities}
-  //           renderItem={({ item, index }) => {
-  //             return <MiniActivityCard activityInfo={item} />;
-  //           }}
-  //           ItemSeparatorComponent={() => (
-  //             <View style={{ height: 1, backgroundColor: palette.accent }} />
-  //           )}
-  //           ListHeaderComponent={<View />}
-  //         />
-  //       </View>
-  //     </View>
-  //   </ScrollView>
-  // );
 }
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Themes.bg,
     flex: 1,
-    // marginHorizontal: 10,
   },
-  profilePhoto: {
-    // justifyContent: "center",
-    // alignItems: "center", // Aligns items (Text, Image) horizontally in the center
-  },
+  profilePhoto: {},
   profileCard: {
     justifyContent: "center",
     alignItems: "center", // Aligns items (Text, Image) horizontally in the center
@@ -194,7 +148,6 @@ const styles = StyleSheet.create({
     alignItems: "center", // Aligns items (Text) horizontally in the center
     margin: 10,
     flex: 1,
-    // textAlign: "center",
   },
   image: {
     borderRadius: 100,
@@ -202,23 +155,15 @@ const styles = StyleSheet.create({
     width: 100,
     aspectRatio: 1,
     margin: 10,
-    // alignSelf: "flex-start",
-    // alignSelf: "center",
   },
   pronounText: {
     color: "grey",
     margin: 5,
   },
   bio: {
-    // backgroundColor: palette.white,
-    // shadowColor: "black",
-    // shadowOpacity: 0.2,
-    // shadowRadius: 5,
-    // shadowOffset: { width: -1, height: 5 },
     marginHorizontal: 5,
     borderRadius: 10,
     padding: 5,
-    // fontSize: 16,
   },
   interestsList: {
     flex: 1,
@@ -233,7 +178,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    // verticalAlign: "center",
   },
   header: {
     flex: 1,

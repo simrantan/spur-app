@@ -49,24 +49,6 @@ export default function Rejected() {
   }, []);
   return (
     <SafeAreaView style={styles.container}>
-      {/* <Stack.Screen
-        options={{
-          title: "Spurs",
-          headerLeft: null,
-        }}
-        style={styles.spacer}
-      />
-      <FlatList
-        data={invites}
-        renderItem={(item) => renderInvite(item)}
-        keyExtractor={(item) => item.id}
-        style={styles.spacer}
-        ListEmptyComponent={
-          <Text h4 style={{ marginTop: 30, color: "gray" }}>
-            No invites right now!
-          </Text>
-        }
-      /> */}
       <Text h4 style={{ marginTop: 30, color: "gray" }}>
         No invites right now!
       </Text>

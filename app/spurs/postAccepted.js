@@ -105,60 +105,6 @@ export default function spurInvitePending() {
   );
 }
 const styles = StyleSheet.create({
-  // item: {
-  //   flex: 1,
-  //   width: windowWidth,
-  //   justifyContent: "space-between",
-  //   flexDirection: "column",
-  //   margin: 5,
-  // },
-  // promptbox: {
-  //   width: windowWidth * 0.2,
-  //   height: windowWidth * 0.1,
-  //   marginVertical: 3,
-  //   justifyContent: "center",
-  // },
-  // textbox: {
-  //   width: windowWidth * 0.5,
-  //   height: windowWidth * 0.1,
-  //   backgroundColor: "white",
-  //   borderRadius: 10,
-  //   marginVertical: 3,
-  //   justifyContent: "center",
-  //   margin: 3,
-  // },
-  // from: {
-  //   flexDirection: "row",
-  // },
-  // activityInfo: {
-  //   flexDirection: "row",
-  //   justifyContent: "flex-start",
-  //   alignItems: "flex-start",
-  // },
-  // activityDetails: {
-  //   flexDirection: "column",
-  //   alignContent: "flex-start",
-  //   justifyContent: "flex-start",
-  //   direction: "ltr",
-  //   margin: 15,
-  // },
-  // col: {
-  //   flexDirection: "col",
-  //   width: windowWidth * 0.95,
-  //   alignSelf: "center",
-  //   shadowColor: "black",
-  //   shadowOpacity: 0.4,
-  //   shadowRadius: 5,
-  //   shadowOffset: { width: -1, height: 5 },
-  //   backgroundColor: palette.beige,
-  //   borderRadius: 10,
-  // },
-  // textalign: {
-  //   margin: 10,
-  // },
-  // details: {
-  //   color: palette.accent2,
-  // },
   container: {
     flex: 1,
     alignItems: "center",

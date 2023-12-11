@@ -46,8 +46,7 @@ const styles = StyleSheet.create({
   card_box: {
     backgroundColor: Themes.bgSecondary,
     flexDirection: "column",
-    // justifyContent: "flex-start",
-    // flex: 1,
+
     borderRadius: 10,
     justifyContent: "space-between",
     minheight: windowHeight * 0.7,

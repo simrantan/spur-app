@@ -49,17 +49,7 @@ export default function ActivityCard({
           />
         </View>
       </View>
-      {/* <ActivityCardFront
-        activityImageUri={activityImageUri}
-        activityTitle={activityTitle}
-        quickInfo={quickInfo}
-      />
-      <ActivityCardBack
-        index={index}
-        interestedFriendIds={interestedFriendIds}
-        description={description}
-        needsList={needsList}
-      /> */}
+
       <View style={{ height: 10 }}></View>
     </ScrollView>
   );

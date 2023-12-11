@@ -10,7 +10,6 @@ export default function FriendProfileAndNameHorizontal({ friend, size }) {
   if (!friend) return <View />;
 
   return (
-    // <View style={styles.container}>
     <Pressable
       style={styles.container}
       onPress={() => {
@@ -37,7 +36,6 @@ export default function FriendProfileAndNameHorizontal({ friend, size }) {
         </View>
       </View>
     </Pressable>
-    // </View>
   );
 }
 
@@ -59,26 +57,19 @@ const styles = StyleSheet.create({
   },
   friendbox: {
     flexDirection: "row",
-    // flexGrow: 1,
-    // justifyContent: "center",
+
     width: "100%",
     alignItems: "center",
     backgroundColor: Themes.bgSecondary,
     overflow: "hidden",
-
-    // marginVertical: -20,
   },
   container: {
     flexDirection: "row",
     alignContent: "flex-start",
-    // justifyContent: "left",
-    // width: "100%",
+
     padding: 8,
     flexGrow: 1,
     backgroundColor: Themes.bgSecondary,
-
-    // paddingVertical: 40,
-    // marginVertical: -20,
   },
 });
 

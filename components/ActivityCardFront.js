@@ -19,7 +19,6 @@ export default function ActivityCardFront({
   onPress,
 }) {
   return (
-    // <View style={styles.container}>
     <ScrollView style={styles.container}>
       <View style={styles.card_box}>
         <ImageBackground
@@ -40,7 +39,6 @@ export default function ActivityCardFront({
         <Button type="outline" onPress={onPress} title={"More Info"} />
       </View>
     </ScrollView>
-    // </View>
   );
 }
 
@@ -73,7 +71,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     width: "100%",
     paddingTop: 20,
-    // paddingBottom: 10,
+
     paddingHorizontal: 10,
   },
   bigtitle: {

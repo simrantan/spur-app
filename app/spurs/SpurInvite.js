@@ -139,7 +139,6 @@ const styles = StyleSheet.create({
   },
   textalign: {
     margin: 5,
-    // padding: 5,
   },
 
   image: {
