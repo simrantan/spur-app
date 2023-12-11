@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import { Text, Button, Dialog, useTheme } from "@rneui/themed";
 import { useLocalSearchParams, Stack } from "expo-router";
-import { supabase, activitiesTable } from "../../../utils/supabase";
-import MiniActivityCard from "../../../components/MiniActivityCard";
-import InterestedFriendsList from "../../../components/friendComponents/InterestedFriendsList";
+import { supabase, activitiesTable } from "../../utils/supabase";
+import MiniActivityCard from "../../components/MiniActivityCard";
+import InterestedFriendsList from "../../components/friendComponents/InterestedFriendsList";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { FontAwesome } from "@expo/vector-icons";
-import PeopleChecklistItem from "../../../components/friendComponents/PeopleChecklistItem";
-import { Themes } from "../../../assets/Themes";
+import PeopleChecklistItem from "../../components/friendComponents/PeopleChecklistItem";
+import { Themes } from "../../assets/Themes";
 
 const suggestedDateTime = new Date(Date.now() + 9000000);
 const dateFormat = {
