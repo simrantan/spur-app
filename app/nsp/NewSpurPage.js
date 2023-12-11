@@ -55,7 +55,7 @@ export default function NewSpurPage() {
   };
 
   useEffect(() => {
-    setactivityId(Number(id));
+    setActivityId(Number(id));
   }, [id]);
 
   useEffect(() => {
