@@ -25,15 +25,12 @@ export default function Page() {
   const screenTitle = friend.firstName + "'s Profile";
 
   const fetchActivities = async () => {
-    console.log("Friend interests", friend.interests);
     const id = friend.interests;
-    //console.log("friendinterest", friend.interests);
+
     if (!friend.interests || friend.interests.length === 0) {
-      console.log("No interests to fetch activities for.");
       return;
     }
     const { data, error } = await supabase.from("Activities v5").select("*");
-    // .in("id", id);
 
     if (error) {
       console.error("Error fetching activities:", error);
@@ -46,7 +43,6 @@ export default function Page() {
     fetchActivities();
   }, []);
 
-  console.log("activities are: ", activities);
   const header = (
     <View style={styles.header}>
       <Stack.Screen
@@ -67,7 +63,6 @@ export default function Page() {
             {friend.pronouns}
           </Text>
         </View>
-
       </View>
       <Text h3 style={styles.sectionHeaderText}>
         Bio

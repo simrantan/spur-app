@@ -53,8 +53,6 @@ export default function Accepted() {
     });
   }, []);
 
-  console.log("invites", invites);
-
   return (
     <View style={{ flex: 1, backgroundColor: Themes.bg }}>
       <Stack.Screen
